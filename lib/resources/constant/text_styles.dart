@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+//Home screen
+TextStyle activeVehicle1 = GoogleFonts.poppins(
+    color: Colors.black, fontSize: 20, fontWeight: FontWeight.w400);
+
+TextStyle activeVehicle2 = GoogleFonts.poppins(
+    color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500);
+
+TextStyle cardtitle = GoogleFonts.poppins(
+    color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500);
+
+////////////////////////---OLD STYLES----//////////////////////////////////////////////////////////////////////////////
 TextStyle style2 = GoogleFonts.poppins(
     color: Colors.white, fontSize: 27, fontWeight: FontWeight.w500);
 

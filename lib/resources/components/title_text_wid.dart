@@ -10,9 +10,12 @@ class HomeTitles extends StatelessWidget {
   String titles;
   @override
   Widget build(BuildContext context) {
-    return Text(titles,
-        style: GoogleFonts.poppins(
-            color: textColorU, fontSize: 18, fontWeight: FontWeight.w500));
+    return Container(
+      padding: const EdgeInsets.only(left: 5),
+      child: Text(titles,
+          style: GoogleFonts.poppins(
+              color: textColorU, fontSize: 18, fontWeight: FontWeight.bold)),
+    );
   }
 }
 

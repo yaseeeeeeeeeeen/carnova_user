@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:carnova_user/view/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +23,8 @@ class MapTapWid extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
-                      border: Border.all(color: Colors.black, width: 1)),
+                      border:
+                          Border.all(color: Colors.grey.shade300, width: 1)),
                   width: MediaQuery.sizeOf(context).width / 4.6,
                   child: Center(
                     child: Image.asset(brandLogos[index]),

@@ -4,6 +4,7 @@ class UserSideImages {
   String userPhoto = "assets/images/staticCover.jpg";
   String carDemo = "assets/images/currentlyUsing.jpg";
   String profileBg = "assets/images/profileBg.jpeg";
+  String startsvg = "assets/svg/star-svgrepo-com.svg";
 
   //brand logos static
   String carLogo1 =

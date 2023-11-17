@@ -1,3 +1,4 @@
+import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/modals/vehicle_data._modal.dart';
 import 'package:carnova_user/resources/components/active_vehicle.dart';
@@ -16,6 +17,7 @@ class HomeScreen extends StatelessWidget {
     double heigth = MediaQuery.sizeOf(context).height;
     // double width = MediaQuery.sizeOf(context).width;
     return Scaffold(
+        backgroundColor: scaffoldBg,
         appBar: customAppBarU(context),
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
@@ -24,14 +26,20 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                HomeTitles(titles: "Currently"),
+                const SizedBox(height: 5),
+                HomeTitles(titles: "Active"),
+                const SizedBox(height: 10),
                 const ActivatedVehicle(),
+                const SizedBox(height: 10),
                 HomeTitles(titles: "Top Brands"),
+                const SizedBox(height: 10),
                 const MapTapWid(),
+                const SizedBox(height: 10),
                 HomeTitles(titles: "Most Rated"),
+                const SizedBox(height: 10),
                 Container(
+                  height: heigth / 4.3,
                   margin: const EdgeInsets.only(top: 5, bottom: 5),
-                  height: heigth / 5.9,
                   child: ListView.separated(
                       physics: const BouncingScrollPhysics(),
                       shrinkWrap: true,
@@ -43,7 +51,6 @@ class HomeScreen extends StatelessWidget {
                       itemCount: vehiclesData.length,
                       scrollDirection: Axis.horizontal),
                 ),
-                const SizedBox(height: 70)
               ],
             ),
           ),
