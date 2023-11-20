@@ -3,7 +3,8 @@ class UserSideImages {
   String mapImg = "assets/images/map_bg.jpeg";
   String userPhoto = "assets/images/staticCover.jpg";
   String carDemo = "assets/images/currentlyUsing.jpg";
-  String profileBg = "assets/images/profileBg.jpeg";
+  String profileBg =
+      "assets/images/Premium Vector _ Abstract liquid green background stock vector.jpg";
   String startsvg = "assets/svg/star-svgrepo-com.svg";
 
   //brand logos static

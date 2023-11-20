@@ -8,7 +8,7 @@ class CarMoreImages extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider(
       options: CarouselOptions(
-          height: MediaQuery.sizeOf(context).height / 5, autoPlay: false),
+          height: MediaQuery.sizeOf(context).height / 5, autoPlay: true),
       items: images.map((i) {
         return Builder(
           builder: (BuildContext context) {

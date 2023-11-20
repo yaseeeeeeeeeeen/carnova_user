@@ -43,26 +43,7 @@ class CarDetailsCard extends StatelessWidget {
                                 review: "its very friendly to use",
                                 rating: "4.5"),
                             const ReviewCommentTile(
-                                review: "Good coundition", rating: "4.2"),
-                            const ReviewCommentTile(
-                                review: "i feel some clutch problems",
-                                rating: "2.5"),
-                            const ReviewCommentTile(
-                                review: "its very friendly to use",
-                                rating: "4.5"),
-                            const ReviewCommentTile(
-                                review: "Good coundition", rating: "4.2"),
-                            const ReviewCommentTile(
-                                review: "i feel some clutch problems",
-                                rating: "2.5"),
-                            const ReviewCommentTile(
-                                review: "its very friendly to use",
-                                rating: "4.5"),
-                            const ReviewCommentTile(
-                                review: "Good coundition", rating: "4.2"),
-                            const ReviewCommentTile(
-                                review: "i feel some clutch problems",
-                                rating: "2.5")
+                                review: "Good coundition", rating: "4.2")
                           ],
                         ),
                       ),
@@ -85,7 +66,7 @@ class CarDetailsCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SvgPicture.asset(svgPath[index],
-                                fit: BoxFit.cover, height: 40, width: 40),
+                                fit: BoxFit.cover, height: 30, width: 30),
                             Text(cardetails[index], style: style7)
                           ],
                         ),
@@ -97,15 +78,16 @@ class CarDetailsCard extends StatelessWidget {
           } else {
             return Container(
               margin: const EdgeInsets.all(2),
-              width: 150,
+              width: 100,
               decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade300),
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.black.withOpacity(0.2)),
+                  color: Colors.white),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SvgPicture.asset(svgPath[index],
-                      height: 30, width: 30, fit: BoxFit.cover),
+                      height: 25, width: 25, fit: BoxFit.cover),
                   const SizedBox(height: 5),
                   Text(cardetails[index], style: style5)
                 ],

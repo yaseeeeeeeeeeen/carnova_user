@@ -3,7 +3,7 @@ import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/view/history_screen.dart';
 import 'package:carnova_user/view/home_screen.dart';
-import 'package:carnova_user/view/second_screen.dart';
+import 'package:carnova_user/view/find_vehicle.dart';
 import 'package:carnova_user/view/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -142,19 +142,19 @@ class HomePageState extends State<BottomNavBar> {
     Icons.home_rounded,
     Icons.search_outlined,
     Icons.history,
-    Icons.settings_rounded,
+    Icons.person,
   ];
 
   List<String> listOfStrings = [
     'Home',
     'Find',
     'History',
-    'Settings',
+    'Profile',
   ];
 
   List<Widget> screens = [
     const HomeScreen(),
-    const FindVehicleU(),
+    FindVehicleU(),
     const HistoryScreen(),
     const UserProfile(),
   ];

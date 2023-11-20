@@ -18,7 +18,8 @@ class _ListTileToggleState extends State<ListTileToggle> {
     return Container(
       margin: const EdgeInsets.only(top: 5, bottom: 3),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: Colors.black12),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey.shade300)),
       child: ListTile(
         trailing: Switch(
             activeColor: Colors.black,
@@ -28,26 +29,26 @@ class _ListTileToggleState extends State<ListTileToggle> {
               value = false;
             }),
         title: Text(widget.text, style: style5),
-        leading: const Icon(Icons.color_lens_outlined, color: Colors.black),
+        // leading: const Icon(Icons.color_lens_outlined, color: Colors.black),
       ),
     );
   }
 }
 
 class ListTilePwid extends StatelessWidget {
-  ListTilePwid({super.key, required this.title, required this.icon});
+  ListTilePwid({super.key, required this.title});
   String title;
-  Icon icon;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 3, bottom: 3),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: Colors.black12),
+          border: Border.all(color: Colors.grey.shade300),
+          borderRadius: BorderRadius.circular(10)),
       child: ListTile(
         trailing: const Icon(CupertinoIcons.right_chevron, color: Colors.black),
         title: Text(title, style: style5),
-        leading: icon,
       ),
     );
   }

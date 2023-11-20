@@ -45,18 +45,10 @@ Widget bottomsheetWid(double height, context) {
             ],
           )),
       ListTileToggle(text: "Dark Mode"),
-      ListTilePwid(
-          title: "Change Password",
-          icon: const Icon(Icons.lock_clock_outlined, color: Colors.black)),
-      ListTilePwid(
-          title: "Clear data",
-          icon: const Icon(Icons.delete_forever_outlined, color: Colors.black)),
-      ListTilePwid(
-          title: "Help",
-          icon: const Icon(Icons.help_center_outlined, color: Colors.black)),
-      ListTilePwid(
-          title: "About",
-          icon: const Icon(Icons.info_outline_rounded, color: Colors.black)),
+      ListTilePwid(title: "Change Password"),
+      ListTilePwid(title: "Clear data"),
+      ListTilePwid(title: "Help"),
+      ListTilePwid(title: "About"),
     ]),
   );
 }

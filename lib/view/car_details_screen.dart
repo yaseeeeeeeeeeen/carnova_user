@@ -8,8 +8,9 @@ import 'package:carnova_user/utils/appbar.dart';
 
 // ignore: must_be_immutable
 class CarDataShow extends StatelessWidget {
-  CarDataShow({super.key, required this.vehicleData});
+  CarDataShow({super.key, required this.vehicleData, required this.isBooked});
   VehicleDataModal vehicleData;
+  bool isBooked;
   @override
   Widget build(BuildContext context) {
     List<String> cardetails = [
@@ -20,7 +21,8 @@ class CarDataShow extends StatelessWidget {
     ];
     double heigth = MediaQuery.sizeOf(context).height;
     return Scaffold(
-      bottomNavigationBar: CarDataBottomBar(price: vehicleData.price),
+      bottomNavigationBar:
+          CarDataBottomBar(price: vehicleData.price),
       appBar: customAppBarText(vehicleData.name, context),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -40,13 +42,17 @@ class CarDataShow extends StatelessWidget {
                               fit: BoxFit.cover)))),
               const SizedBox(height: 5),
               HomeTitles(titles: "Car Details"),
+              const SizedBox(height: 10),
               CarDetailsCard(cardetails: cardetails),
+              const SizedBox(height: 10),
               Container(
                 margin: const EdgeInsets.only(top: 5, bottom: 5),
                 height: heigth / 9,
                 color: Colors.amber,
               ),
+              const SizedBox(height: 10),
               HomeTitles(titles: "More Images"),
+              const SizedBox(height: 10),
               CarMoreImages(images: vehicleData.images)
             ],
           ),

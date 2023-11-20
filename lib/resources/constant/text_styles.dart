@@ -11,6 +11,22 @@ TextStyle activeVehicle2 = GoogleFonts.poppins(
 TextStyle cardtitle = GoogleFonts.poppins(
     color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500);
 
+TextStyle buttontextstyle = GoogleFonts.poppins(
+    color: Colors.white, fontSize: 16, fontWeight: FontWeight.w400);
+
+TextStyle tabbartitle =
+    GoogleFonts.poppins(fontSize: 17, fontWeight: FontWeight.bold);
+
+TextStyle tabcardtext1 = GoogleFonts.poppins(
+    color: Colors.black, fontSize: 17, fontWeight: FontWeight.w500);
+
+/////profie texts-----------
+TextStyle profileName = GoogleFonts.poppins(
+    color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500);
+TextStyle mailstyle = GoogleFonts.poppins(
+    color: Colors.black.withOpacity(0.7),
+    fontSize: 13,
+    fontWeight: FontWeight.w600);
 ////////////////////////---OLD STYLES----//////////////////////////////////////////////////////////////////////////////
 TextStyle style2 = GoogleFonts.poppins(
     color: Colors.white, fontSize: 27, fontWeight: FontWeight.w500);
@@ -34,7 +50,7 @@ TextStyle style6 = GoogleFonts.poppins(
     color: Colors.black, fontSize: 14, fontWeight: FontWeight.w500);
 
 TextStyle style7 = GoogleFonts.poppins(
-    color: Colors.white, fontSize: 25, fontWeight: FontWeight.w800);
+    color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800);
 
 TextStyle reviweTitle = GoogleFonts.halant(
     color: Colors.white, fontSize: 25, fontWeight: FontWeight.w800);
