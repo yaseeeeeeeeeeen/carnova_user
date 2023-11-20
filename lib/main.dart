@@ -1,3 +1,4 @@
+import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

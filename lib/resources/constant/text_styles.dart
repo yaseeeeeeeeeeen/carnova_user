@@ -27,6 +27,12 @@ TextStyle mailstyle = GoogleFonts.poppins(
     color: Colors.black.withOpacity(0.7),
     fontSize: 13,
     fontWeight: FontWeight.w600);
+
+TextStyle listtilesText =
+    GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w400);
+
+TextStyle logoutbutton = GoogleFonts.poppins(
+    fontSize: 16, fontWeight: FontWeight.w500, color: Colors.red);
 ////////////////////////---OLD STYLES----//////////////////////////////////////////////////////////////////////////////
 TextStyle style2 = GoogleFonts.poppins(
     color: Colors.white, fontSize: 27, fontWeight: FontWeight.w500);

@@ -7,9 +7,11 @@ class CustomTextfield extends StatelessWidget {
   bool isSufix;
   TextEditingController controller;
   TextInputType? keybordtype;
+  bool viewonly;
   CustomTextfield(
       {super.key,
       this.keybordtype,
+      required this.viewonly,
       required this.hint,
       required this.isSufix,
       required this.controller});
@@ -33,6 +35,7 @@ class CustomTextfield extends StatelessWidget {
               keyboardType: keybordtype,
               style: GoogleFonts.poppins(color: Colors.black),
               decoration: InputDecoration(
+                enabled: viewonly,
                 border: const OutlineInputBorder(),
                 fillColor: Colors.transparent,
                 filled: true,
