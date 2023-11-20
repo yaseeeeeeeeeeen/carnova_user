@@ -1,6 +1,7 @@
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/view/home_screen.dart';
+import 'package:carnova_user/view/profile_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -23,10 +24,13 @@ class ProfileCardWid extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CircleAvatar(
-              backgroundColor: Colors.white,
-              radius: heigth / 13,
-              backgroundImage: AssetImage(imageU.userPhoto)),
+          Hero(
+tag: "profilePhoto",
+            child: CircleAvatar(
+                backgroundColor: Colors.white,
+                radius: heigth / 13,
+                backgroundImage: AssetImage(imageU.userPhoto)),
+          ),
           const SizedBox(height: 10),
           Text(
             "Muhammed Yaseen",
@@ -41,7 +45,10 @@ class ProfileCardWid extends StatelessWidget {
                     style: mailstyle, overflow: TextOverflow.ellipsis),
               ),
               TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ProfileEditScreen()));
+                  },
                   child: Text(
                     "Edit Profile",
                     style: GoogleFonts.poppins(
@@ -56,6 +63,3 @@ class ProfileCardWid extends StatelessWidget {
     );
   }
 }
-
-
-

@@ -1,7 +1,9 @@
+import 'package:carnova_user/blocs/profile_edit/profile_edit_bloc.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 main() async {
   runApp(const MyApp());
@@ -14,9 +16,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: BottomNavBar(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => ProfileEditBloc())
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: BottomNavBar(),
+      ),
     );
   }
 }

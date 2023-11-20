@@ -11,8 +11,7 @@ class UserProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double heigth = MediaQuery.sizeOf(context).height;
-    return Scaffold(
+       return Scaffold(
         backgroundColor: scaffoldBg,
         appBar: customAppBarU(context),
         body: Padding(
@@ -29,7 +28,7 @@ class UserProfile extends StatelessWidget {
                 ProfileScreenListtile(
                     text: "Privacy & Policy", isLogout: false),
                 ProfileScreenListtile(text: "Help", isLogout: false),
-                const Divider(),
+                const Divider(thickness: 1.5),
                 ProfileScreenListtile(text: "Clear App Data", isLogout: false),
                 ProfileScreenListtile(text: "Sign Out", isLogout: true),
                 Container()
