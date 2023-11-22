@@ -1,3 +1,5 @@
+import 'package:carnova_user/resources/components/car_show_screen/agent_tile.dart';
+import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/modals/vehicle_data._modal.dart';
 import 'package:carnova_user/resources/components/car_show_screen/car_book_bar.dart';
@@ -21,8 +23,8 @@ class CarDataShow extends StatelessWidget {
     ];
     double heigth = MediaQuery.sizeOf(context).height;
     return Scaffold(
-      bottomNavigationBar:
-          CarDataBottomBar(price: vehicleData.price),
+      backgroundColor: scaffoldBg,
+      bottomNavigationBar: CarDataBottomBar(price: vehicleData.price),
       appBar: customAppBarText(vehicleData.name, context),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -45,11 +47,8 @@ class CarDataShow extends StatelessWidget {
               const SizedBox(height: 10),
               CarDetailsCard(cardetails: cardetails),
               const SizedBox(height: 10),
-              Container(
-                margin: const EdgeInsets.only(top: 5, bottom: 5),
-                height: heigth / 9,
-                color: Colors.amber,
-              ),
+              HomeTitles(titles: "Contact"),
+               CarAgentTile(vehicledata: vehicleData),
               const SizedBox(height: 10),
               HomeTitles(titles: "More Images"),
               const SizedBox(height: 10),

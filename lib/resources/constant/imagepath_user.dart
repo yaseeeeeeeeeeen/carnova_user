@@ -2,10 +2,15 @@ class UserSideImages {
   String appLogo = "assets/images/logoWhite-removebg-preview.png";
   String mapImg = "assets/images/map_bg.jpeg";
   String userPhoto = "assets/images/staticCover.jpg";
+  String profileDemo = "assets/images/profileDemo.jpg";
   String carDemo = "assets/images/currentlyUsing.jpg";
   String profileBg =
       "assets/images/Premium Vector _ Abstract liquid green background stock vector.jpg";
   String startsvg = "assets/svg/star-svgrepo-com.svg";
+
+//////svg///////////////////////////
+  String gmapSvg = "assets/svg/google-map.svg";
+  String phoneSvg = "assets/svg/call-icon.svg";
 
   //brand logos static
   String carLogo1 =

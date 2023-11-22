@@ -1,7 +1,6 @@
 import 'package:carnova_user/resources/components/profie_screen/profile_card.dart';
 import 'package:carnova_user/resources/components/profie_screen/profile_screen_listtile.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
-import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/utils/appbar.dart';
 
 import 'package:flutter/material.dart';

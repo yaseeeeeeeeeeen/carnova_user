@@ -33,6 +33,12 @@ TextStyle listtilesText =
 
 TextStyle logoutbutton = GoogleFonts.poppins(
     fontSize: 16, fontWeight: FontWeight.w500, color: Colors.red);
+
+///////////car detail screen//////////////////////
+
+TextStyle caragentName =
+    GoogleFonts.poppins(fontSize: 15, fontWeight: FontWeight.w500);
+
 ////////////////////////---OLD STYLES----//////////////////////////////////////////////////////////////////////////////
 TextStyle style2 = GoogleFonts.poppins(
     color: Colors.white, fontSize: 27, fontWeight: FontWeight.w500);

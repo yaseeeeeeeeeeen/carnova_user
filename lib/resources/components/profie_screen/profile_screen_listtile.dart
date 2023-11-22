@@ -1,6 +1,7 @@
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ProfileScreenListtile extends StatelessWidget {
   ProfileScreenListtile(
       {super.key, required this.text, required this.isLogout});
