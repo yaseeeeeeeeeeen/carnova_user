@@ -1,11 +1,15 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:carnova_user/blocs/signup/signup_bloc.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/my_textfield.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
+import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:carnova_user/utils/validations.dart';
 import 'package:carnova_user/view/home_screen.dart';
+import 'package:carnova_user/view/login_signup/otp_verification.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
@@ -121,20 +125,41 @@ class SignupScreen extends StatelessWidget {
                                 obscureText: true,
                               ),
                               const SizedBox(height: 20),
-                              Hero(
-
-                                tag: "signin",
-                                child: MyLoadingButton(
-                                    isLoading: false,
-                                    title: 'Sign Up',
-                                    onTap: () async {
-                                      if (formKey.currentState!.validate()) {
-                                        final data = await signup();
-                                        // context.read<SignupBloc>().add(
-                                        //     SignupClickedEvent(
-                                        //         signupData: data));
-                                      }
-                                    }),
+                              BlocConsumer<SignupBloc, SignupState>(
+                                listener: (context, state) {
+                                  if (state is SignupSucsessState) {
+                                    print("SUCCSESS");
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SignupOtpScreen(
+                                                    email:
+                                                        emailController.text)));
+                                  } else if (state is SignupFailedState) {
+                                    print("FAILED");
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        customSnackbar(context, false,
+                                            "Something Wrong Tryagain"));
+                                  }
+                                },
+                                builder: (context, state) {
+                                  bool isLoading = state is LoadingState;
+                                  return Hero(
+                                    tag: "signin",
+                                    child: MyLoadingButton(
+                                        isLoading: isLoading,
+                                        title: 'Sign Up',
+                                        onTap: () async {
+                                          if (formKey.currentState!
+                                              .validate()) {
+                                            final data = await signup();
+                                            context.read<SignupBloc>().add(
+                                                SignupButtonClicked(
+                                                    signupdata: data));
+                                          }
+                                        }),
+                                  );
+                                },
                               ),
                               const SizedBox(height: 40),
                               Row(
