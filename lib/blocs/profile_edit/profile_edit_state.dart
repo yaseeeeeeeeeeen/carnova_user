@@ -10,11 +10,8 @@ class ProfileUpdateLoadingState extends ProfileEditState {}
 class ProfileUpdateSuccsessState extends ProfileEditState {}
 
 class ProfileImageAddedState extends ProfileEditState {
-    String imagePath;
-  ProfileImageAddedState({
-    required this.imagePath,
-  });
-
+  String imagePath;
+  ProfileImageAddedState({required this.imagePath});
 }
 
 class ProfileUpdateFailedState extends ProfileEditState {}
