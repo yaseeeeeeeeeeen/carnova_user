@@ -19,6 +19,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       emit(OtpVerificationSuccsessState());
     } else {
       emit(OtpVerificationFailedState());
+      
     }
   }
 }

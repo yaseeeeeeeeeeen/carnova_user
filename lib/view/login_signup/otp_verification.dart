@@ -102,7 +102,8 @@ class SignupOtpScreen extends StatelessWidget {
                           if (state is OtpVerificationSuccsessState) {
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
-                                    builder: (context) => BottomNavBar()),
+                                    builder: (context) =>
+                                        CustomNavBar()),
                                 (route) => false);
                           } else if (state is OtpVerificationFailedState) {
                             customSnackbar(

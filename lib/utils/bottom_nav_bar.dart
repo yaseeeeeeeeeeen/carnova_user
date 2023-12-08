@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // ignore: must_be_immutable
-class BottomNavBar extends StatefulWidget {
-  BottomNavBar({super.key, this.index});
+class CustomNavBar extends StatefulWidget {
+  CustomNavBar({super.key, this.index});
   int? index;
   @override
   HomePageState createState() => HomePageState();
 }
 
-class HomePageState extends State<BottomNavBar> {
+class HomePageState extends State<CustomNavBar> {
   var currentIndex = 0;
 
   @override
