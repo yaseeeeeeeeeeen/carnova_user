@@ -16,4 +16,13 @@ class ApiServices {
     print(response.statusCode);
     return response;
   }
+
+  Future<http.Response> userOtp(Map<String, int?> otp) async {
+    final url = Uri.parse(ApiUrls.otpverificationUrl);
+    final body = jsonEncode(otp);
+    final response = await http.post(url, body: body, headers: headers);
+    print("otp Verificationn Response === ${response.statusCode}");
+    print("otp messege Response === ${response.body}");
+    return response;
+  }
 }

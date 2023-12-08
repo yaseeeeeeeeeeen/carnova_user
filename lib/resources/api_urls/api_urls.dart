@@ -3,6 +3,5 @@ class ApiUrls {
   static const String userUrl = "$baseUrl/user";
   static const String loginUrl = "$userUrl/login";
   static const String signupUrl = "$userUrl/signup";
-  static const String otpverificationUrl = "$baseUrl/verify-otp";
-  
+  static const String otpverificationUrl = "$userUrl/verify-otp";
 }
