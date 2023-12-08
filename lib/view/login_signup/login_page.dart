@@ -1,10 +1,14 @@
+import 'package:carnova_user/blocs/login/login_bloc.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/my_textfield.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
+import 'package:carnova_user/utils/bottom_nav_bar.dart';
+import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:carnova_user/utils/validations.dart';
 import 'package:carnova_user/view/home_screen.dart';
 import 'package:carnova_user/view/login_signup/sign_up.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -141,19 +145,37 @@ class _LoginScreenState extends State<LoginScreen> {
                             // sign in button
                             Hero(
                               tag: "signin",
-                              child: MyLoadingButton(
-                                isLoading: false,
-                                title: 'Sign In',
-                                onTap: () {
-                                  if (loginKey.currentState!.validate()) {
-                                    final mailandpass = {
-                                      "email": emailController.text,
-                                      "password": passwordController.text
-                                    };
-                                    // context.read<LoginBloc>().add(
-                                    //     LoginClickedEvent(
-                                    //         mailandpass: mailandpass));
+                              child: BlocConsumer<LoginBloc, LoginState>(
+                                listener: (context, state) {
+                                  if (state is LoginSuccsess) {
+                                    Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                CustomNavBar()),
+                                        (route) => false);
+                                  } else if (state is LoginFailedState) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        customSnackbar(
+                                            context, false, state.messege));
                                   }
+                                },
+                                builder: (context, state) {
+                                  bool isLoading = state is LoadingState;
+                                  return MyLoadingButton(
+                                    isLoading: isLoading,
+                                    title: 'Sign In',
+                                    onTap: () {
+                                      if (loginKey.currentState!.validate()) {
+                                        final mailandpass = {
+                                          "email": emailController.text,
+                                          "password": passwordController.text
+                                        };
+                                        context.read<LoginBloc>().add(
+                                            LoginButtonClickedEvent(
+                                                mailandpass: mailandpass));
+                                      }
+                                    },
+                                  );
                                 },
                               ),
                             ),

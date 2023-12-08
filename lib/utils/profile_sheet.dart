@@ -1,3 +1,4 @@
+import 'package:carnova_user/modals/user_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/resources/components/profile_tile_button.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
@@ -36,9 +37,10 @@ Widget bottomsheetWid(double height, context) {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Muhammed Yaseen",
+                      Text(logedUser!.name.toUpperCase(),
                           style: style5, overflow: TextOverflow.ellipsis),
-                      Text("muahhammedyaseen@gmail.com",
+                     const SizedBox(height: 10),
+                      Text(logedUser!.email,
                           overflow: TextOverflow.ellipsis, style: style6),
                     ]),
               )

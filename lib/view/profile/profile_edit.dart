@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:carnova_user/blocs/profile_edit/profile_edit_bloc.dart';
+import 'package:carnova_user/modals/user_modal.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/custom_textfiled.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
@@ -18,6 +19,9 @@ class ProfileEditScreen extends StatelessWidget {
   String? imagePath;
   @override
   Widget build(BuildContext context) {
+    nameController.text = logedUser!.name;
+    emailController.text = logedUser!.email;
+    phoneController.text = logedUser!.phone.toString();
     return Scaffold(
       appBar: customAppBarText("PROFILE EDIT", context),
       body: Padding(

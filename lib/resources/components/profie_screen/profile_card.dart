@@ -1,3 +1,4 @@
+import 'package:carnova_user/modals/user_modal.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/view/home_screen.dart';
 import 'package:carnova_user/view/profile/profile_edit.dart';
@@ -24,7 +25,7 @@ class ProfileCardWid extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Hero(
-tag: "profilePhoto",
+            tag: "profilePhoto",
             child: CircleAvatar(
                 backgroundColor: Colors.white,
                 radius: heigth / 13,
@@ -32,7 +33,7 @@ tag: "profilePhoto",
           ),
           const SizedBox(height: 10),
           Text(
-            "Muhammed Yaseen",
+            "   ${logedUser!.name.toUpperCase()}",
             style: profileName,
           ),
           Row(
@@ -40,7 +41,7 @@ tag: "profilePhoto",
             children: [
               SizedBox(
                 width: MediaQuery.sizeOf(context).width / 1.8,
-                child: Text("muhammedyaseen@gmail.com",
+                child: Text(logedUser!.email,
                     style: mailstyle, overflow: TextOverflow.ellipsis),
               ),
               TextButton(

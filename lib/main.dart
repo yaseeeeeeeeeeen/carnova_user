@@ -2,14 +2,16 @@ import 'package:carnova_user/blocs/login/login_bloc.dart';
 import 'package:carnova_user/blocs/otp/otp_bloc.dart';
 import 'package:carnova_user/blocs/profile_edit/profile_edit_bloc.dart';
 import 'package:carnova_user/blocs/signup/signup_bloc.dart';
-
-import 'package:carnova_user/view/login_signup/login_page.dart';
+import 'package:carnova_user/data/shared_preferance/sharedprefrance.dart';
+import 'package:carnova_user/view/splash_screen/splash_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreference.instance.initStorage();
   runApp(const MyApp());
 }
 
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: LoginScreen(),
+        home: SplashScreen(),
       ),
     );
   }

@@ -1,7 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:carnova_user/data/shared_preferance/sharedprefrance.dart';
+import 'package:carnova_user/modals/user_modal.dart';
 import 'package:carnova_user/repositories/signup_repo.dart';
+import 'package:carnova_user/repositories/userdata_repo.dart';
 
 part 'signup_event.dart';
 part 'signup_state.dart';
@@ -15,11 +19,20 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
       SignupButtonClicked event, Emitter<SignupState> emit) async {
     emit(LoadingState());
     final response = await UserSignupRepo().userSignup(event.signupdata);
-    print(response.statusCode);
+    final body = jsonDecode(response.body);
     if (response.statusCode == 200) {
-      emit(SignupSucsessState());
+      String token = body['token'];
+      SharedPreference.instance.storeToken(token);
+      final responsess = await UserDataRepo().userData(token);
+      if (responsess.statusCode == 200) {
+        final dataJson = jsonDecode(responsess.body);
+        final userdata = UserModal.fromJson(dataJson);
+        logedUser = userdata;
+        emit(SignupSucsessState());
+      }
+      emit(SignupFailedState(messege: body["message"]));
     } else {
-      emit(SignupFailedState());
+      emit(SignupFailedState(messege: body["message"]));
     }
   }
 }
