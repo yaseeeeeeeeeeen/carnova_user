@@ -1,4 +1,5 @@
 import 'package:carnova_user/modals/user_modal.dart';
+import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/resources/components/profile_tile_button.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
@@ -25,10 +26,16 @@ Widget bottomsheetWid(double height, context) {
               CircleAvatar(
                 radius: 47,
                 backgroundColor: Colors.black,
-                child: CircleAvatar(
-                    backgroundImage: AssetImage(imageU.userPhoto),
-                    radius: 45,
-                    backgroundColor: Colors.black),
+                child: logedUser!.profile!.isNotEmpty
+                    ? CircleAvatar(
+                        backgroundImage: NetworkImage(
+                            "${ApiUrls.baseUrl}/${logedUser!.profile}"),
+                        radius: 45,
+                        backgroundColor: Colors.black)
+                    : CircleAvatar(
+                        backgroundImage: AssetImage(imageU.userPhoto),
+                        radius: 45,
+                        backgroundColor: Colors.black),
               ),
               Container(
                 width: MediaQuery.sizeOf(context).width / 1.6,
@@ -39,7 +46,7 @@ Widget bottomsheetWid(double height, context) {
                     children: [
                       Text(logedUser!.name.toUpperCase(),
                           style: style5, overflow: TextOverflow.ellipsis),
-                     const SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Text(logedUser!.email,
                           overflow: TextOverflow.ellipsis, style: style6),
                     ]),

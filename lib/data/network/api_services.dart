@@ -1,5 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:carnova_user/data/shared_preferance/sharedprefrance.dart';
+import 'package:carnova_user/modals/user_modal.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:http/http.dart' as http;
 
@@ -33,11 +36,41 @@ class ApiServices {
 
   Future<http.Response> getUserData(String token) async {
     final url = Uri.parse(ApiUrls.userdata);
+    final header = {'Authorization': 'Bearer $token', 'Cookie': 'jwt=$token'};
+    final response = await http.get(url, headers: header);
+    return response;
+  }
+
+  Future<http.StreamedResponse> profileUpdate(File image) async {
+    final token = SharedPreference.instance.getToken();
+    final url = Uri.parse(ApiUrls.addProfile);
+    var request = http.MultipartRequest('PATCH', url);
+    request.headers['Authorization'] = 'Bearer $token';
+    request.headers['Cookie'] = 'jwt=$token';
+    var profilePhotoStream = http.ByteStream(image.openRead());
+    var profilePhotoLength = await image.length();
+    var profilePhotoMultipartFile = http.MultipartFile(
+      'profile',
+      profilePhotoStream,
+      profilePhotoLength,
+      filename: 'profilephoto${logedUser!.name}.jpg',
+    );
+    request.files.add(profilePhotoMultipartFile);
+    final response = await request.send();
+    return response;
+  }
+
+  Future<http.Response> dataUpdate(Map<String, dynamic> data) async {
+    final url = Uri.parse(ApiUrls.updateprofile);
+    final token = SharedPreference.instance.getToken();
     final header = {
       'Authorization': 'Bearer $token',
-      'Cookie': 'jwt=$token'
+      'Cookie': 'jwt=$token',
+      'Content-Type': 'application/json'
     };
-    final response = await http.get(url, headers: header);
+
+    final body = jsonEncode(data);
+    final response = await http.patch(url, body: body, headers: header);
     return response;
   }
 }

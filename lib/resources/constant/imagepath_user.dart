@@ -1,6 +1,6 @@
 class UserSideImages {
   String appLogo = "assets/images/logoWhite-removebg-preview.png";
-  String applogoBlack="assets/images/applogoBlack.png";
+  String applogoBlack = "assets/images/applogoBlack.png";
   String mapImg = "assets/images/map_bg.jpeg";
   String userPhoto = "assets/images/staticCover.jpg";
   String profileDemo = "assets/images/profileDemo.jpg";

@@ -1,3 +1,5 @@
+import 'package:carnova_user/modals/user_modal.dart';
+import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -23,10 +25,16 @@ PreferredSizeWidget customAppBarU(context) {
               },
             );
           },
-          child: CircleAvatar(
-            backgroundImage: AssetImage(imageU.userPhoto),
-            backgroundColor: Colors.black,
-          ),
+          child: logedUser!.profile!.isNotEmpty
+              ? CircleAvatar(
+                  backgroundImage:
+                      NetworkImage("${ApiUrls.baseUrl}/${logedUser!.profile}"),
+                  backgroundColor: Colors.black,
+                )
+              : CircleAvatar(
+                  backgroundImage: AssetImage(imageU.profileDemo),
+                  backgroundColor: Colors.black,
+                ),
         ),
         const SizedBox(width: 10),
       ],
@@ -37,12 +45,14 @@ PreferredSizeWidget customAppBarU(context) {
           child: Image(image: AssetImage(imageU.appLogo), fit: BoxFit.cover)));
 }
 
-PreferredSizeWidget customAppBarText(String title, context) {
+PreferredSizeWidget customAppBarText(
+    String title, context, Function()? onPressed) {
   return AppBar(
       leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+          onPressed: onPressed ??
+              () {
+                Navigator.of(context).pop();
+              },
           icon: const Icon(Icons.arrow_back_outlined, color: Colors.white)),
       backgroundColor: appbarColorU,
       centerTitle: true,

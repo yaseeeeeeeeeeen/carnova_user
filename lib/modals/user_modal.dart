@@ -33,7 +33,7 @@ class UserModal {
         name: json["name"],
         email: json["email"],
         phone: json["phone"],
-        profile: json["profile"] ?? "",
+        profile: json["profile"]??"",
         isBlocked: json["isBlocked"],
       );
 
@@ -48,3 +48,4 @@ class UserModal {
 }
 
 UserModal? logedUser;
+

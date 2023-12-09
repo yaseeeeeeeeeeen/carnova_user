@@ -1,6 +1,14 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:ffi';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:carnova_user/blocs/login/login_bloc.dart';
+import 'package:carnova_user/data/network/api_services.dart';
+import 'package:carnova_user/data/shared_preferance/sharedprefrance.dart';
+import 'package:carnova_user/modals/user_modal.dart';
+import 'package:carnova_user/repositories/userdata_repo.dart';
 
 import 'package:carnova_user/utils/functions/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -12,6 +20,7 @@ part 'profile_edit_state.dart';
 class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
   ProfileEditBloc() : super(ProfileEditInitial()) {
     on<ImageAddedClicked>(imageAddedClicked);
+    on<SubmitClicked>(submitClicked);
   }
 
   FutureOr<void> imageAddedClicked(
@@ -20,9 +29,31 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
         cropAspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
         imageSource: ImageSource.gallery);
     if (pickedimage != null) {
-      String imagePicked = pickedimage.path;
+      File imagePicked = File(pickedimage.path);
       // hostModelData?.profile = pickedimage as File;
       emit(ProfileImageAddedState(imagePath: imagePicked));
+    }
+  }
+
+  FutureOr<void> submitClicked(
+      SubmitClicked event, Emitter<ProfileEditState> emit) async {
+    emit(ProfileUpdateLoadingState());
+    final response = await ApiServices.instance.dataUpdate(event.data);
+    print(response.statusCode);
+    final response1 = await ApiServices.instance.profileUpdate(event.imagepath);
+    final responsBody = await response1.stream.bytesToString();
+    print(responsBody);
+    final token = SharedPreference.instance.getToken();
+    if (token != null) {
+      final response = await UserDataRepo().userData(token);
+      final data = jsonDecode(response.body);
+      if (data != null) {
+        final data1 = UserModal.fromJson(data);
+        logedUser = data1;
+      }
+      emit(ProfileUpdateSuccsessState());
+    } else {
+      emit(ProfileUpdateFailedState(message: "Somthing Wrong"));
     }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:carnova_user/modals/user_modal.dart';
+import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/view/home_screen.dart';
 import 'package:carnova_user/view/profile/profile_edit.dart';
@@ -26,10 +27,16 @@ class ProfileCardWid extends StatelessWidget {
         children: [
           Hero(
             tag: "profilePhoto",
-            child: CircleAvatar(
-                backgroundColor: Colors.white,
-                radius: heigth / 13,
-                backgroundImage: AssetImage(imageU.userPhoto)),
+            child: logedUser!.profile!.isNotEmpty
+                ? CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: heigth / 13,
+                    backgroundImage: NetworkImage(
+                        "${ApiUrls.baseUrl}/${logedUser!.profile}"))
+                : CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: heigth / 13,
+                    backgroundImage: AssetImage(imageU.profileDemo)),
           ),
           const SizedBox(height: 10),
           Text(

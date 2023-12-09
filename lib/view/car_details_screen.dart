@@ -25,7 +25,7 @@ class CarDataShow extends StatelessWidget {
     return Scaffold(
       backgroundColor: scaffoldBg,
       bottomNavigationBar: CarDataBottomBar(price: vehicleData.price),
-      appBar: customAppBarText(vehicleData.name, context),
+      appBar: customAppBarText(vehicleData.name, context,null),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(

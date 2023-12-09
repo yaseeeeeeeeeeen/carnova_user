@@ -45,6 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (token != null) {
       final response = await UserDataRepo().userData(token);
       final data = jsonDecode(response.body);
+      print(data);
       if (data != null) {
         final data1 = UserModal.fromJson(data);
         logedUser = data1;

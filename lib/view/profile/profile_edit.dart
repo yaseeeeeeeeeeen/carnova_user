@@ -6,6 +6,9 @@ import 'package:carnova_user/resources/components/textfields_and_buttons/custom_
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/appbar.dart';
+import 'package:carnova_user/utils/bottom_nav_bar.dart';
+import 'package:carnova_user/utils/snack_bar.dart';
+import 'package:carnova_user/view/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,15 +18,19 @@ class ProfileEditScreen extends StatelessWidget {
 
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+
   String? imagePath;
+  File? profileImage;
   @override
   Widget build(BuildContext context) {
     nameController.text = logedUser!.name;
-    emailController.text = logedUser!.email;
     phoneController.text = logedUser!.phone.toString();
     return Scaffold(
-      appBar: customAppBarText("PROFILE EDIT", context),
+      appBar: customAppBarText("PROFILE EDIT", context, () {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => CustomNavBar(index: 3)),
+            (route) => false);
+      }),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: SingleChildScrollView(
@@ -33,7 +40,8 @@ class ProfileEditScreen extends StatelessWidget {
               child: BlocBuilder<ProfileEditBloc, ProfileEditState>(
                 builder: (context, state) {
                   if (state is ProfileImageAddedState) {
-                    imagePath = state.imagePath;
+                    profileImage = state.imagePath;
+                    imagePath = state.imagePath.path;
                   }
 
                   return GestureDetector(
@@ -48,8 +56,8 @@ class ProfileEditScreen extends StatelessWidget {
                                 backgroundImage: FileImage(File(imagePath!)),
                                 radius: 80,
                               )
-                            : const CircleAvatar(
-                                //show previews profile photo
+                            :  CircleAvatar(
+                              backgroundImage: AssetImage(imageU.profileDemo),
                                 backgroundColor: Colors.black12,
                                 radius: 80,
                               )),
@@ -66,25 +74,54 @@ class ProfileEditScreen extends StatelessWidget {
             const SizedBox(height: 10),
             CustomTextfield(
                 viewonly: true,
-                hint: "Email",
-                isSufix: false,
-                controller: emailController),
-            const SizedBox(height: 10),
-            CustomTextfield(
-                viewonly: true,
                 keybordtype: TextInputType.number,
                 hint: "Phone Number",
                 isSufix: true,
                 controller: phoneController),
             const SizedBox(height: 10),
-            MyLoadingButton(
-              isLoading: false,
-              title: "Update",
-              onTap: () {},
+            BlocConsumer<ProfileEditBloc, ProfileEditState>(
+              listener: (context, state) {
+                if (state is ProfileUpdateFailedState) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      customSnackbar(context, false, state.message));
+                } else if (state is ProfileUpdateSuccsessState) {
+                  ScaffoldMessenger.of(context).showSnackBar(customSnackbar(
+                      context, true, "Profile Updated Succsess"));
+                }
+              },
+              builder: (context, state) {
+                bool isLoading = state is ProfileUpdateLoadingState;
+                return MyLoadingButton(
+                  isLoading: isLoading,
+                  title: "Update",
+                  onTap: () {
+                    if (profileImage == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(customSnackbar(
+                          context, false, "ADD YOUR PROFILE PHOTO"));
+                    }
+                    updateButton(phoneController, nameController, profileImage!,
+                        context);
+                  },
+                );
+              },
             )
           ]),
         ),
       ),
     );
+  }
+
+  updateButton(TextEditingController phone, TextEditingController name,
+      File profile, BuildContext context) {
+    File profilephoto = profile;
+    if (phone.text.length == 10 || name.text.isNotEmpty) {
+      Map<String, dynamic> data = {"phone": phone.text, "name": name.text};
+      context
+          .read<ProfileEditBloc>()
+          .add(SubmitClicked(imagepath: profilephoto, data: data));
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(customSnackbar(context, false, "SOMETHING WRONG"));
+    }
   }
 }
