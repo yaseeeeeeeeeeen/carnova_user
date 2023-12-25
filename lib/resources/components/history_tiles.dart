@@ -87,7 +87,7 @@ class CarUpcomingListTile extends StatelessWidget {
               ),
             );
           },
-          itemCount: vehiclesinfo.length),
+          itemCount: 3),
     );
   }
 }
@@ -111,8 +111,7 @@ class HistoryCharList extends StatelessWidget {
             final data = vehiclesinfo[index];
             return GestureDetector(
               onTap: () {
-                
-             //   Navigator.of(context).push(MaterialPageRoute(builder: (context) => CarDataShow(vehicleData: data, isBooked: )))
+                //   Navigator.of(context).push(MaterialPageRoute(builder: (context) => CarDataShow(vehicleData: data, isBooked: )))
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -175,7 +174,7 @@ class HistoryCharList extends StatelessWidget {
               ),
             );
           },
-          itemCount: vehiclesinfo.length),
+          itemCount: 3),
     );
   }
 }

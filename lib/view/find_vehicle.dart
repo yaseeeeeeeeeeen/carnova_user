@@ -1,9 +1,11 @@
+import 'package:carnova_user/blocs/vehicle_check/vehicle_check_bloc.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/custom_textfiled.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/utils/appbar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -107,8 +109,27 @@ class FindVehicleU extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 15),
-              const MyLoadingButton(
-                  title: "Check Availabilty", isLoading: false)
+              BlocConsumer<VehicleCheckBloc, VehicleCheckState>(
+                listener: (context, state) {
+                  if (state is UserLoactionPickedSuccsessState) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        customSnackbar(context, true, state.loction));
+                  } else if (state is LocationPickingFailed) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        customSnackbar(context, false, state.message));
+                  }
+                },
+                builder: (context, state) {
+                  return MyLoadingButton(
+                      title: "Check Availabilty",
+                      isLoading: state is VehicleCheckLoading,
+                      onTap: () {
+                        context
+                            .read<VehicleCheckBloc>()
+                            .add(CheckAvaliblityButtonClicked());
+                      });
+                },
+              )
             ],
           ),
         ));

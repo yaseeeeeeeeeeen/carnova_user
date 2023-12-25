@@ -1,5 +1,5 @@
 class ApiUrls {
-  static const String baseUrl = "http://192.168.109.133:3000";
+  static const String baseUrl = "http://192.168.86.133:3000";
   static const String userUrl = "$baseUrl/user";
   static const String loginUrl = "$userUrl/login";
   static const String userdata = "$userUrl/getuser";
