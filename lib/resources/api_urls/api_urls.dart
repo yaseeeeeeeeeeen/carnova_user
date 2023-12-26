@@ -1,5 +1,5 @@
 class ApiUrls {
-  static const String baseUrl = "http://192.168.86.133:3000";
+  static const String baseUrl = "http://10.4.6.91:3000";
   static const String userUrl = "$baseUrl/user";
   static const String loginUrl = "$userUrl/login";
   static const String userdata = "$userUrl/getuser";
@@ -7,4 +7,6 @@ class ApiUrls {
   static const String otpverificationUrl = "$userUrl/verify-otp";
   static const String addProfile = "$userUrl/update-profile";
   static const String updateprofile = "$userUrl/update-user";
+  static const String getVehicles = "$userUrl/vehicles";
+  static const String putAvailableVehicles = '$userUrl/store-choice';
 }

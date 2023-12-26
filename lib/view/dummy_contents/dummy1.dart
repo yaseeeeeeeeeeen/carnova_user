@@ -1,8 +1,8 @@
-import 'package:carnova_user/modals/fetch_modal.dart';
-import 'package:carnova_user/resources/api_urls/api_urls.dart';
-import 'package:carnova_user/resources/components/car_show_screen/agent_tile.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
+import 'package:carnova_user/view/dummy_contents/dummy2.dart';
+import 'package:carnova_user/view/dummy_contents/dummy3.dart';
 import 'package:flutter/material.dart';
+import 'package:carnova_user/modals/vehicle_data._modal.dart';
 import 'package:carnova_user/resources/components/car_show_screen/car_book_bar.dart';
 import 'package:carnova_user/resources/components/car_show_screen/car_details_card.dart';
 import 'package:carnova_user/resources/components/car_show_screen/vehicle_images_wid.dart';
@@ -10,9 +10,9 @@ import 'package:carnova_user/resources/components/title_text_wid.dart';
 import 'package:carnova_user/utils/appbar.dart';
 
 // ignore: must_be_immutable
-class CarDataShow extends StatelessWidget {
-  CarDataShow({super.key, required this.vehicleData, required this.isBooked});
-  Vehicle vehicleData;
+class CarDataShowD extends StatelessWidget {
+  CarDataShowD({super.key, required this.vehicleData, required this.isBooked});
+  VehicleDataModal vehicleData;
   bool isBooked;
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class CarDataShow extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                              image: NetworkImage("${ApiUrls.baseUrl}/${vehicleData.images[0]}"),
+                              image: NetworkImage(vehicleData.images[0]),
                               fit: BoxFit.cover)))),
               const SizedBox(height: 5),
               HomeTitles(titles: "Car Details"),
@@ -50,11 +50,11 @@ class CarDataShow extends StatelessWidget {
               CarDetailsCard(cardetails: cardetails),
               const SizedBox(height: 10),
               HomeTitles(titles: "Contact"),
-               CarAgentTile(vehicledata: vehicleData),
+               CarAgentTileD(vehicledata: vehicleData),
               const SizedBox(height: 10),
               HomeTitles(titles: "More Images"),
               const SizedBox(height: 10),
-              CarMoreImages(images: vehicleData.images)
+              CarMoreImagesD(images: vehicleData.images)
             ],
           ),
         ),

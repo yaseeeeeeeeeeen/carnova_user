@@ -1,6 +1,7 @@
 import 'package:carnova_user/modals/vehicle_data._modal.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/view/car_details_screen.dart';
+import 'package:carnova_user/view/dummy_contents/dummy1.dart';
 import 'package:carnova_user/view/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -22,7 +23,7 @@ class MostRatedDemo extends StatelessWidget {
       ),
       child: GestureDetector(
           onTap: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => CarDataShow(vehicleData: vehicledata,isBooked: false))),
+              builder: (context) => CarDataShowD(vehicleData: vehicledata,isBooked: false))),
           child: Column(
             children: [
               Hero(

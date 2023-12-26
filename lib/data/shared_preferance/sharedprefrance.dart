@@ -1,13 +1,12 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPreference {
-  SharedPreference._();
-  static final _instance = SharedPreference._();
-  static SharedPreference get instance => _instance;
+class SharedPref {
+  SharedPref._();
+  static final _instance = SharedPref._();
+  static SharedPref get instance => _instance;
 
-  static const String email = 'email';
-  static const String password = 'password';
   static const String token = 'token';
+  static const String location = 'location';
 
   late SharedPreferences sharedPref;
 
@@ -15,15 +14,23 @@ class SharedPreference {
     sharedPref = await SharedPreferences.getInstance();
   }
 
-  storeToken(userToken) async {
-    await sharedPref.setString(token, userToken);
+  storeToken(hostToken) async {
+    await sharedPref.setString(token, hostToken);
   }
 
   removeToken() async {
     await sharedPref.remove(token);
   }
 
-  String? getToken() {
-   return sharedPref.getString(token);
+  storeLocation(String value) async {
+    await sharedPref.setString(location, value);
+  }
+
+  String? getLocation() {
+    return sharedPref.getString(location);
+  }
+
+  String? getToke() {
+    return sharedPref.getString(token);
   }
 }

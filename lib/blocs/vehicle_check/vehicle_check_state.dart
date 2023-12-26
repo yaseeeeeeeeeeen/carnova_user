@@ -7,18 +7,26 @@ final class VehicleCheckInitial extends VehicleCheckState {}
 
 class VehicleCheckLoading extends VehicleCheckState {}
 
-class UserLoactionPickedSuccsessState extends VehicleCheckState {
-  String loction;
-  double lat;
-  double long;
-  UserLoactionPickedSuccsessState({
-    required this.loction,
-    required this.lat,
-    required this.long,
-  });
+class UserStoreChoiceState extends VehicleCheckState {
+  Map<String, String> data;
+  UserStoreChoiceState({required this.data});
+}
 
+class UserStoreChoiceSuccsess extends VehicleCheckState {}
+
+// class PutVehicleSuccsess extends VehicleCheckState {}
+
+class VehilceFetchingFailed extends VehicleCheckState {
+  String messege;
+  VehilceFetchingFailed({required this.messege});
 }
 
 class LocationPickingFailed extends VehicleCheckState {
   String message = "Location Picking Failed";
+}
+
+class VehicleFetchSuccsessState extends VehicleCheckState {
+  Position location;
+  List<Vehicle> vehicleModel;
+  VehicleFetchSuccsessState({required this.vehicleModel,required this.location});
 }

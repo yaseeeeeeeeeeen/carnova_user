@@ -4,7 +4,9 @@ import 'package:carnova_user/blocs/profile_edit/profile_edit_bloc.dart';
 import 'package:carnova_user/blocs/signup/signup_bloc.dart';
 import 'package:carnova_user/blocs/vehicle_check/vehicle_check_bloc.dart';
 import 'package:carnova_user/data/shared_preferance/sharedprefrance.dart';
+import 'package:carnova_user/view/map_screen.dart';
 import 'package:carnova_user/view/splash_screen/splash_screen.dart';
+import 'package:carnova_user/view/vehicle_list.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreference.instance.initStorage();
+  SharedPref.instance.initStorage();
   runApp(const MyApp());
 }
 
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+        const SystemUiOverlayStyle(statusBarColor: Colors.black));
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => ProfileEditBloc()),
@@ -31,9 +33,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => OtpBloc()),
         BlocProvider(create: (context) => VehicleCheckBloc())
       ],
-      child: const MaterialApp(
+      child:const  MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        home: SplashScreen()
       ),
     );
   }

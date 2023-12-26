@@ -1,5 +1,5 @@
 import 'package:carnova_user/modals/fetch_modal.dart';
-import 'package:carnova_user/resources/api_urls/api_urls.dart';
+import 'package:carnova_user/modals/vehicle_data._modal.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/view/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +7,9 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 
-class CarAgentTile extends StatelessWidget {
-  const CarAgentTile({super.key, required this.vehicledata});
-  final Vehicle vehicledata;
+class CarAgentTileD extends StatelessWidget {
+  const CarAgentTileD({super.key, required this.vehicledata});
+  final VehicleDataModal vehicledata;
   @override
   Widget build(BuildContext context) {
     double heigth = MediaQuery.sizeOf(context).height;
@@ -24,7 +24,7 @@ class CarAgentTile extends StatelessWidget {
       child: Center(
         child: ListTile(
           title: Text(
-            vehicledata.hostDetails.name,
+            "Roberto Carlos",
             style: caragentName,
           ),
           subtitle: const Text("Car Agent"),
@@ -36,7 +36,7 @@ class CarAgentTile extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    callAgent(vehicledata.hostDetails.phone.toString());
+                    callAgent("8848917803");
                   },
                   child: CircleAvatar(
                     backgroundColor: Colors.transparent,
@@ -61,14 +61,9 @@ class CarAgentTile extends StatelessWidget {
           ),
           leading: SizedBox(
             width: width / 8,
-            child: vehicledata.hostDetails.profile.isNotEmpty
-                ? CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        "${ApiUrls.baseUrl}/${vehicledata.hostDetails.profile}"),
-                  )
-                : CircleAvatar(
-                    backgroundImage: AssetImage(imageU.profileDemo),
-                  ),
+            child: CircleAvatar(
+              backgroundImage: AssetImage(imageU.profileDemo),
+            ),
           ),
         ),
       ),

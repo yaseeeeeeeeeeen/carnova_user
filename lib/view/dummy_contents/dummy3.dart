@@ -1,9 +1,8 @@
-import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class CarMoreImages extends StatelessWidget {
-  const CarMoreImages({super.key, required this.images});
+class CarMoreImagesD extends StatelessWidget {
+  const CarMoreImagesD({super.key, required this.images});
   final List images;
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class CarMoreImages extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        image: NetworkImage("${ApiUrls.baseUrl}/$i"), fit: BoxFit.cover)));
+                        image: NetworkImage(i), fit: BoxFit.cover)));
           },
         );
       }).toList(),

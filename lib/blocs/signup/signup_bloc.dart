@@ -22,7 +22,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     final body = jsonDecode(response.body);
     if (response.statusCode == 200) {
       String token = body['token'];
-      SharedPreference.instance.storeToken(token);
+      SharedPref.instance.storeToken(token);
       final responsess = await UserDataRepo().userData(token);
       if (responsess.statusCode == 200) {
         final dataJson = jsonDecode(responsess.body);

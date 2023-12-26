@@ -128,16 +128,14 @@ class SignupScreen extends StatelessWidget {
                               BlocConsumer<SignupBloc, SignupState>(
                                 listener: (context, state) {
                                   if (state is SignupSucsessState) {
-                                    print("SUCCSESS");
-                                    Navigator.of(context).push(
+                                                               Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 SignupOtpScreen(
                                                     email:
                                                         emailController.text)));
                                   } else if (state is SignupFailedState) {
-                                    print("FAILED");
-                                    ScaffoldMessenger.of(context).showSnackBar(
+                                                   ScaffoldMessenger.of(context).showSnackBar(
                                         customSnackbar(context, false,
                                             "Something Wrong Tryagain"));
                                   }

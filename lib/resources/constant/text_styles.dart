@@ -27,6 +27,10 @@ TextStyle mailstyle = GoogleFonts.poppins(
     color: Colors.black.withOpacity(0.7),
     fontSize: 13,
     fontWeight: FontWeight.w600);
+TextStyle mylocation = GoogleFonts.poppins(
+    color: Colors.white,
+    fontSize: 15,
+    fontWeight: FontWeight.w600);
 
 TextStyle listtilesText =
     GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w400);

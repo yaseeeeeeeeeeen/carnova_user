@@ -1,10 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:carnova_user/blocs/login/login_bloc.dart';
 import 'package:carnova_user/data/network/api_services.dart';
 import 'package:carnova_user/data/shared_preferance/sharedprefrance.dart';
 import 'package:carnova_user/modals/user_modal.dart';
@@ -43,7 +41,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
     final response1 = await ApiServices.instance.profileUpdate(event.imagepath);
     final responsBody = await response1.stream.bytesToString();
     print(responsBody);
-    final token = SharedPreference.instance.getToken();
+    final token = SharedPref.instance.getToke();
     if (token != null) {
       final response = await UserDataRepo().userData(token);
       final data = jsonDecode(response.body);

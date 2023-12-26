@@ -21,7 +21,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
     if (response.statusCode == 200) {
       String token = body['token'];
       print("token is : $token");
-      SharedPreference.instance.storeToken(token);
+      SharedPref.instance.storeToken(token);
       emit(OtpVerificationSuccsessState());
     } else {
       emit(OtpVerificationFailedState(messege: body["message"]));

@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
   loginCheck(context) async {
     await Future.delayed(const Duration(seconds: 2));
 
-    final token = SharedPreference.instance.getToken();
+    final token = SharedPref.instance.getToke();
 
     if (token != null) {
       final response = await UserDataRepo().userData(token);
