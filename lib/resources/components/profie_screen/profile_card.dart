@@ -1,4 +1,4 @@
-import 'package:carnova_user/modals/user_modal.dart';
+import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/view/home_screen.dart';
@@ -27,12 +27,12 @@ class ProfileCardWid extends StatelessWidget {
         children: [
           Hero(
             tag: "profilePhoto",
-            child: logedUser!.profile!.isNotEmpty
+            child: logedUser.profile!.isNotEmpty
                 ? CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: heigth / 13,
                     backgroundImage: NetworkImage(
-                        "${ApiUrls.baseUrl}/${logedUser!.profile}"))
+                        "${ApiUrls.baseUrl}/${logedUser.profile}"))
                 : CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: heigth / 13,
@@ -40,7 +40,7 @@ class ProfileCardWid extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            "   ${logedUser!.name.toUpperCase()}",
+            "   ${logedUser.name.toUpperCase()}",
             style: profileName,
           ),
           Row(
@@ -48,7 +48,7 @@ class ProfileCardWid extends StatelessWidget {
             children: [
               SizedBox(
                 width: MediaQuery.sizeOf(context).width / 1.8,
-                child: Text(logedUser!.email,
+                child: Text(logedUser.email,
                     style: mailstyle, overflow: TextOverflow.ellipsis),
               ),
               TextButton(

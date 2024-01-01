@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/data/shared_preferance/sharedprefrance.dart';
-import 'package:carnova_user/modals/user_modal.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/utils/app_exceptions.dart';
 import 'package:either_dart/either.dart';
@@ -55,7 +55,7 @@ class ApiServices {
       'profile',
       profilePhotoStream,
       profilePhotoLength,
-      filename: 'profilephoto${logedUser!.name}.jpg',
+      filename: 'profilephoto${logedUser.name}.jpg',
     );
     request.files.add(profilePhotoMultipartFile);
     final response = await request.send();

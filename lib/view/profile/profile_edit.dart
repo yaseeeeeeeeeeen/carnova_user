@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:carnova_user/blocs/profile_edit/profile_edit_bloc.dart';
+import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/modals/user_modal.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/custom_textfiled.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
@@ -23,8 +24,8 @@ class ProfileEditScreen extends StatelessWidget {
   File? profileImage;
   @override
   Widget build(BuildContext context) {
-    nameController.text = logedUser!.name;
-    phoneController.text = logedUser!.phone.toString();
+    nameController.text = logedUser.name;
+    phoneController.text = logedUser.phone.toString();
     return Scaffold(
       appBar: customAppBarText("PROFILE EDIT", context, () {
         Navigator.of(context).pushAndRemoveUntil(
@@ -56,8 +57,8 @@ class ProfileEditScreen extends StatelessWidget {
                                 backgroundImage: FileImage(File(imagePath!)),
                                 radius: 80,
                               )
-                            :  CircleAvatar(
-                              backgroundImage: AssetImage(imageU.profileDemo),
+                            : CircleAvatar(
+                                backgroundImage: AssetImage(imageU.profileDemo),
                                 backgroundColor: Colors.black12,
                                 radius: 80,
                               )),

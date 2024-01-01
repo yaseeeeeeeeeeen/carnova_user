@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:carnova_user/modals/vehicle_data._modal.dart';
 import 'package:carnova_user/resources/components/car_show_screen/car_book_bar.dart';
 import 'package:carnova_user/resources/components/car_show_screen/car_details_card.dart';
-import 'package:carnova_user/resources/components/car_show_screen/vehicle_images_wid.dart';
 import 'package:carnova_user/resources/components/title_text_wid.dart';
 import 'package:carnova_user/utils/appbar.dart';
 

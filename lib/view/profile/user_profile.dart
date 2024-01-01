@@ -2,6 +2,7 @@ import 'package:carnova_user/resources/components/profie_screen/profile_card.dar
 import 'package:carnova_user/resources/components/profie_screen/profile_screen_listtile.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/appbar.dart';
+import 'package:carnova_user/view/profile/change_password.dart';
 
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ class UserProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-       return Scaffold(
+    return Scaffold(
         backgroundColor: scaffoldBg,
         appBar: customAppBarU(context),
         body: Padding(
@@ -20,7 +21,14 @@ class UserProfile extends StatelessWidget {
               children: [
                 const ProfileCardWid(),
                 const SizedBox(height: 10),
-                const ProfileListtileToggle(text: "Dark Mode"),
+                ProfileScreenListtile(
+                  text: "Change Password",
+                  isLogout: false,
+                  ontap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ChangePasswordScreen()));
+                  },
+                ),
                 ProfileScreenListtile(text: "App info", isLogout: false),
                 ProfileScreenListtile(
                     text: "Terms & Conditions", isLogout: false),

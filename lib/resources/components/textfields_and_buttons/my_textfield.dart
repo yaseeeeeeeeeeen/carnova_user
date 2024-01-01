@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 // ignore: must_be_immutable
 class MyTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -26,9 +25,10 @@ class MyTextField extends StatelessWidget {
       controller: controller,
       obscureText: obscureText,
       decoration: InputDecoration(
-          border: OutlineInputBorder(
+          border: const OutlineInputBorder(
               borderSide: BorderSide(width: 5, color: Colors.black)),
-          label: Text(hintText, style: TextStyle(color: Colors.black)),
+          label:
+              Text(hintText, style: GoogleFonts.poppins(color: Colors.black)),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey),
           ),

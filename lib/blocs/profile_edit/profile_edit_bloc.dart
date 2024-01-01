@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:carnova_user/blocs/login/login_bloc.dart';
+import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/data/network/api_services.dart';
 import 'package:carnova_user/data/shared_preferance/sharedprefrance.dart';
 import 'package:carnova_user/modals/user_modal.dart';
@@ -47,7 +49,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
       final data = jsonDecode(response.body);
       if (data != null) {
         final data1 = UserModal.fromJson(data);
-        logedUser = data1;
+        locator<LoginBloc>().logedUser = data1;
       }
       emit(ProfileUpdateSuccsessState());
     } else {

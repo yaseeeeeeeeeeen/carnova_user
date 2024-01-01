@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:carnova_user/blocs/login/login_bloc.dart';
+import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/data/shared_preferance/sharedprefrance.dart';
 import 'package:carnova_user/modals/user_modal.dart';
 import 'package:carnova_user/repositories/userdata_repo.dart';
@@ -45,12 +47,16 @@ class _SplashScreenState extends State<SplashScreen> {
     if (token != null) {
       final response = await UserDataRepo().userData(token);
       final data = jsonDecode(response.body);
-      print(data);
       if (data != null) {
         final data1 = UserModal.fromJson(data);
-        logedUser = data1;
+        locator<LoginBloc>().logedUser = data1;
+        print(logedUser.name);
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => CustomNavBar()),
+            (route) => false);
+      } else {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const LoginScreen()),
             (route) => false);
       }
     } else {

@@ -1,3 +1,4 @@
+import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/modals/user_modal.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:flutter/material.dart';
@@ -26,10 +27,10 @@ Widget bottomsheetWid(double height, context) {
               CircleAvatar(
                 radius: 47,
                 backgroundColor: Colors.black,
-                child: logedUser!.profile!.isNotEmpty
+                child: logedUser.profile!.isNotEmpty
                     ? CircleAvatar(
                         backgroundImage: NetworkImage(
-                            "${ApiUrls.baseUrl}/${logedUser!.profile}"),
+                            "${ApiUrls.baseUrl}/${logedUser.profile}"),
                         radius: 45,
                         backgroundColor: Colors.black)
                     : CircleAvatar(
@@ -44,10 +45,10 @@ Widget bottomsheetWid(double height, context) {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(logedUser!.name.toUpperCase(),
+                      Text(logedUser.name.toUpperCase(),
                           style: style5, overflow: TextOverflow.ellipsis),
                       const SizedBox(height: 10),
-                      Text(logedUser!.email,
+                      Text(logedUser.email,
                           overflow: TextOverflow.ellipsis, style: style6),
                     ]),
               )

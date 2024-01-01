@@ -28,9 +28,7 @@ TextStyle mailstyle = GoogleFonts.poppins(
     fontSize: 13,
     fontWeight: FontWeight.w600);
 TextStyle mylocation = GoogleFonts.poppins(
-    color: Colors.white,
-    fontSize: 15,
-    fontWeight: FontWeight.w600);
+    color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600);
 
 TextStyle listtilesText =
     GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w400);
@@ -76,3 +74,7 @@ TextStyle ratingtitle = GoogleFonts.poppins(
 
 TextStyle navbartitle = GoogleFonts.poppins(
     color: Colors.white, fontWeight: FontWeight.w600, fontSize: 15);
+
+TextStyle changePasswordFont = GoogleFonts.poppins(
+  color: Colors.black,fontSize: 15
+);

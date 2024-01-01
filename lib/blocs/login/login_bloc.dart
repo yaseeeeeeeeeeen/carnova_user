@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/data/shared_preferance/sharedprefrance.dart';
 import 'package:carnova_user/modals/user_modal.dart';
 import 'package:carnova_user/repositories/login_repo.dart';
@@ -11,6 +12,7 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
+  late UserModal logedUser;
   LoginBloc() : super(LoginInitial()) {
     on<LoginButtonClickedEvent>(loginButtonClickedEvent);
   }
@@ -28,7 +30,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       if (responsess.statusCode == 200) {
         final dataJson = jsonDecode(responsess.body);
         final userdata = UserModal.fromJson(dataJson);
-        logedUser = userdata;
+        locator<LoginBloc>().logedUser = userdata;
 
         emit(LoginSuccsess());
       } else {

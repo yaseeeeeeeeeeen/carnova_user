@@ -58,8 +58,11 @@ class UserRepo {
 
   EitherResponse storeChoice(Map<String, String> data) async {
     const url = ApiUrls.putAvailableVehicles;
-    print(url);
-    print("data: $data");
     return ApiService.putApi(data, url, token);
+  }
+
+  EitherResponse resetPassword(Map<String, String> data) async {
+    const url = ApiUrls.resetpassword;
+    return ApiService.patchApi(data, url,token);
   }
 }

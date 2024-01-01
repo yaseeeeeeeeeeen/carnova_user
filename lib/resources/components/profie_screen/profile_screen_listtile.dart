@@ -4,18 +4,22 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class ProfileScreenListtile extends StatelessWidget {
   ProfileScreenListtile(
-      {super.key, required this.text, required this.isLogout});
+      {super.key, required this.text, required this.isLogout,this.ontap});
   final String text;
   bool isLogout = false;
+  void Function()? ontap;
   @override
   Widget build(BuildContext context) {
     double heigth = MediaQuery.sizeOf(context).height;
-    return SizedBox(
-        height: heigth / 18,
-        width: double.infinity,
-        child: ListTile(
-          title: Text(text, style: isLogout ? logoutbutton : listtilesText),
-        ));
+    return GestureDetector(
+      onTap:  ontap,
+      child: SizedBox(
+          height: heigth / 18,
+          width: double.infinity,
+          child: ListTile(
+            title: Text(text, style: isLogout ? logoutbutton : listtilesText),
+          )),
+    );
   }
 }
 

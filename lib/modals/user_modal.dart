@@ -47,5 +47,5 @@ class UserModal {
       };
 }
 
-UserModal? logedUser;
+
 

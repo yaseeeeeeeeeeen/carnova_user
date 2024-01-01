@@ -9,4 +9,5 @@ class ApiUrls {
   static const String updateprofile = "$userUrl/update-user";
   static const String getVehicles = "$userUrl/vehicles";
   static const String putAvailableVehicles = '$userUrl/store-choice';
+  static const String resetpassword = '$userUrl/reset-password';
 }

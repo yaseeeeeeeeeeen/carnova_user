@@ -1,3 +1,4 @@
+import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/modals/user_modal.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:flutter/material.dart';
@@ -25,10 +26,10 @@ PreferredSizeWidget customAppBarU(context) {
               },
             );
           },
-          child: logedUser!.profile!.isNotEmpty
+          child: logedUser.profile!.isNotEmpty
               ? CircleAvatar(
                   backgroundImage:
-                      NetworkImage("${ApiUrls.baseUrl}/${logedUser!.profile}"),
+                      NetworkImage("${ApiUrls.baseUrl}/${logedUser.profile}"),
                   backgroundColor: Colors.black,
                 )
               : CircleAvatar(

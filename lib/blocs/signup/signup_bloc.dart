@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:carnova_user/blocs/login/login_bloc.dart';
+import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/data/shared_preferance/sharedprefrance.dart';
 import 'package:carnova_user/modals/user_modal.dart';
 import 'package:carnova_user/repositories/signup_repo.dart';
@@ -27,7 +29,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
       if (responsess.statusCode == 200) {
         final dataJson = jsonDecode(responsess.body);
         final userdata = UserModal.fromJson(dataJson);
-        logedUser = userdata;
+        locator<LoginBloc>().logedUser = userdata;
         emit(SignupSucsessState());
       }
       emit(SignupFailedState(messege: body["message"]));
