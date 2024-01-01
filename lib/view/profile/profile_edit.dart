@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:carnova_user/blocs/profile_edit/profile_edit_bloc.dart';
 import 'package:carnova_user/data/get_it/get_it.dart';
-import 'package:carnova_user/modals/user_modal.dart';
+import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/custom_textfiled.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
@@ -19,6 +19,7 @@ class ProfileEditScreen extends StatelessWidget {
 
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  final logedUser = getLoggedInUser();
 
   String? imagePath;
   File? profileImage;
@@ -57,11 +58,19 @@ class ProfileEditScreen extends StatelessWidget {
                                 backgroundImage: FileImage(File(imagePath!)),
                                 radius: 80,
                               )
-                            : CircleAvatar(
-                                backgroundImage: AssetImage(imageU.profileDemo),
-                                backgroundColor: Colors.black12,
-                                radius: 80,
-                              )),
+                            : logedUser.profile!.isNotEmpty
+                                ? CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                        "${ApiUrls.baseUrl}/${logedUser.profile}"),
+                                    backgroundColor: Colors.black12,
+                                    radius: 80,
+                                  )
+                                : CircleAvatar(
+                                    backgroundImage:
+                                        AssetImage(imageU.profileDemo),
+                                    backgroundColor: Colors.black12,
+                                    radius: 80,
+                                  )),
                   );
                 },
               ),
@@ -84,24 +93,26 @@ class ProfileEditScreen extends StatelessWidget {
               listener: (context, state) {
                 if (state is ProfileUpdateFailedState) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                      customSnackbar(context, false, state.message));
-                } else if (state is ProfileUpdateSuccsessState) {
+                      customSnackbar(context, false, state.messege));
+                } else if (state is UserDataUpdateSuccsess) {
                   ScaffoldMessenger.of(context).showSnackBar(customSnackbar(
                       context, true, "Profile Updated Succsess"));
                 }
               },
               builder: (context, state) {
-                bool isLoading = state is ProfileUpdateLoadingState;
+                bool isLoading = state is SubmitLoadingState;
                 return MyLoadingButton(
                   isLoading: isLoading,
                   title: "Update",
                   onTap: () {
-                    if (profileImage == null) {
-                      ScaffoldMessenger.of(context).showSnackBar(customSnackbar(
-                          context, false, "ADD YOUR PROFILE PHOTO"));
-                    }
-                    updateButton(phoneController, nameController, profileImage!,
-                        context);
+                    // if (profileImage == null) {
+                    //   ScaffoldMessenger.of(context).showSnackBar(customSnackbar(
+                    //       context, false, "ADD YOUR PROFILE PHOTO"));
+                    // }else{
+
+                    // }
+                    updateButtonClicked(
+                        nameController.text, phoneController.text, context);
                   },
                 );
               },
@@ -112,17 +123,20 @@ class ProfileEditScreen extends StatelessWidget {
     );
   }
 
-  updateButton(TextEditingController phone, TextEditingController name,
-      File profile, BuildContext context) {
-    File profilephoto = profile;
-    if (phone.text.length == 10 || name.text.isNotEmpty) {
-      Map<String, dynamic> data = {"phone": phone.text, "name": name.text};
-      context
-          .read<ProfileEditBloc>()
-          .add(SubmitClicked(imagepath: profilephoto, data: data));
+  updateButtonClicked(String name, String phone, BuildContext context) {
+    if (logedUser.profile!.isNotEmpty) {
+      if (name.isNotEmpty && phone.length == 10) {
+        Map<String, dynamic> data = {"phone": phone, "name": name};
+        context
+            .read<ProfileEditBloc>()
+            .add(SubmitClickedWithImg(imagepath: profileImage, data: data));
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(customSnackbar(context, false, "Something Wrong"));
+      }
     } else {
       ScaffoldMessenger.of(context)
-          .showSnackBar(customSnackbar(context, false, "SOMETHING WRONG"));
+          .showSnackBar(customSnackbar(context, false, "Add a Profile Photo"));
     }
   }
 }

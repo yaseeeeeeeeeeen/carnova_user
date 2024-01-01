@@ -5,16 +5,29 @@ abstract class ProfileEditState {}
 
 final class ProfileEditInitial extends ProfileEditState {}
 
-class ProfileUpdateLoadingState extends ProfileEditState {}
-
-class ProfileUpdateSuccsessState extends ProfileEditState {}
+class ProfileUpdateFailedState extends ProfileEditState {
+  String messege = "Profile Photo Update Failed";
+}
 
 class ProfileImageAddedState extends ProfileEditState {
   File imagePath;
-  ProfileImageAddedState({required this.imagePath});
+  ProfileImageAddedState({
+    required this.imagePath,
+  });
 }
 
-class ProfileUpdateFailedState extends ProfileEditState {
-  String message;
-  ProfileUpdateFailedState({required this.message});
+class UserDataUpdateSuccsess extends ProfileEditState {}
+
+class UserDataUpdateFailed extends ProfileEditState {
+  String messege;
+  UserDataUpdateFailed({required this.messege});
+}
+
+class SubmitLoadingState extends ProfileEditState {}
+
+class SubmitSuccsessState extends ProfileEditState {}
+
+class SubmitFailedState extends ProfileEditState {
+  String messege;
+  SubmitFailedState({required this.messege});
 }

@@ -2,8 +2,7 @@ class UserSideImages {
   String appLogo = "assets/images/logoWhite-removebg-preview.png";
   String applogoBlack = "assets/images/applogoBlack.png";
   String mapImg = "assets/images/map_bg.jpeg";
-  String userPhoto = "assets/images/staticCover.jpg";
-  String profileDemo = "assets/images/profileDemo.jpg";
+    String profileDemo = "assets/images/profileDemo.jpg";
   String carDemo = "assets/images/currentlyUsing.jpg";
   String profileBg =
       "assets/images/Premium Vector _ Abstract liquid green background stock vector.jpg";

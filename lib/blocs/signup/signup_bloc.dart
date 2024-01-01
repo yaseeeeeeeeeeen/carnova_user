@@ -7,7 +7,7 @@ import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/data/shared_preferance/sharedprefrance.dart';
 import 'package:carnova_user/modals/user_modal.dart';
 import 'package:carnova_user/repositories/signup_repo.dart';
-import 'package:carnova_user/repositories/userdata_repo.dart';
+import 'package:carnova_user/repositories/user_repo.dart';
 
 part 'signup_event.dart';
 part 'signup_state.dart';
@@ -25,16 +25,16 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     if (response.statusCode == 200) {
       String token = body['token'];
       SharedPref.instance.storeToken(token);
-      final responsess = await UserDataRepo().userData(token);
-      if (responsess.statusCode == 200) {
-        final dataJson = jsonDecode(responsess.body);
+
+      final response1 = await UserRepo().fetchUserData();
+      response1.fold((left) {
+        emit(SignupFailedState(messege: left.message));
+      }, (right) {
+        final dataJson = jsonDecode(right);
         final userdata = UserModal.fromJson(dataJson);
         locator<LoginBloc>().logedUser = userdata;
         emit(SignupSucsessState());
-      }
-      emit(SignupFailedState(messege: body["message"]));
-    } else {
-      emit(SignupFailedState(messege: body["message"]));
+      });
     }
   }
 }

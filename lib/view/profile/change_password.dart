@@ -19,7 +19,9 @@ class ChangePasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBarText("Change Password", context, () => null),
+      appBar: customAppBarText("Change Password", context, () {
+        Navigator.of(context).pop();
+      }),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(

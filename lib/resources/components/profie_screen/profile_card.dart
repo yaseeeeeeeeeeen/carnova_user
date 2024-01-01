@@ -12,6 +12,7 @@ class ProfileCardWid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double heigth = MediaQuery.sizeOf(context).height;
+    final logedUser = getLoggedInUser();
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -31,8 +32,8 @@ class ProfileCardWid extends StatelessWidget {
                 ? CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: heigth / 13,
-                    backgroundImage: NetworkImage(
-                        "${ApiUrls.baseUrl}/${logedUser.profile}"))
+                    backgroundImage:
+                        NetworkImage("${ApiUrls.baseUrl}/${logedUser.profile}"))
                 : CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: heigth / 13,

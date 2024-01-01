@@ -1,16 +1,15 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:carnova_user/blocs/login/login_bloc.dart';
 import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/data/network/api_services.dart';
-import 'package:carnova_user/data/shared_preferance/sharedprefrance.dart';
 import 'package:carnova_user/modals/user_modal.dart';
-import 'package:carnova_user/repositories/userdata_repo.dart';
+import 'package:carnova_user/repositories/user_repo.dart';
 
 import 'package:carnova_user/utils/functions/image_picker.dart';
+import 'package:carnova_user/utils/functions/string_to_file.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -18,9 +17,10 @@ part 'profile_edit_event.dart';
 part 'profile_edit_state.dart';
 
 class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
+  File? imagePath;
   ProfileEditBloc() : super(ProfileEditInitial()) {
     on<ImageAddedClicked>(imageAddedClicked);
-    on<SubmitClicked>(submitClicked);
+    on<SubmitClickedWithImg>(submitClicked);
   }
 
   FutureOr<void> imageAddedClicked(
@@ -36,24 +36,36 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
   }
 
   FutureOr<void> submitClicked(
-      SubmitClicked event, Emitter<ProfileEditState> emit) async {
-    emit(ProfileUpdateLoadingState());
-    final response = await ApiServices.instance.dataUpdate(event.data);
-    print(response.statusCode);
-    final response1 = await ApiServices.instance.profileUpdate(event.imagepath);
-    final responsBody = await response1.stream.bytesToString();
-    print(responsBody);
-    final token = SharedPref.instance.getToke();
-    if (token != null) {
-      final response = await UserDataRepo().userData(token);
-      final data = jsonDecode(response.body);
-      if (data != null) {
-        final data1 = UserModal.fromJson(data);
-        locator<LoginBloc>().logedUser = data1;
-      }
-      emit(ProfileUpdateSuccsessState());
+      SubmitClickedWithImg event, Emitter<ProfileEditState> emit) async {
+    emit(SubmitLoadingState());
+    await Future.delayed(const Duration(seconds: 2));
+    if (event.imagepath == null) {
+      final logedUser = getLoggedInUser();
+      List<String> imageUrls = [logedUser.profile!];
+      final img = await convertingStringtoImage(imageUrls);
+      imagePath = img[0];
     } else {
-      emit(ProfileUpdateFailedState(message: "Somthing Wrong"));
+      imagePath = event.imagepath;
+    }
+    final response = await ApiServices.instance.profileUpdate(imagePath!);
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      final data = await ApiServices.instance.dataUpdate(event.data);
+      if (data.statusCode == 200) {
+        final response1 = await UserRepo().fetchUserData();
+        print(response1);
+        response1.fold((left) {
+          emit(UserDataUpdateFailed(messege: left.message));
+        }, (right) {
+          final userdata = UserModal.fromJson(right);
+          replaceUserData(userdata);
+          emit(UserDataUpdateSuccsess());
+        });
+      } else {
+        emit(ProfileUpdateFailedState());
+      }
+    } else {
+      emit(ProfileUpdateFailedState());
     }
   }
 }

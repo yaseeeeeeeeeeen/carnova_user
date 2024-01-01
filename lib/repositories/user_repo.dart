@@ -63,6 +63,12 @@ class UserRepo {
 
   EitherResponse resetPassword(Map<String, String> data) async {
     const url = ApiUrls.resetpassword;
-    return ApiService.patchApi(data, url,token);
+    return ApiService.patchApi(data, url, token);
+  }
+
+  EitherResponse fetchUserData() {
+    final token = SharedPref.instance.getToke();
+    const url = ApiUrls.userdata;
+    return ApiService.getApi(url, token);
   }
 }

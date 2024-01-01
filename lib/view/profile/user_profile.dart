@@ -2,6 +2,7 @@ import 'package:carnova_user/resources/components/profie_screen/profile_card.dar
 import 'package:carnova_user/resources/components/profie_screen/profile_screen_listtile.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/appbar.dart';
+import 'package:carnova_user/utils/functions/logout_cnfm.dart';
 import 'package:carnova_user/view/profile/change_password.dart';
 
 import 'package:flutter/material.dart';
@@ -37,7 +38,13 @@ class UserProfile extends StatelessWidget {
                 ProfileScreenListtile(text: "Help", isLogout: false),
                 const Divider(thickness: 1.5),
                 ProfileScreenListtile(text: "Clear App Data", isLogout: false),
-                ProfileScreenListtile(text: "Sign Out", isLogout: true),
+                ProfileScreenListtile(
+                  text: "Sign Out",
+                  isLogout: true,
+                  ontap: () {
+                    signoutConfirmation(context);
+                  },
+                ),
                 Container()
               ],
             ),

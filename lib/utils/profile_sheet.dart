@@ -1,12 +1,14 @@
 import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/modals/user_modal.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
+import 'package:carnova_user/view/profile/change_password.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/resources/components/profile_tile_button.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/view/home_screen.dart';
 
 Widget bottomsheetWid(double height, context) {
+  final logedUser = getLoggedInUser();
   return Container(
     padding: const EdgeInsets.all(5),
     height: height / 1.7,
@@ -34,7 +36,7 @@ Widget bottomsheetWid(double height, context) {
                         radius: 45,
                         backgroundColor: Colors.black)
                     : CircleAvatar(
-                        backgroundImage: AssetImage(imageU.userPhoto),
+                        backgroundImage: AssetImage(imageU.profileDemo),
                         radius: 45,
                         backgroundColor: Colors.black),
               ),
@@ -54,8 +56,14 @@ Widget bottomsheetWid(double height, context) {
               )
             ],
           )),
-      ListTileToggle(text: "Dark Mode"),
-      ListTilePwid(title: "Change Password"),
+      // ListTileToggle(text: "Dark Mode"),
+
+      GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ChangePasswordScreen()));
+          },
+          child: ListTilePwid(title: "Change Password")),
       ListTilePwid(title: "Clear data"),
       ListTilePwid(title: "Help"),
       ListTilePwid(title: "About"),

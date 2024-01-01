@@ -1,5 +1,4 @@
 import 'package:carnova_user/data/get_it/get_it.dart';
-import 'package:carnova_user/modals/user_modal.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,6 +9,7 @@ import 'package:carnova_user/view/home_screen.dart';
 
 PreferredSizeWidget customAppBarU(context) {
   double height = MediaQuery.sizeOf(context).height;
+  final logedUser = getLoggedInUser();
   return AppBar(
       actions: [
         GestureDetector(

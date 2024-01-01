@@ -44,6 +44,7 @@ class ApiServices {
   }
 
   Future<http.StreamedResponse> profileUpdate(File image) async {
+    final logedUser = getLoggedInUser();
     final token = SharedPref.instance.getToke();
     final url = Uri.parse(ApiUrls.addProfile);
     var request = http.MultipartRequest('PATCH', url);
