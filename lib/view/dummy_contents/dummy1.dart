@@ -3,7 +3,6 @@ import 'package:carnova_user/view/dummy_contents/dummy2.dart';
 import 'package:carnova_user/view/dummy_contents/dummy3.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/modals/vehicle_data._modal.dart';
-import 'package:carnova_user/resources/components/car_show_screen/car_book_bar.dart';
 import 'package:carnova_user/resources/components/car_show_screen/car_details_card.dart';
 import 'package:carnova_user/resources/components/title_text_wid.dart';
 import 'package:carnova_user/utils/appbar.dart';
@@ -25,7 +24,7 @@ class CarDataShowD extends StatelessWidget {
     double heigth = MediaQuery.sizeOf(context).height;
     return Scaffold(
       backgroundColor: scaffoldBg,
-      bottomNavigationBar: CarDataBottomBar(price: vehicleData.price.toString()),
+      // bottomNavigationBar: CarDataBottomBar(price: vehicleData.price.toString(),endDate: "",startDate: ""vehicle: ),
       appBar: customAppBarText(vehicleData.name, context,null),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

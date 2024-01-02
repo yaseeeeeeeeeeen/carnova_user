@@ -11,9 +11,11 @@ import 'package:carnova_user/utils/appbar.dart';
 
 // ignore: must_be_immutable
 class CarDataShow extends StatelessWidget {
-  CarDataShow({super.key, required this.vehicleData, required this.isBooked});
+  CarDataShow({super.key, required this.vehicleData, required this.isBooked,required this.startDate,required this.endDate});
   Vehicle vehicleData;
   bool isBooked;
+  String startDate;
+  String endDate;
   @override
   Widget build(BuildContext context) {
     List<String> cardetails = [
@@ -27,7 +29,7 @@ class CarDataShow extends StatelessWidget {
     return Scaffold(
       backgroundColor: scaffoldBg,
       bottomNavigationBar:
-          CarDataBottomBar(price: vehicleData.price.toInt().toString()),
+          CarDataBottomBar(price: vehicleData.price.toInt().toString(),vehicle: vehicleData,startDate: startDate,endDate: endDate),
       appBar: customAppBarText(vehicleData.name, context, null),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

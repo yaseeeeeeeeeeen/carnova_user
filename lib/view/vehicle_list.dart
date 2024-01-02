@@ -10,10 +10,14 @@ class FetchedVehicles extends StatelessWidget {
   List<Vehicle> vehicles;
   String location;
   Position position;
+  String startDate;
+  String enddate;
   FetchedVehicles(
       {super.key,
       required this.vehicles,
       required this.location,
+      required this.startDate,
+      required this.enddate,
       required this.position});
   TextEditingController locationController = TextEditingController();
 
@@ -67,7 +71,10 @@ class FetchedVehicles extends StatelessWidget {
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => CarDataShow(
-                                  vehicleData: data, isBooked: false)));
+                                  endDate: enddate,
+                                  startDate: startDate,
+                                  vehicleData: data,
+                                  isBooked: false)));
                         },
                         child: CarListTile(data: data));
                   },

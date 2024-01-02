@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:carnova_user/utils/appbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/date_symbol_data_file.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -78,6 +79,7 @@ class FindVehicleU extends StatelessWidget {
                         },
                         onCancel: () {
                           /////// textfield and timeformat hint textes all clearing here//////////////
+
                           _startDate = DateTime.now();
                           _endDate = DateTime.now();
                           endDate = "";
@@ -129,6 +131,8 @@ class FindVehicleU extends StatelessWidget {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) {
                           return FetchedVehicles(
+                              startDate: startDate,
+                              enddate: endDate,
                               vehicles: state.vehicleModel,
                               location: location,
                               position: state.location);

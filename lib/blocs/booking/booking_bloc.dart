@@ -51,6 +51,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
 
   void _handleExternalWallet(ExternalWalletResponse response) {
     // Do something when an external wallet was selected
+    
   }
 
   FutureOr<void> paymentSuccessEvent(

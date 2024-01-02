@@ -1,13 +1,23 @@
+import 'package:carnova_user/modals/fetch_modal.dart';
+import 'package:carnova_user/view/booking1.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
+import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class CarDataBottomBar extends StatelessWidget {
-  CarDataBottomBar({super.key, required this.price});
+  CarDataBottomBar(
+      {super.key,
+      required this.price,
+      required this.startDate,
+      required this.endDate,
+      required this.vehicle});
   String price;
-  // bool isBooked;
+  Vehicle vehicle;
+  String startDate;
+  String endDate;
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
@@ -29,24 +39,26 @@ class CarDataBottomBar extends StatelessWidget {
                 ]),
           ),
           const SizedBox(width: 30),
-          // isBooked
-          //     ? ElevatedButton(
-          //         onPressed: () {},
-          //         style: ElevatedButton.styleFrom(
-          //             fixedSize: const Size(130, 50),
-          //             backgroundColor: Colors.black,
-          //             shape: RoundedRectangleBorder(
-          //                 borderRadius: BorderRadius.circular(10))),
-          //         child: Text("Cancel", style: style4))
-          //     :
-               ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(130, 50),
-                      backgroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                  child: Text("Book Now", style: style4))
+           ElevatedButton(
+              onPressed: () {
+  DateTime start = DateFormat('EEEE, MMMM d, y').parse(startDate);
+  DateTime end = DateFormat('EEEE, MMMM d, y').parse(endDate);
+                String formattedStartDate =
+                    DateFormat('yyyy-MM-dd').format(start);
+                String formattedEndDate = DateFormat('yyyy-MM-dd').format(end);
+
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => PaymentScreen(
+                        vehicle: vehicle,
+                        startingDate: formattedStartDate,
+                        endingDate: formattedEndDate)));
+              },
+              style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(130, 50),
+                  backgroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10))),
+              child: Text("Book Now", style: style4))
         ],
       ),
     ));
