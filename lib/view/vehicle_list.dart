@@ -3,7 +3,6 @@ import 'package:carnova_user/resources/components/car_show_screen/car_tile_wid.d
 import 'package:carnova_user/resources/components/textfields_and_buttons/custom_textfiled.dart';
 import 'package:carnova_user/utils/appbar.dart';
 import 'package:carnova_user/view/car_details_screen.dart';
-import 'package:carnova_user/view/map_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -50,9 +49,9 @@ class FetchedVehicles extends StatelessWidget {
                     width: 60,
                     child: IconButton(
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => MapScreen(
-                                  locationName: location, postion: position)));
+                          // Navigator.of(context).push(MaterialPageRoute(
+                          //     builder: (context) => MapScreen(
+                          //         locationName: location, postion: position)));
                         },
                         icon:
                             const Icon(Icons.location_on, color: Colors.black)),

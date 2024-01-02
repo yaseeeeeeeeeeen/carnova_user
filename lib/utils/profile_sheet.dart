@@ -1,5 +1,4 @@
 import 'package:carnova_user/data/get_it/get_it.dart';
-import 'package:carnova_user/modals/user_modal.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/view/profile/change_password.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +10,7 @@ Widget bottomsheetWid(double height, context) {
   final logedUser = getLoggedInUser();
   return Container(
     padding: const EdgeInsets.all(5),
-    height: height / 1.7,
-    child: Column(children: [
+    child: ListView(shrinkWrap: true, children: [
       Container(
           padding: const EdgeInsets.only(left: 5),
           decoration: BoxDecoration(
@@ -67,6 +65,7 @@ Widget bottomsheetWid(double height, context) {
       ListTilePwid(title: "Clear data"),
       ListTilePwid(title: "Help"),
       ListTilePwid(title: "About"),
+      const SizedBox(height: 5)
     ]),
   );
 }

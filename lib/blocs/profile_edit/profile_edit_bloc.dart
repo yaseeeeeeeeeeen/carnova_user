@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:carnova_user/blocs/login/login_bloc.dart';
 import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/data/network/api_services.dart';
 import 'package:carnova_user/modals/user_modal.dart';
@@ -30,7 +29,6 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
         imageSource: ImageSource.gallery);
     if (pickedimage != null) {
       File imagePicked = File(pickedimage.path);
-      // hostModelData?.profile = pickedimage as File;
       emit(ProfileImageAddedState(imagePath: imagePicked));
     }
   }
@@ -48,12 +46,10 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
       imagePath = event.imagepath;
     }
     final response = await ApiServices.instance.profileUpdate(imagePath!);
-    print(response.statusCode);
     if (response.statusCode == 200) {
       final data = await ApiServices.instance.dataUpdate(event.data);
       if (data.statusCode == 200) {
         final response1 = await UserRepo().fetchUserData();
-        print(response1);
         response1.fold((left) {
           emit(UserDataUpdateFailed(messege: left.message));
         }, (right) {

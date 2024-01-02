@@ -31,6 +31,7 @@ class CustomTextfield extends StatelessWidget {
             child: TextFormField(
               autovalidateMode: AutovalidateMode.onUserInteraction,
               controller: controller,
+              
               textInputAction: TextInputAction.next,
               keyboardType: keybordtype,
               style: GoogleFonts.poppins(color: Colors.black),

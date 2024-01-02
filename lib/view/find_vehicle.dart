@@ -129,18 +129,19 @@ class FindVehicleU extends StatelessWidget {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) {
                           return FetchedVehicles(
-                              vehicles: state.vehicleModel, location: location,position: state.location);
+                              vehicles: state.vehicleModel,
+                              location: location,
+                              position: state.location);
                         },
                       ));
                     }
                   },
                   builder: (context, state) {
                     return MyLoadingButton(
-                        title: "Check Availabilty",
+                        title: "Check Nearby Vehicles",
                         isLoading: state is VehicleCheckLoading,
                         onTap: () {
                           if (enddateController.text.isNotEmpty) {
-                            print("1.0");
                             context.read<VehicleCheckBloc>().add(
                                 CheckAvaliblityButtonClicked(
                                     startDate: startdateController.text,

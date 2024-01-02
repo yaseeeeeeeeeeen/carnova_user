@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   loginCheck(context) async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
 
     final token = SharedPref.instance.getToke();
 

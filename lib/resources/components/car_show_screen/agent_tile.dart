@@ -24,6 +24,8 @@ class CarAgentTile extends StatelessWidget {
       child: Center(
         child: ListTile(
           title: Text(
+            softWrap: false,
+            overflow: TextOverflow.visible,
             vehicledata.hostDetails.name,
             style: caragentName,
           ),
@@ -42,7 +44,7 @@ class CarAgentTile extends StatelessWidget {
                     backgroundColor: Colors.transparent,
                     radius: heigth / 30,
                     child: SvgPicture.asset(imageU.phoneSvg,
-                        height: heigth / 30, fit: BoxFit.contain),
+                        height: heigth / 32, fit: BoxFit.contain),
                   ),
                 ),
                 GestureDetector(

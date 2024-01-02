@@ -20,14 +20,15 @@ class CarDataShow extends StatelessWidget {
       vehicleData.brand,
       vehicleData.fuel,
       vehicleData.transmission,
-     "4.5"
-     // vehicleData.rating.abs().toString()
+      "4.5"
+      // vehicleData.rating.abs().toString()
     ];
     double heigth = MediaQuery.sizeOf(context).height;
     return Scaffold(
       backgroundColor: scaffoldBg,
-      bottomNavigationBar: CarDataBottomBar(price: vehicleData.price.toString()),
-      appBar: customAppBarText(vehicleData.name, context,null),
+      bottomNavigationBar:
+          CarDataBottomBar(price: vehicleData.price.toInt().toString()),
+      appBar: customAppBarText(vehicleData.name, context, null),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
@@ -42,7 +43,8 @@ class CarDataShow extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                              image: NetworkImage("${ApiUrls.baseUrl}/${vehicleData.images[0]}"),
+                              image: NetworkImage(
+                                  "${ApiUrls.baseUrl}/${vehicleData.images[0]}"),
                               fit: BoxFit.cover)))),
               const SizedBox(height: 5),
               HomeTitles(titles: "Car Details"),
@@ -50,7 +52,7 @@ class CarDataShow extends StatelessWidget {
               CarDetailsCard(cardetails: cardetails),
               const SizedBox(height: 10),
               HomeTitles(titles: "Contact"),
-               CarAgentTile(vehicledata: vehicleData),
+              CarAgentTile(vehicledata: vehicleData),
               const SizedBox(height: 10),
               HomeTitles(titles: "More Images"),
               const SizedBox(height: 10),

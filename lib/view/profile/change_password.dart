@@ -41,15 +41,15 @@ class ChangePasswordScreen extends StatelessWidget {
                       const SizedBox(height: 10),
                       Text('Enter new password for your security',
                           style: changePasswordFont),
-                      Container(
-                        height: MediaQuery.of(context).size.height / 3,
-                        alignment: Alignment.topCenter,
-                        color: Colors.amber,
-                        child: const Center(
-                          child: Text("Lottieee in here"),
-                        ),
-                        // child: Lottie.asset('asset/lotties/newPassword.json'),
-                      ),
+                      // Container(
+                      //   height: MediaQuery.of(context).size.height / 3,
+                      //   alignment: Alignment.topCenter,
+                      //   color: Colors.amber,
+                      //   child: const Center(
+                      //     child: Text("Lottieee in here"),
+                      //   ),
+                      //   // child: Lottie.asset('asset/lotties/newPassword.json'),
+                      // ),
                       MyTextField(
                           validation: (value) =>
                               Validations().passwordValidations(value),
