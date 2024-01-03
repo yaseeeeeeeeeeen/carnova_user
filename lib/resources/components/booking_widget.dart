@@ -9,7 +9,7 @@ class SubTitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      padding: const EdgeInsets.all(5),
       child: Text(
         title,
         style: GoogleFonts.inriaSans(
@@ -19,8 +19,6 @@ class SubTitleWidget extends StatelessWidget {
     );
   }
 }
-
-
 
 class FairDetailsRowWidget extends StatelessWidget {
   final String name;
@@ -33,8 +31,13 @@ class FairDetailsRowWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text(name), Text(money)]));
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Text(
+            name,
+            style: GoogleFonts.poppins(),
+          ),
+          Text(money, style: GoogleFonts.poppins())
+        ]));
   }
 }

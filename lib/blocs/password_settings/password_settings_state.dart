@@ -8,6 +8,10 @@ final class PasswordChangeLoading extends PasswordSettingsState {}
 
 final class PasswordChangeErorr extends PasswordSettingsState {}
 
+final class PasswordVisiblityOn extends PasswordSettingsState {}
+
+final class PasswordVisiblityoff extends PasswordSettingsState {}
+
 final class PasswordChangeFailed extends PasswordSettingsState {
 final  String messege;
 

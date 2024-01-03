@@ -1,4 +1,6 @@
+import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/modals/vehicle_data._modal.dart';
+import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:flutter/material.dart';
 class CarUpcomingListTile extends StatelessWidget {
   CarUpcomingListTile({super.key});
   //// addd upcoming booked vehiles list
+  final vehicles = getBookedVehicleList();
   final vehiclesinfo = vehiclesData;
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,7 @@ class CarUpcomingListTile extends StatelessWidget {
           separatorBuilder: (context, index) => const SizedBox(height: 10),
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            final data = vehiclesinfo[index];
+            final data = vehicles[index];
             return GestureDetector(
               onTap: () {
                 // Navigator.of(context).push(MaterialPageRoute(
@@ -36,11 +39,12 @@ class CarUpcomingListTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Hero(
-                        tag: data.name,
+                        tag: data.vehicleId.name,
                         child: Container(
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: NetworkImage(data.coverPhoto),
+                                  image: NetworkImage(
+                                      "${ApiUrls.baseUrl}/${data.vehicleId.images[0]}"),
                                   fit: BoxFit.cover),
                               borderRadius: const BorderRadius.only(
                                   bottomLeft: Radius.circular(10),
@@ -59,27 +63,29 @@ class CarUpcomingListTile extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(data.name, style: tabcardtext1),
-                                    Text("₹${data.price}", style: tabcardtext1)
+                                    Text(data.vehicleId.name,
+                                        style: tabcardtext1),
+                                    Text("₹${data.vehicleId.price}",
+                                        style: tabcardtext1)
                                   ],
                                 ),
-                                Text(data.brand,
+                                Text(data.vehicleId.brand,
                                     style: const TextStyle(
                                         color: Colors.grey, fontSize: 13)),
-                                const Row(
+                                Row(
                                   children: [
-                                    Icon(Icons.calendar_today_outlined,
+                                    const Icon(Icons.calendar_today_outlined,
                                         size: 15, color: Colors.grey),
-                                    SizedBox(width: 5),
-                                    Text("20-10-2023")
+                                    const SizedBox(width: 5),
+                                    Text(data.startDate)
                                   ],
                                 ),
-                                const Row(
+                                Row(
                                   children: [
-                                    Icon(Icons.location_on,
+                                    const Icon(Icons.location_on,
                                         size: 15, color: Colors.grey),
-                                    SizedBox(width: 5),
-                                    Text("Calicut-Kerala")
+                                    const SizedBox(width: 5),
+                                    Text(data.pickup)
                                   ],
                                 )
                               ]))
@@ -87,7 +93,7 @@ class CarUpcomingListTile extends StatelessWidget {
               ),
             );
           },
-          itemCount: 3),
+          itemCount: vehicles.length),
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:carnova_user/modals/fetch_modal.dart';
-import 'package:carnova_user/view/booking1.dart';
+import 'package:carnova_user/view/vehicle/booking_confirm.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';

@@ -1,7 +1,10 @@
 import 'package:carnova_user/blocs/login/login_bloc.dart';
+import 'package:carnova_user/blocs/vehicle_check/vehicle_check_bloc.dart';
 import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/data/shared_preferance/sharedprefrance.dart';
+import 'package:carnova_user/modals/booked_vehicle.dart';
 import 'package:carnova_user/modals/user_modal.dart';
+import 'package:carnova_user/repositories/booking_repo.dart';
 import 'package:carnova_user/repositories/user_repo.dart';
 import 'package:carnova_user/utils/bottom_nav_bar.dart';
 import 'package:carnova_user/view/home_screen.dart';
@@ -51,6 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
       }, (right) {
         final data1 = UserModal.fromJson(right);
         locator<LoginBloc>().logedUser = data1;
+        fetchUserBookings(context);
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => CustomNavBar()),
             (route) => false);
@@ -60,5 +64,15 @@ class _SplashScreenState extends State<SplashScreen> {
           MaterialPageRoute(builder: (context) => const LoginScreen()),
           (route) => false);
     }
+  }
+
+  fetchUserBookings(context) async {
+    final userBooking = await BookingRepo().userBookings();
+    userBooking.fold((left) {}, (right) {
+      final List vehicleList = right as List;
+      final datas = vehicleList.map((e) => BookedVehicle.fromJson(e)).toList();
+      locator<VehicleCheckBloc>().bookedVehicles = datas;
+      print("------------${datas[0].vehicleId.brand}");
+    });
   }
 }

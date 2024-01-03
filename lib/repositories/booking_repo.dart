@@ -6,6 +6,11 @@ class BookingRepo {
   String? token = SharedPref.instance.getToke();
   EitherResponse bookvehicle(Map<String, dynamic> bookingdata) async {
     const url = ApiUrls.bookVehicle;
-    return ApiService.postApi(bookingdata, url,token);
+    return ApiService.postApi(bookingdata, url, token);
+  }
+
+  EitherResponse userBookings() async {
+    const url = ApiUrls.getBooking;
+    return ApiService.getApi(url, token);
   }
 }

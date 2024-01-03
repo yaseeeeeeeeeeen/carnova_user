@@ -3,7 +3,7 @@ import 'package:carnova_user/resources/components/profie_screen/profile_screen_l
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/appbar.dart';
 import 'package:carnova_user/utils/functions/logout_cnfm.dart';
-import 'package:carnova_user/view/profile/change_password.dart';
+import 'package:carnova_user/view/login_signup/change_password.dart';
 
 import 'package:flutter/material.dart';
 

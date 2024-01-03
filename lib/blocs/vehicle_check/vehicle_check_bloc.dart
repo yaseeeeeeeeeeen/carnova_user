@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:carnova_user/modals/booked_vehicle.dart';
 import 'package:carnova_user/modals/fetch_modal.dart';
 import 'package:carnova_user/repositories/user_repo.dart';
 import 'package:carnova_user/utils/functions/location_picker.dart';
@@ -10,6 +11,7 @@ part 'vehicle_check_event.dart';
 part 'vehicle_check_state.dart';
 
 class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
+  late List<BookedVehicle> bookedVehicles;
   Position? location;
   VehicleCheckBloc() : super(VehicleCheckInitial()) {
     on<CheckAvaliblityButtonClicked>(checkAvaliblityButtonClicked);
@@ -45,6 +47,7 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
       FetchAvalibleVehicles event, Emitter<VehicleCheckState> emit) async {
     emit(VehicleCheckLoading());
     final response = await UserRepo().storeChoice(event.checkingData);
+    print(event.checkingData);
     response.fold((left) {
       emit(VehilceFetchingFailed(messege: left.message));
     }, (right) {
@@ -56,7 +59,7 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
 
   FutureOr<void> fetchVehicles(
       FetchVehicles event, Emitter<VehicleCheckState> emit) async {
-      emit(VehicleCheckLoading());
+    emit(VehicleCheckLoading());
     final response = await UserRepo().getAvailableVehicles();
     response.fold((left) {
       emit(VehilceFetchingFailed(messege: left.message));

@@ -83,6 +83,7 @@ class SignupScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 20),
                               MyTextField(
+                                isPassword: false,
                                 validation: (p0) =>
                                     Validations().nameValidation(p0),
                                 controller: firstnameController,
@@ -91,6 +92,7 @@ class SignupScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 12),
                               MyTextField(
+                                isPassword: false,
                                 validation: (p0) =>
                                     Validations().emailValidation(p0),
                                 controller: emailController,
@@ -100,6 +102,7 @@ class SignupScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 12),
                               MyTextField(
+                                isPassword: false,
                                 validation: (p0) =>
                                     Validations().phoneNumberValidate(p0),
                                 controller: phoneNumberController,
@@ -109,6 +112,7 @@ class SignupScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 12),
                               MyTextField(
+                                isPassword: true,
                                 validation: (p0) =>
                                     Validations().passwordValidations(p0),
                                 controller: passwordController,
@@ -117,6 +121,7 @@ class SignupScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 12),
                               MyTextField(
+                                isPassword: true,
                                 validation: (p0) => Validations()
                                     .confirmpassValidations(
                                         p0, passwordController.text),
@@ -128,14 +133,14 @@ class SignupScreen extends StatelessWidget {
                               BlocConsumer<SignupBloc, SignupState>(
                                 listener: (context, state) {
                                   if (state is SignupSucsessState) {
-                                                               Navigator.of(context).push(
+                                    Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 SignupOtpScreen(
                                                     email:
                                                         emailController.text)));
                                   } else if (state is SignupFailedState) {
-                                                   ScaffoldMessenger.of(context).showSnackBar(
+                                    ScaffoldMessenger.of(context).showSnackBar(
                                         customSnackbar(context, false,
                                             "Something Wrong Tryagain"));
                                   }

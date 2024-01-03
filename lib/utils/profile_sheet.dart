@@ -1,10 +1,11 @@
 import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
-import 'package:carnova_user/view/profile/change_password.dart';
+import 'package:carnova_user/view/login_signup/change_password.dart';
 import 'package:flutter/material.dart';
-import 'package:carnova_user/resources/components/profile_tile_button.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/view/home_screen.dart';
+
+import '../resources/components/profile_tile_button.dart';
 
 Widget bottomsheetWid(double height, context) {
   final logedUser = getLoggedInUser();

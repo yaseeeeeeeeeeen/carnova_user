@@ -7,14 +7,20 @@ class ResetPassword extends PasswordSettingsEvent {
   String oldpassword;
   String newpassword;
   String confirmpassword;
-  ResetPassword({
-    required this.oldpassword,
-    required this.newpassword,
-    required this.confirmpassword
-  });
+  ResetPassword(
+      {required this.oldpassword,
+      required this.newpassword,
+      required this.confirmpassword});
 }
 
 class ForgetPassword extends PasswordSettingsEvent {
   String email;
   ForgetPassword({required this.email});
+}
+
+class PasswordVisiblity extends PasswordSettingsEvent {
+  bool visiblity;
+  PasswordVisiblity({
+    required this.visiblity
+  });
 }

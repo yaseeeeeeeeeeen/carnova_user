@@ -1,6 +1,6 @@
 import 'package:carnova_user/modals/vehicle_data._modal.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
-import 'package:carnova_user/view/car_details_screen.dart';
+import 'package:carnova_user/view/vehicle/car_details_screen.dart';
 import 'package:carnova_user/view/dummy_contents/dummy1.dart';
 import 'package:carnova_user/view/home_screen.dart';
 import 'package:flutter/material.dart';

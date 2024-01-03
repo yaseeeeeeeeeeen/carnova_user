@@ -39,3 +39,5 @@ final class PaymentStartEvent extends BookingEvent {}
 final class PaymentSuccessEvent extends BookingEvent {}
 
 final class PaymentFailedEvent extends BookingEvent {}
+
+final class UpdateBookedVehiclesList extends BookingEvent{}

@@ -94,6 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                             // email textfield
                             MyTextField(
+                              isPassword: false,
                               validation: (p0) =>
                                   Validations().emailValidation(p0),
                               controller: emailController,
@@ -105,6 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                             // password textfield
                             MyTextField(
+                              isPassword: true,
                               validation: (p0) =>
                                   Validations().passwordValidations(p0),
                               controller: passwordController,
@@ -129,8 +131,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                       //         ForgotPasswordScreen(),
                                       //   ),
                                       // );
-
-                                      
                                     },
                                     child: Text(
                                       'Forgot Password?',

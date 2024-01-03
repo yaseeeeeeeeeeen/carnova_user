@@ -1,5 +1,4 @@
 import 'package:carnova_user/blocs/password_settings/password_settings_bloc.dart';
-import 'package:carnova_user/modals/user_modal.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/my_textfield.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
@@ -50,7 +49,9 @@ class ChangePasswordScreen extends StatelessWidget {
                       //   ),
                       //   // child: Lottie.asset('asset/lotties/newPassword.json'),
                       // ),
+                      const SizedBox(height: 10),
                       MyTextField(
+                          isPassword: true,
                           validation: (value) =>
                               Validations().passwordValidations(value),
                           controller: oldPasswordController,
@@ -58,6 +59,7 @@ class ChangePasswordScreen extends StatelessWidget {
                           obscureText: false),
                       const SizedBox(height: 10),
                       MyTextField(
+                          isPassword: true,
                           validation: (value) =>
                               Validations().passwordValidations(value),
                           controller: newPasswordController,
@@ -65,6 +67,7 @@ class ChangePasswordScreen extends StatelessWidget {
                           obscureText: false),
                       const SizedBox(height: 10),
                       MyTextField(
+                        isPassword: true,
                         validation: (value) => Validations()
                             .confirmpassValidations(
                                 value, newPasswordController.text),

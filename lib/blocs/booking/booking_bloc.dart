@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:carnova_user/blocs/booking/booking_event.dart';
 import 'package:carnova_user/blocs/booking/booking_state.dart';
+import 'package:carnova_user/data/get_it/get_it.dart';
+import 'package:carnova_user/modals/booked_vehicle.dart';
 import 'package:carnova_user/repositories/booking_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -9,6 +11,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
   BookingBloc() : super(PaymentInitial()) {
     on<PaymentInitialEvent>(paymentinitialEvent);
     on<PaymentSuccessEvent>(paymentSuccessEvent);
+    on<UpdateBookedVehiclesList>(updateBookedVehiclesList);
     // on<PaymentFailedEvent>(paymentFailedEvent);
     // on<PaymentRefundEvent>(paymentRefundEvent);
   }
@@ -51,7 +54,6 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
 
   void _handleExternalWallet(ExternalWalletResponse response) {
     // Do something when an external wallet was selected
-    
   }
 
   FutureOr<void> paymentSuccessEvent(
@@ -61,6 +63,16 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       emit(PaymentErrorState(message: error.message));
     }, (response) {
       emit(PaymentSuccessState());
+    });
+  }
+
+  FutureOr<void> updateBookedVehiclesList(
+      UpdateBookedVehiclesList event, Emitter<BookingState> emit) async {
+    final userBooking = await BookingRepo().userBookings();
+    userBooking.fold((left) {}, (right) {
+      final List vehicleList = right as List;
+      final datas = vehicleList.map((e) => BookedVehicle.fromJson(e)).toList();
+      replaceBookedList(datas);
     });
   }
 }

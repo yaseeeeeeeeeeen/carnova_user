@@ -1,15 +1,20 @@
 import 'package:carnova_user/blocs/booking/booking_bloc.dart';
 import 'package:carnova_user/blocs/booking/booking_event.dart';
 import 'package:carnova_user/blocs/booking/booking_state.dart';
+import 'package:carnova_user/blocs/vehicle_check/vehicle_check_bloc.dart';
 import 'package:carnova_user/modals/fetch_modal.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
-import 'package:carnova_user/resources/components/payment_demo/payment_demo.dart';
+import 'package:carnova_user/resources/components/booking_widget.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
+import 'package:carnova_user/resources/components/title_text_wid.dart';
+import 'package:carnova_user/resources/constant/colors_userside.dart';
+import 'package:carnova_user/utils/appbar.dart';
 import 'package:carnova_user/utils/bottom_nav_bar.dart';
 import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
+
+import '../../resources/components/car_show_screen/agent_tile.dart';
 
 // ignore: must_be_immutable
 class PaymentScreen extends StatefulWidget {
@@ -33,6 +38,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
   void initState() {
     super.initState();
     count = countDate(widget.startingDate, widget.endingDate);
+    if (count == 0) {
+      count = 1;
+    }
   }
 
   int? count;
@@ -43,65 +51,68 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double h = MediaQuery.sizeOf(context).height;
     return Scaffold(
+      backgroundColor: scaffoldBg,
+      appBar: customAppBarText("CONFIRM BOOKING", context, () {
+        Navigator.of(context).pop();
+      }),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(30)),
-                  child: Image.network(
-                    '${ApiUrls.baseUrl}/${widget.vehicle.images[0]}',
-                    fit: BoxFit.fill,
-                    height: 300,
-                    width: double.infinity,
-                  ),
-                ),
-                // Padding(
-                //   padding: EdgeInsets.only(top: dpadding),
-                //   child: const BackButtonWidget(),
-                // )
-              ],
-            ),
-            SubTitleWidget(
-                title:
-                    "${widget.vehicle.brand.toUpperCase()}  ${widget.vehicle.name.toUpperCase()}",
-                fontsize: 18),
-            const SizedBox(height: 10),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     PickupDropoffWidget(
-            //         title: 'Pickup',
-            //         location: widget.vehicle.location,
-            //         date: widget.startingDate),
-            //     PickupDropoffWidget(
-            //         title: 'Dropoff',
-            //         location: widget.vehicle.location,
-            //         date: widget.endingDate),
-            //   ],
-            // ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
-              child: Container(
-                height: 300,
+        physics: const BouncingScrollPhysics(),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SubTitleWidget(
+                  title: widget.vehicle.name.toUpperCase(), fontsize: 20),
+              const SizedBox(height: 10),
+              Hero(
+                  tag: widget.vehicle.name,
+                  child: Container(
+                      height: h / 3.8,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  "${ApiUrls.baseUrl}/${widget.vehicle.images[0]}"),
+                              fit: BoxFit.cover)))),
+              const SizedBox(height: 5),
+              CarAgentTile(vehicledata: widget.vehicle),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     PickupDropoffWidget(
+              //         title: 'Pickup',
+              //         location: widget.vehicle.location,
+              //         date: widget.startingDate),
+              //     PickupDropoffWidget(
+              //         title: 'Dropoff',
+              //         location: widget.vehicle.location,
+              //         date: widget.endingDate),
+              //   ],
+              // ),
+              const SizedBox(height: 5),
+              Container(
+                height: h / 2.5,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    border: Border.all(width: 1),
+                    color: Colors.white,
+                    border: Border.all(color: Colors.grey.shade300),
                     borderRadius: BorderRadius.circular(10)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SubTitleWidget(title: 'Fair Details'),
+                    const SubTitleWidget(title: '  Booking Details'),
                     FairDetailsRowWidget(
                         name: "Base Rate :",
                         money: '₹ ${widget.vehicle.price}'),
                     FairDetailsRowWidget(name: "SGST : 14 %", money: '₹ $sgst'),
                     FairDetailsRowWidget(name: "CGST : 14 %", money: '₹ $cgst'),
+                    FairDetailsRowWidget(
+                        name: "", money: "${count.toString()} DAYS"),
+                    FairDetailsRowWidget(
+                        name: "Location", money: widget.vehicle.location),
                     const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         child: Divider(thickness: 0.5)),
@@ -133,11 +144,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     // ),
                     FairDetailsRowWidget(
                         name: "Total Rental Amount", money: '₹ $totalAmount'),
+                    const SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: BlocConsumer<BookingBloc, BookingState>(
                         listener: (context, state) {
                           if (state is PaymentSuccessState) {
+                            context
+                                .read<BookingBloc>()
+                                .add(UpdateBookedVehiclesList());
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
                                     builder: (context) => CustomNavBar()),
@@ -153,7 +168,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         },
                         builder: (context, state) {
                           return MyLoadingButton(
-                              title: "BookNow",
+                              title: "Go to Payment",
                               isLoading: false,
                               onTap: () {
                                 context.read<BookingBloc>().add(
@@ -172,9 +187,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     )
                   ],
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

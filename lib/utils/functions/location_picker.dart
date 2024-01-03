@@ -18,7 +18,7 @@ class LocationPickerFunction {
     if (_permission == LocationPermission.denied) {
       _permission = await Geolocator.requestPermission();
       if (_permission == LocationPermission.denied) {
-                return null;
+        return null;
       }
     }
 
@@ -28,13 +28,13 @@ class LocationPickerFunction {
     }
   }
 
-  Future<String?> getAddress(Position postion) async {  
-            List<Placemark> placeMarks =
-            await placemarkFromCoordinates(postion.latitude, postion.longitude);
-        Placemark place = placeMarks[0];
-        String address =
-            "${place.name}, ${place.locality}, ${place.postalCode}, ${place.country}";
-     //   _currentAddress = address;
-        return address;
+  Future<String?> getAddress(Position postion) async {
+    List<Placemark> placeMarks =
+        await placemarkFromCoordinates(postion.latitude, postion.longitude);
+    Placemark place = placeMarks[0];
+    String address =
+        "${place.locality}, ${place.administrativeArea}, ${place.country}";
+    //   _currentAddress = address;
+    return address;
   }
 }

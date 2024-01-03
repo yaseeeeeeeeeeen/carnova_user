@@ -11,6 +11,7 @@ class PasswordSettingsBloc
   PasswordSettingsBloc() : super(PasswordSettingsInitial()) {
     on<ResetPassword>(resetPassword);
     on<ForgetPassword>(forgetPassword);
+    on<PasswordVisiblity>(passwordVisiblity);
   }
 
   FutureOr<void> resetPassword(
@@ -22,8 +23,8 @@ class PasswordSettingsBloc
       "confirmpass": event.confirmpassword,
     };
     final response = await UserRepo().resetPassword(data);
-     response.fold((left) {
-       emit(PasswordChangeFailed(messege: left.message));
+    response.fold((left) {
+      emit(PasswordChangeFailed(messege: left.message));
     }, (right) {
       emit(PasswordChangeSuccsess());
     });
@@ -32,5 +33,12 @@ class PasswordSettingsBloc
   FutureOr<void> forgetPassword(
       ForgetPassword event, Emitter<PasswordSettingsState> emit) async {
     emit(PasswordChangeLoading());
+  }
+
+  FutureOr<void> passwordVisiblity(
+      PasswordVisiblity event, Emitter<PasswordSettingsState> emit) {
+    event.visiblity
+        ? emit(PasswordVisiblityoff())
+        : emit(PasswordVisiblityOn());
   }
 }
