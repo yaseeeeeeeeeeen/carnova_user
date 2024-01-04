@@ -1,12 +1,10 @@
 import 'package:carnova_user/blocs/booking/booking_bloc.dart';
 import 'package:carnova_user/blocs/booking/booking_event.dart';
 import 'package:carnova_user/blocs/booking/booking_state.dart';
-import 'package:carnova_user/blocs/vehicle_check/vehicle_check_bloc.dart';
 import 'package:carnova_user/modals/fetch_modal.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/resources/components/booking_widget.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
-import 'package:carnova_user/resources/components/title_text_wid.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/appbar.dart';
 import 'package:carnova_user/utils/bottom_nav_bar.dart';
@@ -38,9 +36,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
   void initState() {
     super.initState();
     count = countDate(widget.startingDate, widget.endingDate);
-    if (count == 0) {
-      count = 1;
-    }
   }
 
   int? count;
@@ -79,19 +74,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               fit: BoxFit.cover)))),
               const SizedBox(height: 5),
               CarAgentTile(vehicledata: widget.vehicle),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     PickupDropoffWidget(
-              //         title: 'Pickup',
-              //         location: widget.vehicle.location,
-              //         date: widget.startingDate),
-              //     PickupDropoffWidget(
-              //         title: 'Dropoff',
-              //         location: widget.vehicle.location,
-              //         date: widget.endingDate),
-              //   ],
-              // ),
               const SizedBox(height: 5),
               Container(
                 height: h / 2.5,
@@ -116,32 +98,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         child: Divider(thickness: 0.5)),
-                    // Row(
-                    //   children: [
-                    //     ValueListenableBuilder(
-                    //         valueListenable: isChecked,
-                    //         builder: (context, value, _) {
-                    //           return Checkbox(
-                    //             value: value,
-                    //             onChanged: (value) {
-                    //               isChecked.value = value ?? false;
-                    //             },
-                    //           );
-                    //         }),
-                    //     // Expanded(
-                    //     //   child: Padding(
-                    //     //     padding: const EdgeInsets.only(right: 15),
-                    //     //     child: Row(
-                    //     //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //     //       children: [
-                    //     //         const Text('Wallet'),
-                    //     //         // Text('₹ ${globalUserModel.wallet ?? 0}')
-                    //     //       ],
-                    //     //     ),
-                    //     //   ),
-                    //     // )
-                    //   ],
-                    // ),
                     FairDetailsRowWidget(
                         name: "Total Rental Amount", money: '₹ $totalAmount'),
                     const SizedBox(height: 10),
@@ -199,6 +155,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     DateTime startDate = DateTime.parse(start);
     DateTime endDate = DateTime.parse(end);
     int diffrence = endDate.difference(startDate).inDays;
-    return diffrence;
+    final count = diffrence + 1;
+    return count;
   }
 }

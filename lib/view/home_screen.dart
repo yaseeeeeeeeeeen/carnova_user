@@ -1,3 +1,4 @@
+import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/modals/vehicle_data._modal.dart';
@@ -11,9 +12,11 @@ import 'package:carnova_user/utils/appbar.dart';
 UserSideImages imageU = UserSideImages();
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+ const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
+      final activeVehicles = getActiveVehicles();
     double heigth = MediaQuery.sizeOf(context).height;
     // double width = MediaQuery.sizeOf(context).width;
     return Scaffold(
@@ -27,9 +30,13 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 5),
-                HomeTitles(titles: "Active"),
-                const SizedBox(height: 10),
-                const ActivatedVehicle(),
+                activeVehicles.isEmpty
+                    ? const SizedBox()
+                    : HomeTitles(titles: "Active"),
+                activeVehicles.isEmpty
+                    ? const SizedBox()
+                    : const SizedBox(height: 10),
+                activeVehicles.isEmpty ? const SizedBox() : ActivatedVehicle(),
                 const SizedBox(height: 10),
                 HomeTitles(titles: "Top Brands"),
                 const SizedBox(height: 10),

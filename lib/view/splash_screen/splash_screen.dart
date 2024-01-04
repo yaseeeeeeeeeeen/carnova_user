@@ -11,6 +11,7 @@ import 'package:carnova_user/view/home_screen.dart';
 import 'package:carnova_user/view/login_signup/login_page.dart';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -68,11 +69,27 @@ class _SplashScreenState extends State<SplashScreen> {
 
   fetchUserBookings(context) async {
     final userBooking = await BookingRepo().userBookings();
-    userBooking.fold((left) {}, (right) {
+    userBooking.fold((left) {
+      locator<VehicleCheckBloc>().bookedVehicles = [];
+      locator<VehicleCheckBloc>().allBookedVehicles = [];
+      locator<VehicleCheckBloc>().activeVehicles = [];
+    }, (right) {
+      DateTime currentDate = DateTime.now();
+      DateFormat('yyyy-MM-dd').format(currentDate);
       final List vehicleList = right as List;
       final datas = vehicleList.map((e) => BookedVehicle.fromJson(e)).toList();
-      locator<VehicleCheckBloc>().bookedVehicles = datas;
-      print("------------${datas[0].vehicleId.brand}");
+      locator<VehicleCheckBloc>().allBookedVehicles = datas;
+      //////////////////// DIVIED BOOKED AND NOT BOOKED////////////////////////////////
+      final bookedonly =
+          datas.where((element) => element.status == "Booked").toList();
+      locator<VehicleCheckBloc>().bookedVehicles = bookedonly;
+      ////////////////// ACTIVE VEHICLE SORTING/////////////////////////////////
+      final data2 = datas.where((element) {
+        final startDate = DateTime.parse(element.startDate);
+        final endDate = DateTime.parse(element.endDate);
+        return startDate.isBefore(currentDate) && endDate.isAfter(currentDate);
+      }).toList();
+      locator<VehicleCheckBloc>().activeVehicles = data2;
     });
   }
 }

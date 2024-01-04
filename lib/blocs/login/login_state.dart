@@ -9,6 +9,8 @@ class LoadingState extends LoginState {}
 
 class LoginSuccsess extends LoginState {}
 
+class LogedUserFetched extends LoginState{}
+
 class LoginFailedState extends LoginState {
   String messege;
   LoginFailedState({required this.messege});

@@ -1,7 +1,7 @@
 import 'package:carnova_user/modals/vehicle_data._modal.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
-import 'package:carnova_user/view/history_screen.dart';
+import 'package:carnova_user/view/upcoming_history.dart';
 import 'package:carnova_user/view/home_screen.dart';
 import 'package:carnova_user/view/vehicle/find_vehicle.dart';
 import 'package:carnova_user/view/profile/user_profile.dart';
@@ -153,7 +153,7 @@ class HomePageState extends State<CustomNavBar> {
   ];
 
   List<Widget> screens = [
-    const HomeScreen(),
+     HomeScreen(),
     FindVehicleU(),
     const HistoryScreen(),
     const UserProfile(),

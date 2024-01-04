@@ -39,10 +39,10 @@ class CarDataBottomBar extends StatelessWidget {
                 ]),
           ),
           const SizedBox(width: 30),
-           ElevatedButton(
+          ElevatedButton(
               onPressed: () {
-  DateTime start = DateFormat('EEEE, MMMM d, y').parse(startDate);
-  DateTime end = DateFormat('EEEE, MMMM d, y').parse(endDate);
+                DateTime start = DateFormat('EEEE, MMMM d, y').parse(startDate);
+                DateTime end = DateFormat('EEEE, MMMM d, y').parse(endDate);
                 String formattedStartDate =
                     DateFormat('yyyy-MM-dd').format(start);
                 String formattedEndDate = DateFormat('yyyy-MM-dd').format(end);
@@ -64,3 +64,6 @@ class CarDataBottomBar extends StatelessWidget {
     ));
   }
 }
+
+// ignore: must_be_immutable
+

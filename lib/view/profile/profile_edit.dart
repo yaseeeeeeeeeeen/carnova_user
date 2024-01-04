@@ -105,14 +105,13 @@ class ProfileEditScreen extends StatelessWidget {
                   isLoading: isLoading,
                   title: "Update",
                   onTap: () {
-                    // if (profileImage == null) {
-                    //   ScaffoldMessenger.of(context).showSnackBar(customSnackbar(
-                    //       context, false, "ADD YOUR PROFILE PHOTO"));
-                    // }else{
-
-                    // }
-                    updateButtonClicked(
-                        nameController.text, phoneController.text, context);
+                    if (profileImage == null) {
+                      updateButtonClicked(
+                          nameController.text, phoneController.text, context);
+                    } else {
+                      updateButtonClicked(
+                          nameController.text, phoneController.text, context);
+                    }
                   },
                 );
               },
@@ -135,8 +134,19 @@ class ProfileEditScreen extends StatelessWidget {
             .showSnackBar(customSnackbar(context, false, "Something Wrong"));
       }
     } else {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(customSnackbar(context, false, "Add a Profile Photo"));
+      if (imagePath != null) {
+        if (name.isNotEmpty && phone.length == 10) {
+          Map<String, dynamic> data = {"phone": phone, "name": name};
+          context.read<ProfileEditBloc>().add(
+              SubmitClickedWithImg(imagepath: File(imagePath!), data: data));
+        } else {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(customSnackbar(context, false, "Something Wrong"));
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            customSnackbar(context, false, "Add a Profile Photo"));
+      }
     }
   }
 }

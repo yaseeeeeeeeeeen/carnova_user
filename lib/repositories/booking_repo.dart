@@ -13,4 +13,9 @@ class BookingRepo {
     const url = ApiUrls.getBooking;
     return ApiService.getApi(url, token);
   }
+
+  EitherResponse cancelBooking(String bookId, data) async {
+    String url = "${ApiUrls.cancelBooking}/$bookId";
+    return ApiService.patchApi(data, url, token);
+  }
 }

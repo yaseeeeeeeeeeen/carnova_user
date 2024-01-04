@@ -41,6 +41,8 @@ TextStyle logoutbutton = GoogleFonts.poppins(
 TextStyle caragentName =
     GoogleFonts.poppins(fontSize: 15, fontWeight: FontWeight.w500);
 
+TextStyle tileLocation = GoogleFonts.poppins(fontWeight: FontWeight.w400);
+
 ////////////////////////---OLD STYLES----//////////////////////////////////////////////////////////////////////////////
 TextStyle style2 = GoogleFonts.poppins(
     color: Colors.white, fontSize: 27, fontWeight: FontWeight.w500);
@@ -75,6 +77,5 @@ TextStyle ratingtitle = GoogleFonts.poppins(
 TextStyle navbartitle = GoogleFonts.poppins(
     color: Colors.white, fontWeight: FontWeight.w600, fontSize: 15);
 
-TextStyle changePasswordFont = GoogleFonts.poppins(
-  color: Colors.black,fontSize: 15
-);
+TextStyle changePasswordFont =
+    GoogleFonts.poppins(color: Colors.black, fontSize: 15);

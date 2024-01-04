@@ -19,10 +19,24 @@ void replaceUserData(UserModal updatedUserData) {
   locator<LoginBloc>().logedUser = updatedUserData;
 }
 
+List<BookedVehicle> bookedHistory() {
+  return locator<VehicleCheckBloc>().allBookedVehicles;
+}
+void replaceBookedHistory(List<BookedVehicle> updatedData) {
+  locator<VehicleCheckBloc>().allBookedVehicles = updatedData;
+}
+
+void replaceActive(List<BookedVehicle> updatedData) {
+  locator<VehicleCheckBloc>().activeVehicles = updatedData;
+}
+List<BookedVehicle> getActiveVehicles() {
+  return locator<VehicleCheckBloc>().activeVehicles;
+}
 
 List<BookedVehicle> getBookedVehicleList() {
   return locator<VehicleCheckBloc>().bookedVehicles;
 }
+
 void replaceBookedList(List<BookedVehicle> updatedData) {
   locator<VehicleCheckBloc>().bookedVehicles = updatedData;
 }

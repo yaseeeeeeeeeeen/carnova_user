@@ -1,5 +1,3 @@
-
-
 abstract class BookingEvent {}
 
 final class PaymentInitialEvent extends BookingEvent {
@@ -40,4 +38,13 @@ final class PaymentSuccessEvent extends BookingEvent {}
 
 final class PaymentFailedEvent extends BookingEvent {}
 
-final class UpdateBookedVehiclesList extends BookingEvent{}
+final class UpdateBookedVehiclesList extends BookingEvent {}
+
+final class CancelBooking extends BookingEvent {
+ final String bookId;
+ final String userId;
+ final String reason;
+ final num ammount;
+
+  CancelBooking({required this.bookId, required this.userId, required this.reason, required this.ammount});
+}

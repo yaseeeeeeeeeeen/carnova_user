@@ -149,16 +149,20 @@ class _LoginScreenState extends State<LoginScreen> {
                               tag: "signin",
                               child: BlocConsumer<LoginBloc, LoginState>(
                                 listener: (context, state) {
-                                  if (state is LoginSuccsess) {
+                                  if (state is LogedUserFetched) {
+                                    context
+                                        .read<LoginBloc>()
+                                        .add(BookingHistoryFetching());
+                                  } else if (state is LoginFailedState) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        customSnackbar(
+                                            context, false, state.messege));
+                                  } else if (state is LoginSuccsess) {
                                     Navigator.of(context).pushAndRemoveUntil(
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 CustomNavBar()),
                                         (route) => false);
-                                  } else if (state is LoginFailedState) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        customSnackbar(
-                                            context, false, state.messege));
                                   }
                                 },
                                 builder: (context, state) {

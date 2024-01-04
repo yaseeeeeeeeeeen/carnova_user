@@ -1,14 +1,15 @@
+import 'package:carnova_user/data/get_it/get_it.dart';
+import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:flutter/material.dart';
-import 'package:carnova_user/modals/vehicle_data._modal.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 
 class ActivatedVehicle extends StatelessWidget {
-  const ActivatedVehicle({super.key});
-
+  ActivatedVehicle({super.key});
+  final vehicles = getActiveVehicles();
   @override
   Widget build(BuildContext context) {
     /// just added in vehicle data list
-    final data = vehiclesData[0];
+    final data = vehicles[0];
     ////////////////////////////////////////////////////////////////
     double heigth = MediaQuery.sizeOf(context).height;
     return Container(
@@ -24,7 +25,9 @@ class ActivatedVehicle extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5),
                   color: Colors.black,
                   image: DecorationImage(
-                      image: NetworkImage(data.coverPhoto), fit: BoxFit.cover)),
+                      image: NetworkImage(
+                          "${ApiUrls.baseUrl}/${data.vehicleId.images[0]}"),
+                      fit: BoxFit.cover)),
               height: heigth / 4.5),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,11 +41,11 @@ class ActivatedVehicle extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      data.name,
+                      data.vehicleId.name,
                       style: activeVehicle1,
                     ),
                     Text(
-                      "₹${data.price}",
+                      "₹${data.grandTotal}",
                       style: activeVehicle2,
                     ),
                   ],
