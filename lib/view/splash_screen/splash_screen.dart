@@ -56,9 +56,6 @@ class _SplashScreenState extends State<SplashScreen> {
         final data1 = UserModal.fromJson(right);
         locator<LoginBloc>().logedUser = data1;
         fetchUserBookings(context);
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => CustomNavBar()),
-            (route) => false);
       });
     } else {
       Navigator.of(context).pushAndRemoveUntil(
@@ -84,12 +81,16 @@ class _SplashScreenState extends State<SplashScreen> {
           datas.where((element) => element.status == "Booked").toList();
       locator<VehicleCheckBloc>().bookedVehicles = bookedonly;
       ////////////////// ACTIVE VEHICLE SORTING/////////////////////////////////
-      final data2 = datas.where((element) {
+      locator<VehicleCheckBloc>().activeVehicles = datas.where((element) {
         final startDate = DateTime.parse(element.startDate);
         final endDate = DateTime.parse(element.endDate);
-        return startDate.isBefore(currentDate) && endDate.isAfter(currentDate);
+        return startDate.isBefore(currentDate) &&
+            endDate.isAfter(currentDate) &&
+            element.status == "Booked";
       }).toList();
-      locator<VehicleCheckBloc>().activeVehicles = data2;
     });
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => CustomNavBar()),
+        (route) => false);
   }
 }

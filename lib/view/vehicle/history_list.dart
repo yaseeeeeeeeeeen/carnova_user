@@ -1,6 +1,7 @@
 import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/modals/vehicle_data._modal.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
+import 'package:carnova_user/resources/components/car_show_screen/list_empty_svg.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class HistoryCharList extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       height: heigth,
       child: historyOfbooking.isEmpty
-          ? const Center(child: Text("List IS Emptyyyyy"))
+          ? const ListIsEmpty()
           : ListView.separated(
               physics: const BouncingScrollPhysics(),
               separatorBuilder: (context, index) => const SizedBox(height: 10),

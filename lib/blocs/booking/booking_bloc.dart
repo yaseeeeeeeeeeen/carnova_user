@@ -89,7 +89,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       final data2 = datas.where((element) {
         final startDate = DateTime.parse(element.startDate);
         final endDate = DateTime.parse(element.endDate);
-        return startDate.isBefore(currentDate) && endDate.isAfter(currentDate);
+        return startDate.isBefore(currentDate) && endDate.isAfter(currentDate)&&element.status=="Booked";
       }).toList();
       replaceActive(data2);
       emit(FetchedVehicleData());

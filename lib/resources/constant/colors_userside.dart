@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Color mainColorU = Colors.white;
-Color scaffoldBg =  const Color.fromARGB(200, 241, 241, 241);
+Color scaffoldBg = const
+ Color.fromARGB(255, 241, 241, 241);
 Color secondColorU = const Color(0x00739072);
 Color black = Colors.black;
 Color textColorU = Colors.black;

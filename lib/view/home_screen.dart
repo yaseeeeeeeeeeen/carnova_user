@@ -12,11 +12,11 @@ import 'package:carnova_user/utils/appbar.dart';
 UserSideImages imageU = UserSideImages();
 
 class HomeScreen extends StatelessWidget {
- const HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-      final activeVehicles = getActiveVehicles();
+    final activeVehicles = getActiveVehicles();
     double heigth = MediaQuery.sizeOf(context).height;
     // double width = MediaQuery.sizeOf(context).width;
     return Scaffold(
@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                       },
                       separatorBuilder: (context, index) =>
                           const SizedBox(width: 5),
-                      itemCount: vehiclesData.length,
+                      itemCount: 3,
                       scrollDirection: Axis.horizontal),
                 ),
               ],

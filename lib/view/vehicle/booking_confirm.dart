@@ -109,10 +109,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             context
                                 .read<BookingBloc>()
                                 .add(UpdateBookedVehiclesList());
-                            Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) => CustomNavBar()),
-                                (route) => false);
+
                           } else if (state is PaymentFailedState) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 customSnackbar(
@@ -120,6 +117,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           } else if (state is PaymentErrorState) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 customSnackbar(context, false, state.message));
+                          }else if(state is FetchedVehicleData){
+                                                        Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => CustomNavBar()),
+                                (route) => false);
                           }
                         },
                         builder: (context, state) {
