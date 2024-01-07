@@ -53,9 +53,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       locator<VehicleCheckBloc>().activeVehicles = [];
       emit(LoginSuccsess());
     }, (right) {
-          DateTime currentDate = DateTime.now();
-    DateFormat('yyyy-MM-dd').format(currentDate);
-final List vehicleList = right as List;
+      print("DATA FROM LOGIN $right");
+      DateTime currentDate = DateTime.now();
+      DateFormat('yyyy-MM-dd').format(currentDate);
+      final List vehicleList = right as List;
       final datas = vehicleList.map((e) => BookedVehicle.fromJson(e)).toList();
       locator<VehicleCheckBloc>().allBookedVehicles = datas;
       //////////////////// DIVIED BOOKED AND NOT BOOKED////////////////////////////////
@@ -63,12 +64,13 @@ final List vehicleList = right as List;
           datas.where((element) => element.status == "Booked").toList();
       locator<VehicleCheckBloc>().bookedVehicles = bookedonly;
       ////////////////// ACTIVE VEHICLE SORTING/////////////////////////////////
-       locator<VehicleCheckBloc>().activeVehicles = datas.where((element) {
-          final startDate = DateTime.parse(element.startDate);
-          final endDate = DateTime.parse(element.endDate);
-          return startDate.isBefore(currentDate) &&
-              endDate.isAfter(currentDate);
-        }).toList();
+      locator<VehicleCheckBloc>().activeVehicles = datas.where((element) {
+        final startDate = DateTime.parse(element.startDate);
+        final endDate = DateTime.parse(element.endDate);
+        return startDate.isBefore(currentDate) &&
+            endDate.isAfter(currentDate) &&
+            element.status == "Booked";
+      }).toList();
 /////////////////////////////////////////////////////////////////
       emit(LoginSuccsess());
     });

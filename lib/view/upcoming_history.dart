@@ -1,4 +1,4 @@
-import 'package:carnova_user/resources/components/upcoming_list.dart';
+import 'package:carnova_user/resources/components/car_show_screen/upcoming_list.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/view/vehicle/history_list.dart';

@@ -1,6 +1,6 @@
 import 'package:carnova_user/modals/booked_vehicle.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
-import 'package:carnova_user/resources/components/buttons_texts/cancle_bar.dart';
+import 'package:carnova_user/resources/components/textfields_and_buttons/cancle_bar.dart';
 import 'package:carnova_user/resources/components/car_show_screen/car_details_card.dart';
 import 'package:carnova_user/resources/components/car_show_screen/vehicle_images_wid.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';

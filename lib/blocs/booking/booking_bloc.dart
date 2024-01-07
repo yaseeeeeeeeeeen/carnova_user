@@ -14,7 +14,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
     on<PaymentSuccessEvent>(paymentSuccessEvent);
     on<UpdateBookedVehiclesList>(updateBookedVehiclesList);
     on<CancelBooking>(cancelBooking);
-    // on<PaymentFailedEvent>(paymentFailedEvent);
+    on<PaymentFailedEvent>(paymentFailedEvent);
     // on<PaymentRefundEvent>(paymentRefundEvent);
   }
   Map<String, dynamic> bookingData = {};
@@ -76,6 +76,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       replaceBookedHistory([]);
       replaceActive([]);
     }, (right) {
+      print("DATA FROM BOOKING $right");
       DateTime currentDate = DateTime.now();
       DateFormat('yyyy-MM-dd').format(currentDate);
       final List vehicleList = right as List;
@@ -89,7 +90,9 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       final data2 = datas.where((element) {
         final startDate = DateTime.parse(element.startDate);
         final endDate = DateTime.parse(element.endDate);
-        return startDate.isBefore(currentDate) && endDate.isAfter(currentDate)&&element.status=="Booked";
+        return startDate.isBefore(currentDate) &&
+            endDate.isAfter(currentDate) &&
+            element.status == "Booked";
       }).toList();
       replaceActive(data2);
       emit(FetchedVehicleData());
@@ -111,5 +114,10 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
     }, (right) {
       emit(CancelSuccsessState());
     });
+  }
+
+  FutureOr<void> paymentFailedEvent(
+      PaymentFailedEvent event, Emitter<BookingState> emit) {
+    emit(PaymentFailedState());
   }
 }

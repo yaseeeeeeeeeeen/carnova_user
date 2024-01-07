@@ -122,9 +122,9 @@ class VehicleId {
         lat: json["lat"].toDouble(),
         long: json["long"].toDouble(),
         createdBy: json["createdBy"],
-        images: new List<String>.from(json["images"].map((x) => x)),
+        images:  List<String>.from(json["images"].map((x) => x)),
         isVerified: json["isVerified"],
-        review: new List<dynamic>.from(json["review"].map((x) => x)),
+        review:  List<dynamic>.from(json["review"].map((x) => x)),
         v: json["__v"],
         document: json["document"],
     );
@@ -143,9 +143,9 @@ class VehicleId {
         "lat": lat,
         "long": long,
         "createdBy": createdBy,
-        "images": new List<dynamic>.from(images.map((x) => x)),
+        "images":  List<dynamic>.from(images.map((x) => x)),
         "isVerified": isVerified,
-        "review": new List<dynamic>.from(review.map((x) => x)),
+        "review":  List<dynamic>.from(review.map((x) => x)),
         "__v": v,
         "document": document,
     };

@@ -1,3 +1,4 @@
+import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -35,9 +36,9 @@ class FairDetailsRowWidget extends StatelessWidget {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Text(
             name,
-            style: GoogleFonts.poppins(),
+            style: normalSizePoppins,
           ),
-          Text(money, style: GoogleFonts.poppins())
+          Text(money, style: normalSizePoppins)
         ]));
   }
 }

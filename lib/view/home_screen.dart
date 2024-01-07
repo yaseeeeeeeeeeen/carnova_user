@@ -2,7 +2,7 @@ import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/modals/vehicle_data._modal.dart';
-import 'package:carnova_user/resources/components/active_vehicle.dart';
+import 'package:carnova_user/resources/components/car_show_screen/active_vehicle.dart';
 import 'package:carnova_user/resources/components/map_tap.dart';
 import 'package:carnova_user/resources/components/most_rated_wid.dart';
 import 'package:carnova_user/resources/components/title_text_wid.dart';

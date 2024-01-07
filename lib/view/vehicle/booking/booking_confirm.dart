@@ -3,7 +3,8 @@ import 'package:carnova_user/blocs/booking/booking_event.dart';
 import 'package:carnova_user/blocs/booking/booking_state.dart';
 import 'package:carnova_user/modals/fetch_modal.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
-import 'package:carnova_user/resources/components/booking_widget.dart';
+import 'package:carnova_user/resources/components/booking/booking_failed.dart';
+import 'package:carnova_user/resources/components/booking/booking_widget.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/appbar.dart';
@@ -12,7 +13,7 @@ import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../resources/components/car_show_screen/agent_tile.dart';
+import '../../../resources/components/car_show_screen/agent_tile.dart';
 
 // ignore: must_be_immutable
 class PaymentScreen extends StatefulWidget {
@@ -109,16 +110,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             context
                                 .read<BookingBloc>()
                                 .add(UpdateBookedVehiclesList());
-
                           } else if (state is PaymentFailedState) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                customSnackbar(
-                                    context, false, 'Payment Failed'));
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const BookingFailedScreen()),
+                                (route) => false);
+                        //    ScaffoldMessenger.of(context).showSnackBar(
+                          //      customSnackbar(
+                            //        context, false, 'Payment Failed'));
                           } else if (state is PaymentErrorState) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 customSnackbar(context, false, state.message));
-                          }else if(state is FetchedVehicleData){
-                                                        Navigator.of(context).pushAndRemoveUntil(
+                          } else if (state is FetchedVehicleData) {
+                            Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
                                     builder: (context) => CustomNavBar()),
                                 (route) => false);

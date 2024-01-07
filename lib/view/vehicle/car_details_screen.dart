@@ -3,7 +3,7 @@ import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/resources/components/car_show_screen/agent_tile.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:flutter/material.dart';
-import 'package:carnova_user/resources/components/buttons_texts/car_book_bar.dart';
+import 'package:carnova_user/resources/components/textfields_and_buttons/car_book_bar.dart';
 import 'package:carnova_user/resources/components/car_show_screen/car_details_card.dart';
 import 'package:carnova_user/resources/components/car_show_screen/vehicle_images_wid.dart';
 import 'package:carnova_user/resources/components/title_text_wid.dart';

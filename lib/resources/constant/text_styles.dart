@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+TextStyle normalSizePoppins = GoogleFonts.poppins();
+
 //Home screen
 TextStyle activeVehicle1 = GoogleFonts.poppins(
     color: Colors.black, fontSize: 20, fontWeight: FontWeight.w400);
@@ -79,3 +81,6 @@ TextStyle navbartitle = GoogleFonts.poppins(
 
 TextStyle changePasswordFont =
     GoogleFonts.poppins(color: Colors.black, fontSize: 15);
+
+TextStyle paymentFailedTilteStyle = GoogleFonts.poppins(
+    fontWeight: FontWeight.w600, fontSize: 18, color: Colors.red.shade600);

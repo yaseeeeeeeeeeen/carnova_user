@@ -71,6 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
       locator<VehicleCheckBloc>().allBookedVehicles = [];
       locator<VehicleCheckBloc>().activeVehicles = [];
     }, (right) {
+      print("DATA FROM SPLASH $right");
       DateTime currentDate = DateTime.now();
       DateFormat('yyyy-MM-dd').format(currentDate);
       final List vehicleList = right as List;
