@@ -1,9 +1,11 @@
+import 'package:carnova_user/blocs/login/login_bloc.dart';
 import 'package:carnova_user/blocs/vehicle_check/vehicle_check_bloc.dart';
 import 'package:carnova_user/blocs/vehicle_check/vehicle_check_state.dart';
 import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
-import 'package:carnova_user/view/vehicle/all_vehicles_list.dart';
+import 'package:carnova_user/utils/snack_bar.dart';
+import 'package:carnova_user/view/vehicle/booking/all_vehicles_list.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/modals/vehicle_data._modal.dart';
 import 'package:carnova_user/resources/components/car_show_screen/active_vehicle.dart';
@@ -51,7 +53,11 @@ class HomeScreen extends StatelessWidget {
                   listener: (context, state) {
                     if (state is AllVehiclefetchedState) {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const AllVehiclesList()));
+                          builder: (context) =>
+                              AllVehiclesList(datas: state.allVehicles)));
+                    } else if (state is VehilceFetchingFailed) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          customSnackbar(context, false, state.messege));
                     }
                   },
                   builder: (context, state) {

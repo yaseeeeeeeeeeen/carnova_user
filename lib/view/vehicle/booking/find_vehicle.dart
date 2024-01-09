@@ -4,7 +4,7 @@ import 'package:carnova_user/resources/components/textfields_and_buttons/custom_
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/snack_bar.dart';
-import 'package:carnova_user/view/vehicle/vehicle_list.dart';
+import 'package:carnova_user/view/vehicle/booking/vehicle_list.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/utils/appbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

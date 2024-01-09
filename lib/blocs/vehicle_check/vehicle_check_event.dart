@@ -12,11 +12,15 @@ class CheckAvaliblityButtonClicked extends VehicleCheckEvent {
 
 class FetchAvalibleVehicles extends VehicleCheckEvent {
   Map<String, String> checkingData;
-  FetchAvalibleVehicles({
-    required this.checkingData
-  });
+  FetchAvalibleVehicles({required this.checkingData});
 }
 
 class FetchVehicles extends VehicleCheckEvent {}
 
-class GetAllVehicles extends VehicleCheckEvent{}
+class GetAllVehicles extends VehicleCheckEvent {}
+
+class VehicleSearchEvent extends VehicleCheckEvent {
+  List<Vehicle2> datas;
+  String text;
+  VehicleSearchEvent({required this.text,required this.datas});
+}

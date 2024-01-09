@@ -1,7 +1,7 @@
 import 'package:carnova_user/resources/components/car_show_screen/upcoming_list.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
-import 'package:carnova_user/view/vehicle/history_list.dart';
+import 'package:carnova_user/view/vehicle/booking/history_list.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/utils/appbar.dart';

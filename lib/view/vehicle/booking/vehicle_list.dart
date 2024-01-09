@@ -2,7 +2,7 @@ import 'package:carnova_user/modals/fetch_modal.dart';
 import 'package:carnova_user/resources/components/car_show_screen/car_tile_wid.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/custom_textfiled.dart';
 import 'package:carnova_user/utils/appbar.dart';
-import 'package:carnova_user/view/vehicle/car_details_screen.dart';
+import 'package:carnova_user/view/vehicle/booking/car_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 

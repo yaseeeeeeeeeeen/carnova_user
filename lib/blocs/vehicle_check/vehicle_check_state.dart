@@ -39,3 +39,8 @@ class AllVehiclefetchedState extends VehicleCheckState {
   List<Vehicle2> allVehicles;
   AllVehiclefetchedState({required this.allVehicles});
 }
+
+class SearchedList extends VehicleCheckState {
+  List<Vehicle2> allVehicles;
+  SearchedList({required this.allVehicles});
+}

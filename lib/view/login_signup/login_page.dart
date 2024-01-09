@@ -6,6 +6,7 @@ import 'package:carnova_user/utils/bottom_nav_bar.dart';
 import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:carnova_user/utils/validations.dart';
 import 'package:carnova_user/view/home_screen.dart';
+import 'package:carnova_user/view/login_signup/forget_password.dart';
 import 'package:carnova_user/view/login_signup/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -125,18 +126,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
-                                      // Navigator.of(context).push(
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) =>
-                                      //         ForgotPasswordScreen(),
-                                      //   ),
-                                      // );
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ForgotPasswordScreen(),
+                                        ),
+                                      );
                                     },
                                     child: Text(
                                       'Forgot Password?',
                                       style: TextStyle(
-                                        color: secondColorU,
-                                        fontWeight: FontWeight.w400,
+                                        color: black,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                   ),

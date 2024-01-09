@@ -5,7 +5,6 @@ import 'package:carnova_user/blocs/vehicle_check/vehicle_check_state.dart';
 import 'package:carnova_user/modals/all_vehicle_list_modal.dart';
 import 'package:carnova_user/modals/booked_vehicle.dart';
 import 'package:carnova_user/modals/fetch_modal.dart';
-import 'package:carnova_user/modals/vehicle_data._modal.dart';
 import 'package:carnova_user/repositories/booking_repo.dart';
 import 'package:carnova_user/repositories/user_repo.dart';
 import 'package:carnova_user/utils/functions/location_picker.dart';
@@ -24,6 +23,7 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
     on<FetchAvalibleVehicles>(fetchAvalibleVehicles);
     on<FetchVehicles>(fetchVehicles);
     on<GetAllVehicles>(getAllVehicles);
+    on<VehicleSearchEvent>(vehicleSearchEvent);
   }
 
   FutureOr<void> checkAvaliblityButtonClicked(
@@ -81,13 +81,24 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
   FutureOr<void> getAllVehicles(
       GetAllVehicles event, Emitter<VehicleCheckState> emit) async {
     emit(VehicleCheckLoading());
+    Future.delayed(const Duration(seconds: 2));
     final response = await BookingRepo().getAllVehicles();
     response.fold((left) {
       emit(VehilceFetchingFailed(messege: left.message));
     }, (right) {
       final data = AllVehicleModal.fromJson(right);
-      print(data.vehicles.length);
       emit(AllVehiclefetchedState(allVehicles: data.vehicles));
     });
+  }
+
+  FutureOr<void> vehicleSearchEvent(
+      VehicleSearchEvent event, Emitter<VehicleCheckState> emit) async {
+    emit(VehicleCheckLoading());
+    List<Vehicle2> searchResult = event.datas
+        .where((element) =>
+            element.name.toLowerCase().contains(event.text.toLowerCase()))
+        .toList();
+    print(searchResult.length);
+    emit(SearchedList(allVehicles: searchResult));
   }
 }

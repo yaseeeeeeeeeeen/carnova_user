@@ -20,6 +20,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginInitial()) {
     on<LoginButtonClickedEvent>(loginButtonClickedEvent);
     on<BookingHistoryFetching>(bookingHistoryFetching);
+    on<ForgetPasswordClicked>(forgetPasswordClicked);
   }
 
   FutureOr<void> loginButtonClickedEvent(
@@ -73,6 +74,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }).toList();
 /////////////////////////////////////////////////////////////////
       emit(LoginSuccsess());
+    });
+  }
+//////////////////// WORK PENDING////////////////////////////////////////////////////////////////////////
+  FutureOr<void> forgetPasswordClicked(
+      ForgetPasswordClicked event, Emitter<LoginState> emit) async {
+    emit(LoadingState());
+    final response = await UserLoginRepo().forgetPassword(event.email);
+    response.fold((left) {}, (right) {
+
     });
   }
 }

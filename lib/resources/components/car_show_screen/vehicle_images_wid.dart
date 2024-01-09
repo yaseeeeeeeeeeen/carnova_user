@@ -28,7 +28,7 @@ class CarMoreImages extends StatelessWidget {
                               width: MediaQuery.sizeOf(context).width,
                               child: Image.network(
                                 "${ApiUrls.baseUrl}/$i",
-                                fit: BoxFit.fitWidth,
+                                fit: BoxFit.cover,
                               )),
                           IconButton(
                               onPressed: () {

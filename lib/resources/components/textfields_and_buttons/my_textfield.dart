@@ -11,11 +11,13 @@ class MyTextField extends StatelessWidget {
   final bool isPassword;
   TextInputType? number;
   FormFieldValidator validation;
+  Function(String)? onChanged;
 
   MyTextField({
     Key? key, // Fixing the super.key parameter
-   required this.isPassword,
+    required this.isPassword,
     this.number,
+    this.onChanged,
     required this.validation,
     required this.controller,
     required this.hintText,
@@ -34,10 +36,11 @@ class MyTextField extends StatelessWidget {
       },
       builder: (context, state) {
         return TextFormField(
+          onChanged: onChanged ?? (value) {},
           keyboardType: number ?? TextInputType.text,
           validator: validation,
           controller: controller,
-          obscureText: isPassword?obscureText:false,
+          obscureText: isPassword ? obscureText : false,
           decoration: InputDecoration(
             border: const OutlineInputBorder(
               borderSide: BorderSide(width: 5, color: Colors.black),

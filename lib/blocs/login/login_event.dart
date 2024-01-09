@@ -7,4 +7,10 @@ class LoginButtonClickedEvent extends LoginEvent {
   Map<String, String> mailandpass;
   LoginButtonClickedEvent({required this.mailandpass});
 }
-class BookingHistoryFetching extends LoginEvent{}
+
+class BookingHistoryFetching extends LoginEvent {}
+
+class ForgetPasswordClicked extends LoginEvent {
+  String email;
+  ForgetPasswordClicked({required this.email});
+}
