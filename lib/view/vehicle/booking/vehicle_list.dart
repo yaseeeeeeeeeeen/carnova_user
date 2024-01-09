@@ -35,61 +35,65 @@ class FetchedVehicles extends StatelessWidget {
                   height: double.infinity,
                   width: double.infinity,
                   child: Center(
-                      child: Text(
-                      
-                          "VEHICLES DOES NOT AVALIBLE IN \n $location",textAlign: TextAlign.center)),
+                      child: Text("VEHICLES DOES NOT AVALIBLE IN \n $location",
+                          textAlign: TextAlign.center)),
                 )
-              : Column(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.only(right: 10),
-                            child: CustomTextfield(
-                                viewonly: false,
-                                hint: "",
-                                isSufix: false,
-                                controller: locationController),
+              : SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.only(right: 10),
+                              child: CustomTextfield(
+                                  viewonly: false,
+                                  hint: "",
+                                  isSufix: false,
+                                  controller: locationController),
+                            ),
                           ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: Colors.grey.shade300)),
-                          height: 55,
-                          width: 60,
-                          child: IconButton(
-                              onPressed: () {
-                                // Navigator.of(context).push(MaterialPageRoute(
-                                //     builder: (context) => MapScreen(
-                                //         locationName: location, postion: position)));
-                              },
-                              icon: const Icon(Icons.location_on,
-                                  color: Colors.black)),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    ListView.separated(
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          final data = vehicles[index];
-                          return InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => CarDataShow(
-                                        endDate: enddate,
-                                        startDate: startDate,
-                                        vehicleData: data,
-                                        isBooked: false)));
-                              },
-                              child: CarListTile(data: data));
-                        },
-                        separatorBuilder: (context, index) => const Divider(),
-                        itemCount: vehicles.length)
-                  ],
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border:
+                                    Border.all(color: Colors.grey.shade300)),
+                            height: 55,
+                            width: 60,
+                            child: IconButton(
+                                onPressed: () {
+                                  // Navigator.of(context).push(MaterialPageRoute(
+                                  //     builder: (context) => MapScreen(
+                                  //         locationName: location, postion: position)));
+                                },
+                                icon: const Icon(Icons.location_on,
+                                    color: Colors.black)),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            final data = vehicles[index];
+                            return InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => CarDataShow(
+                                          endDate: enddate,
+                                          startDate: startDate,
+                                          vehicleData: data,
+                                          isBooked: false)));
+                                },
+                                child: CarListTile(data: data));
+                          },
+                          separatorBuilder: (context, index) => const Divider(),
+                          itemCount: vehicles.length)
+                    ],
+                  ),
                 ),
         ));
   }
