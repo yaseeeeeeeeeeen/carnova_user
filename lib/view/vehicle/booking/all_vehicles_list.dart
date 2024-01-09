@@ -2,6 +2,7 @@ import 'package:carnova_user/blocs/vehicle_check/vehicle_check_bloc.dart';
 import 'package:carnova_user/blocs/vehicle_check/vehicle_check_state.dart';
 import 'package:carnova_user/modals/all_vehicle_list_modal.dart';
 import 'package:carnova_user/resources/components/car_show_screen/list_empty_svg.dart';
+import 'package:carnova_user/resources/components/searched_title.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/my_textfield.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/appbar.dart';
@@ -24,51 +25,51 @@ class AllVehiclesList extends StatelessWidget {
       }),
       body: Padding(
           padding: const EdgeInsets.all(15),
-          child: Column(children: [
-            GestureDetector(
-              child: BlocListener<VehicleCheckBloc, VehicleCheckState>(
-                listener: (context, state) {},
-                child: MyTextField(
-                    onChanged: (p0) {
-                      context
-                          .read<VehicleCheckBloc>()
-                          .add(VehicleSearchEvent(text: p0, datas: datas));
-                    },
-                    isPassword: false,
-                    validation: (value) => null,
-                    controller: searchController,
-                    hintText: "Search Vehicle",
-                    obscureText: false),
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(children: [
+              GestureDetector(
+                child: BlocListener<VehicleCheckBloc, VehicleCheckState>(
+                  listener: (context, state) {},
+                  child: MyTextField(
+                      onChanged: (p0) {
+                        context
+                            .read<VehicleCheckBloc>()
+                            .add(VehicleSearchEvent(text: p0, datas: datas));
+                      },
+                      isPassword: false,
+                      validation: (value) => null,
+                      controller: searchController,
+                      hintText: "Search Vehicle",
+                      obscureText: false),
+                ),
               ),
-            ),
-            const SizedBox(height: 10),
-            BlocBuilder<VehicleCheckBloc, VehicleCheckState>(
-              builder: (context, state) {
-                if (state is SearchedList) {
-                  searchedList = state.allVehicles;
-                }
-                return searchedList.isEmpty
-                    ? SizedBox(
-                        height: media.height / 2.5,
-                        width: media.width / 1.5,
-                        child: SvgPicture.asset(
-                            "assets/svg/Car rental-amico (1).svg"),
-                      )
-                    : ListView.separated(
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          final vehicle = searchedList[index];
-                          return Container(
-                              height: 30,
-                              width: double.infinity,
-                              color: Colors.amberAccent,
-                              child: Center(child: Text(vehicle.name)));
-                        },
-                        separatorBuilder: (context, index) => const Divider(),
-                        itemCount: searchedList.length);
-              },
-            )
-          ])),
+              const SizedBox(height: 10),
+              BlocBuilder<VehicleCheckBloc, VehicleCheckState>(
+                builder: (context, state) {
+                  if (state is SearchedList) {
+                    searchedList = state.allVehicles;
+                  }
+                  return searchedList.isEmpty
+                      ? SizedBox(
+                          height: media.height / 2.5,
+                          width: media.width / 1.5,
+                          child: SvgPicture.asset(
+                              "assets/svg/Car rental-amico (1).svg"),
+                        )
+                      : ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            final vehicle = searchedList[index];
+                            return SearchTileWid(data: vehicle);
+                          },
+                          separatorBuilder: (context, index) => const Divider(),
+                          itemCount: searchedList.length);
+                },
+              )
+            ]),
+          )),
     );
   }
 }
