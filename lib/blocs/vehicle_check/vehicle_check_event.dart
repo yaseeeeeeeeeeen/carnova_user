@@ -18,3 +18,5 @@ class FetchAvalibleVehicles extends VehicleCheckEvent {
 }
 
 class FetchVehicles extends VehicleCheckEvent {}
+
+class GetAllVehicles extends VehicleCheckEvent{}

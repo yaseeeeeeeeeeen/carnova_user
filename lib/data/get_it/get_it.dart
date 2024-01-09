@@ -41,3 +41,4 @@ void replaceBookedList(List<BookedVehicle> updatedData) {
   locator<VehicleCheckBloc>().bookedVehicles = updatedData;
 }
 
+

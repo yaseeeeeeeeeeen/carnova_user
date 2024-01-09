@@ -76,7 +76,6 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       replaceBookedHistory([]);
       replaceActive([]);
     }, (right) {
-      print("DATA FROM BOOKING $right");
       DateTime currentDate = DateTime.now();
       DateFormat('yyyy-MM-dd').format(currentDate);
       final List vehicleList = right as List;

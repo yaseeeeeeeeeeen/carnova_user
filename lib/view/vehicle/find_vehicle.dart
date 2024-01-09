@@ -1,4 +1,5 @@
 import 'package:carnova_user/blocs/vehicle_check/vehicle_check_bloc.dart';
+import 'package:carnova_user/blocs/vehicle_check/vehicle_check_state.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/custom_textfiled.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';

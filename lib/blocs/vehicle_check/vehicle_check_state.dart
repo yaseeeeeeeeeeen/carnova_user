@@ -1,5 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-part of 'vehicle_check_bloc.dart';
+
+import 'package:carnova_user/modals/all_vehicle_list_modal.dart';
+import 'package:carnova_user/modals/fetch_modal.dart';
+import 'package:geolocator/geolocator.dart';
 
 abstract class VehicleCheckState {}
 
@@ -28,5 +31,11 @@ class LocationPickingFailed extends VehicleCheckState {
 class VehicleFetchSuccsessState extends VehicleCheckState {
   Position location;
   List<Vehicle> vehicleModel;
-  VehicleFetchSuccsessState({required this.vehicleModel,required this.location});
+  VehicleFetchSuccsessState(
+      {required this.vehicleModel, required this.location});
+}
+
+class AllVehiclefetchedState extends VehicleCheckState {
+  List<Vehicle2> allVehicles;
+  AllVehiclefetchedState({required this.allVehicles});
 }

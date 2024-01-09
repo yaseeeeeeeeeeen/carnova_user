@@ -1,16 +1,20 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:carnova_user/blocs/vehicle_check/vehicle_check_state.dart';
+import 'package:carnova_user/modals/all_vehicle_list_modal.dart';
 import 'package:carnova_user/modals/booked_vehicle.dart';
 import 'package:carnova_user/modals/fetch_modal.dart';
+import 'package:carnova_user/modals/vehicle_data._modal.dart';
+import 'package:carnova_user/repositories/booking_repo.dart';
 import 'package:carnova_user/repositories/user_repo.dart';
 import 'package:carnova_user/utils/functions/location_picker.dart';
 import 'package:geolocator/geolocator.dart';
 
 part 'vehicle_check_event.dart';
-part 'vehicle_check_state.dart';
 
 class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
+  // late List<Vehicle> allVehicles;
   late List<BookedVehicle> bookedVehicles;
   late List<BookedVehicle> allBookedVehicles;
   late List<BookedVehicle> activeVehicles;
@@ -19,6 +23,7 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
     on<CheckAvaliblityButtonClicked>(checkAvaliblityButtonClicked);
     on<FetchAvalibleVehicles>(fetchAvalibleVehicles);
     on<FetchVehicles>(fetchVehicles);
+    on<GetAllVehicles>(getAllVehicles);
   }
 
   FutureOr<void> checkAvaliblityButtonClicked(
@@ -70,6 +75,19 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
           vehicleList.map((e) => Vehicle.fromJson(e)).toList();
       emit(VehicleFetchSuccsessState(
           vehicleModel: vehicleModel, location: location!));
+    });
+  }
+
+  FutureOr<void> getAllVehicles(
+      GetAllVehicles event, Emitter<VehicleCheckState> emit) async {
+    emit(VehicleCheckLoading());
+    final response = await BookingRepo().getAllVehicles();
+    response.fold((left) {
+      emit(VehilceFetchingFailed(messege: left.message));
+    }, (right) {
+      final data = AllVehicleModal.fromJson(right);
+      print(data.vehicles.length);
+      emit(AllVehiclefetchedState(allVehicles: data.vehicles));
     });
   }
 }
