@@ -14,7 +14,7 @@ class HistoryScreen extends StatelessWidget {
     return Scaffold(
         appBar: customAppBarU(context),
         body: Container(
-          color: const Color.fromARGB(255, 255, 255, 255),
+          color: mainColorU,
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
           child: ContainedTabBarView(
@@ -23,8 +23,8 @@ class HistoryScreen extends StatelessWidget {
             tabBarProperties: TabBarProperties(
                 indicatorWeight: 4,
                 indicatorColor: appbarColorU,
-                unselectedLabelColor: Colors.black.withOpacity(0.3),
-                labelColor: Colors.black),
+                unselectedLabelColor: black.withOpacity(0.3),
+                labelColor: black),
             tabs: [
               Text('Upcoming', style: tabbartitle),
               Text('All History', style: tabbartitle),

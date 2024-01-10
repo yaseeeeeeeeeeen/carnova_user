@@ -77,8 +77,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
               Container(
                 height: h / 2.3,
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey.shade300),
+                    color: mainColorU,
+                    border: Border.all(color: borderSide),
                     borderRadius: BorderRadius.circular(10)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,10 +120,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     builder: (context) =>
                                         const BookingFailedScreen()),
                                 (route) => false);
-                            //    ScaffoldMessenger.of(context).showSnackBar(
-                            //      customSnackbar(
-                            //        context, false, 'Payment Failed'));
-                          } else if (state is PaymentErrorState) {
+                           } else if (state is PaymentErrorState) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 customSnackbar(
                                     context, false, state.message));

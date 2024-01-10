@@ -195,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 children: [
                                   Text(
                                     'Not a member?',
-                                    style: TextStyle(color: Colors.grey[700]),
+                                    style: TextStyle(color: black.withOpacity(0.7)),
                                   ),
                                   const SizedBox(width: 4),
                                   GestureDetector(

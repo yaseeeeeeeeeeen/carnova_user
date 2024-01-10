@@ -1,6 +1,7 @@
 import 'package:carnova_user/modals/fetch_modal.dart';
 import 'package:carnova_user/resources/components/car_show_screen/car_tile_wid.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/custom_textfiled.dart';
+import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/appbar.dart';
 import 'package:carnova_user/view/vehicle/booking/car_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -29,19 +30,19 @@ class FetchedVehicles extends StatelessWidget {
           Navigator.of(context).pop();
         }),
         body: Padding(
-          padding: const EdgeInsets.all(10),
-          child: vehicles.isEmpty
-              ? SizedBox(
-                  height: double.infinity,
-                  width: double.infinity,
-                  child: Center(
-                      child: Text("VEHICLES DOES NOT AVALIBLE IN \n $location",
-                          textAlign: TextAlign.center)),
-                )
-              : SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  child: Column(
-                    children: [
+            padding: const EdgeInsets.all(10),
+            child: vehicles.isEmpty
+                ? SizedBox(
+                    height: double.infinity,
+                    width: double.infinity,
+                    child: Center(
+                        child: Text(
+                            "VEHICLES DOES NOT AVALIBLE IN \n $location",
+                            textAlign: TextAlign.center)),
+                  )
+                : SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: Column(children: [
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -58,8 +59,7 @@ class FetchedVehicles extends StatelessWidget {
                           Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                border:
-                                    Border.all(color: Colors.grey.shade300)),
+                                border: Border.all(color: borderSide)),
                             height: 55,
                             width: 60,
                             child: IconButton(
@@ -68,8 +68,7 @@ class FetchedVehicles extends StatelessWidget {
                                   //     builder: (context) => MapScreen(
                                   //         locationName: location, postion: position)));
                                 },
-                                icon: const Icon(Icons.location_on,
-                                    color: Colors.black)),
+                                icon: Icon(Icons.location_on, color: black)),
                           )
                         ],
                       ),
@@ -92,9 +91,6 @@ class FetchedVehicles extends StatelessWidget {
                           },
                           separatorBuilder: (context, index) => const Divider(),
                           itemCount: vehicles.length)
-                    ],
-                  ),
-                ),
-        ));
+                    ]))));
   }
 }

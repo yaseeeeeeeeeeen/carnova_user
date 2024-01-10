@@ -25,7 +25,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final activeVehicles = getActiveVehicles();
     double heigth = MediaQuery.sizeOf(context).height;
-    // double width = MediaQuery.sizeOf(context).width;
     return Scaffold(
         backgroundColor: scaffoldBg,
         appBar: customAppBarU(context),

@@ -4,6 +4,7 @@ import 'package:carnova_user/resources/components/textfields_and_buttons/cancle_
 import 'package:carnova_user/resources/components/car_show_screen/car_details_card.dart';
 import 'package:carnova_user/resources/components/car_show_screen/vehicle_images_wid.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
+import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/resources/components/title_text_wid.dart';
 import 'package:carnova_user/utils/appbar.dart';
@@ -23,7 +24,6 @@ class BookedVehiclesScreen extends StatelessWidget {
       vehicle.vehicleId.fuel,
       vehicle.vehicleId.transmission,
       "4.5"
-      // vehicleData.rating.abs().toString()
     ];
     double heigth = MediaQuery.sizeOf(context).height;
     return Scaffold(
@@ -52,16 +52,16 @@ class BookedVehiclesScreen extends StatelessWidget {
               const SizedBox(height: 10),
               Container(
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade300),
+                    border: Border.all(color: borderSide),
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.white),
+                    color: mainColorU),
                 child: ListTile(
                   title: Text(
                     "Starting Date",
-                    style: GoogleFonts.poppins(),
+                    style: normalSizePoppins,
                   ),
                   trailing:
-                      Text(formattedStartDate, style: GoogleFonts.poppins()),
+                      Text(formattedStartDate, style: normalSizePoppins),
                 ),
               ),
               const SizedBox(height: 10),

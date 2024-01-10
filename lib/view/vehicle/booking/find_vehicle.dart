@@ -52,8 +52,8 @@ class FindVehicleU extends StatelessWidget {
                 Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                      border: Border.all(color: Colors.grey.shade300),
+                      color: mainColorU,
+                      border: Border.all(color: borderSide),
                     ),
                     height: heigth / 2.5,
                     child: SfDateRangePicker(
@@ -78,8 +78,6 @@ class FindVehicleU extends StatelessWidget {
                                   context, false, "Please Select A Date"));
                         },
                         onCancel: () {
-                          /////// textfield and timeformat hint textes all clearing here//////////////
-
                           _startDate = DateTime.now();
                           _endDate = DateTime.now();
                           endDate = "";
@@ -89,7 +87,6 @@ class FindVehicleU extends StatelessWidget {
                         },
                         headerStyle: DateRangePickerHeaderStyle(
                             textStyle: GoogleFonts.poppins()),
-                        // hijriDatePickerDisplayMode: DatePickerDisplayMode.month,
                         initialSelectedRange: PickerDateRange(
                           _startDate ?? DateTime.now(),
                           _endDate ?? DateTime.now(),

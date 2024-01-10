@@ -28,7 +28,6 @@ class CarDataShow extends StatelessWidget {
       vehicleData.fuel,
       vehicleData.transmission,
       "4.3"
-      // vehicleData.rating.abs().toString()
     ];
     double heigth = MediaQuery.sizeOf(context).height;
     return Scaffold(

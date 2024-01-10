@@ -62,13 +62,13 @@ class ProfileEditScreen extends StatelessWidget {
                                 ? CircleAvatar(
                                     backgroundImage: NetworkImage(
                                         "${ApiUrls.baseUrl}/${logedUser.profile}"),
-                                    backgroundColor: Colors.black12,
+                                    backgroundColor: black.withOpacity(0.2),
                                     radius: 80,
                                   )
                                 : CircleAvatar(
                                     backgroundImage:
                                         AssetImage(imageU.profileDemo),
-                                    backgroundColor: Colors.black12,
+                                    backgroundColor: black.withOpacity(0.2),
                                     radius: 80,
                                   )),
                   );

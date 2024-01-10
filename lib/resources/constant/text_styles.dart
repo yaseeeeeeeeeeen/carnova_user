@@ -84,3 +84,11 @@ TextStyle changePasswordFont =
 
 TextStyle paymentFailedTilteStyle = GoogleFonts.poppins(
     fontWeight: FontWeight.w600, fontSize: 18, color: Colors.red.shade600);
+
+TextStyle greycolourNormal = const TextStyle(color: Colors.grey, fontSize: 13);
+
+/////////// Cancle///////////////
+TextStyle cancleText =
+    GoogleFonts.poppins(fontWeight: FontWeight.w600, color: Colors.red);
+
+TextStyle poppins600 = GoogleFonts.poppins(fontWeight: FontWeight.w600);

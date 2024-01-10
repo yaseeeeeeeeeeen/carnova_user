@@ -60,15 +60,15 @@ class SignupScreen extends StatelessWidget {
                                       child: Text(
                                     "C",
                                     style: GoogleFonts.poppins(
-                                        fontSize: 40, color: Colors.white),
+                                        fontSize: 40, color: mainColorU),
                                   )),
                                 ),
                               ),
                               const SizedBox(height: 10),
-                              const Text(
+                               Text(
                                 "Create an account",
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    color: black,
                                     fontWeight: FontWeight.w700,
                                     fontSize: 25),
                               ),
@@ -76,7 +76,7 @@ class SignupScreen extends StatelessWidget {
                               Text(
                                 "Sign up to join",
                                 style: TextStyle(
-                                  color: Colors.grey[700],
+                                  color: black.withOpacity(0.7),
                                   fontWeight: FontWeight.w500,
                                   fontSize: 15,
                                 ),
