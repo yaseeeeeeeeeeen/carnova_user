@@ -1,5 +1,6 @@
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
+import 'package:carnova_user/utils/appbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -16,29 +17,9 @@ class CarMoreImages extends StatelessWidget {
           builder: (BuildContext context) {
             return GestureDetector(
               onTap: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (context) {
-                      return Stack(
-                        children: [
-                          Container(
-                              color: appbarColorU,
-                              padding: const EdgeInsets.all(10),
-                              height: MediaQuery.sizeOf(context).height / 3,
-                              width: MediaQuery.sizeOf(context).width,
-                              child: Image.network(
-                                "${ApiUrls.baseUrl}/$i",
-                                fit: BoxFit.fitWidth,
-                              )),
-                          IconButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              icon: Icon(Icons.keyboard_arrow_left,
-                                  size: 25, color: mainColorU)),
-                        ],
-                      );
-                    });
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>
+                        ImagePreviewWid(imagePath: "${ApiUrls.baseUrl}/$i")));
               },
               child: Container(
                   margin: const EdgeInsets.all(5),
@@ -51,6 +32,24 @@ class CarMoreImages extends StatelessWidget {
           },
         );
       }).toList(),
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class ImagePreviewWid extends StatelessWidget {
+  ImagePreviewWid({super.key, required this.imagePath});
+  String imagePath;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: mainColorU,
+      appBar: customAppBarText("IMAGE PREVIEW", context, () {
+        Navigator.of(context).pop();
+      }),
+      body: Center(
+        child: Image(image: NetworkImage(imagePath)),
+      ),
     );
   }
 }

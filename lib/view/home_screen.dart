@@ -1,4 +1,3 @@
-import 'package:carnova_user/blocs/login/login_bloc.dart';
 import 'package:carnova_user/blocs/vehicle_check/vehicle_check_bloc.dart';
 import 'package:carnova_user/blocs/vehicle_check/vehicle_check_state.dart';
 import 'package:carnova_user/data/get_it/get_it.dart';
@@ -6,8 +5,8 @@ import 'package:carnova_user/resources/components/textfields_and_buttons/loading
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:carnova_user/view/vehicle/booking/all_vehicles_list.dart';
+import 'package:carnova_user/view/vehicle/welcome_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:carnova_user/modals/vehicle_data._modal.dart';
 import 'package:carnova_user/resources/components/car_show_screen/active_vehicle.dart';
 import 'package:carnova_user/resources/components/map_tap.dart';
 import 'package:carnova_user/resources/components/most_rated_wid.dart';
@@ -24,7 +23,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final activeVehicles = getActiveVehicles();
+    final upcomingVehicles = getBookedVehicleList();
     double heigth = MediaQuery.sizeOf(context).height;
+    if (upcomingVehicles.isEmpty && activeVehicles.isEmpty) {
+      /////////////////welcome screen//////////////////////////////////////
+      return const WelcomeScreen();
+    }
     return Scaffold(
         backgroundColor: scaffoldBg,
         appBar: customAppBarU(context),
@@ -71,7 +75,9 @@ class HomeScreen extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 10),
-                HomeTitles(titles: "Upcoming Bookings"),
+                upcomingVehicles.isEmpty
+                    ? const SizedBox()
+                    : HomeTitles(titles: "Upcoming Bookings"),
                 const SizedBox(height: 10),
                 Container(
                   height: heigth / 4.3,
@@ -80,11 +86,12 @@ class HomeScreen extends StatelessWidget {
                       physics: const BouncingScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return MostRatedDemo(vehicledata: vehiclesData[index]);
+                        return MostRatedDemo(
+                            vehicledata: upcomingVehicles[index]);
                       },
                       separatorBuilder: (context, index) =>
                           const SizedBox(width: 5),
-                      itemCount: 3,
+                      itemCount: upcomingVehicles.length,
                       scrollDirection: Axis.horizontal),
                 ),
               ],

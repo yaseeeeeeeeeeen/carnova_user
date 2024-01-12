@@ -80,9 +80,9 @@ class CarDetailsCard extends StatelessWidget {
               margin: const EdgeInsets.all(2),
               width: 100,
               decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade300),
+                  border: Border.all(color: borderSide),
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.white),
+                  color: mainColorU),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
