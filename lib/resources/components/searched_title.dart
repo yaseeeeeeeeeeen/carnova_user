@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carnova_user/modals/all_vehicle_list_modal.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
+import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class SearchTileWid extends StatelessWidget {
   SearchTileWid({super.key, required this.data});
@@ -12,23 +15,37 @@ class SearchTileWid extends StatelessWidget {
     double width = MediaQuery.sizeOf(context).width;
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: mainColorU,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.grey.shade300)),
+          border: Border.all(color: borderSide)),
       height: heigth / 7.3,
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Hero(
           tag: data.name,
-          child: Container(
-            margin: const EdgeInsets.only(right: 5),
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage("${ApiUrls.baseUrl}/${data.images[0]}"),
-                    fit: BoxFit.cover),
-                borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    topLeft: Radius.circular(10))),
-            width: width / 2.6,
+          child: ClipRRect(
+            borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(10), topLeft: Radius.circular(10)),
+            child: CachedNetworkImage(
+              imageUrl: "${ApiUrls.baseUrl}/${data.images[0]}",
+              width: width / 2.6,
+              height: heigth / 7.2,
+              fit: BoxFit.cover,
+              placeholder: (context, url) => Shimmer.fromColors(
+                baseColor: Colors.grey.shade500,
+                highlightColor: Colors.grey.shade100,
+                child: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              "${ApiUrls.baseUrl}/${data.images[0]}"),
+                          fit: BoxFit.cover),
+                      borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          topLeft: Radius.circular(10))),
+                  width: width / 2.6,
+                ),
+              ),
+            ),
           ),
         ),
         Container(
@@ -59,4 +76,3 @@ class SearchTileWid extends StatelessWidget {
     );
   }
 }
- 

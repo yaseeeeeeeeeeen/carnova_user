@@ -1,10 +1,8 @@
 import 'package:carnova_user/blocs/vehicle_check/vehicle_check_bloc.dart';
 import 'package:carnova_user/blocs/vehicle_check/vehicle_check_state.dart';
 import 'package:carnova_user/modals/all_vehicle_list_modal.dart';
-import 'package:carnova_user/resources/components/car_show_screen/list_empty_svg.dart';
 import 'package:carnova_user/resources/components/searched_title.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/my_textfield.dart';
-import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

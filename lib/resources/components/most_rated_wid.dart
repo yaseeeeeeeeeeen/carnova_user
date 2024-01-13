@@ -1,8 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carnova_user/modals/booked_vehicle.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
+import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
 
 // ignore: must_be_immutable
 class MostRatedDemo extends StatelessWidget {
@@ -17,7 +20,7 @@ class MostRatedDemo extends StatelessWidget {
     double width = MediaQuery.sizeOf(context).width;
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: borderSide),
         borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(10), topRight: Radius.circular(10)),
       ),
@@ -26,17 +29,32 @@ class MostRatedDemo extends StatelessWidget {
         children: [
           Hero(
             tag: vehicledata.vehicleId.name,
-            child: Container(
-              width: width / 1.5 - 10,
-              height: heigth / 6,
-              decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10)),
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          "${ApiUrls.baseUrl}/${vehicledata.vehicleId.images[0]}"),
-                      fit: BoxFit.cover)),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+              child: CachedNetworkImage(
+                width: width / 1.5 - 10,
+                height: heigth / 6,
+                fit: BoxFit.cover,
+                imageUrl:
+                    "${ApiUrls.baseUrl}/${vehicledata.vehicleId.images[0]}",
+                placeholder: (context, url) => Shimmer.fromColors(
+                  baseColor: shimmerbaseColor,
+                  highlightColor: shimmerhighlightColor,
+                  child: Container(
+                    width: width / 1.5 - 10,
+                    height: heigth / 6,
+                    decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10)),
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                "${ApiUrls.baseUrl}/${vehicledata.vehicleId.images[0]}"),
+                            fit: BoxFit.cover)),
+                  ),
+                ),
+              ),
             ),
           ),
           Container(

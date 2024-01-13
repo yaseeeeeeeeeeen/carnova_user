@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/appbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CarMoreImages extends StatelessWidget {
   const CarMoreImages({super.key, required this.images});
@@ -22,12 +24,25 @@ class CarMoreImages extends StatelessWidget {
                         ImagePreviewWid(imagePath: "${ApiUrls.baseUrl}/$i")));
               },
               child: Container(
-                  margin: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                          image: NetworkImage("${ApiUrls.baseUrl}/$i"),
-                          fit: BoxFit.cover))),
+                margin: const EdgeInsets.all(5),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    imageUrl: "${ApiUrls.baseUrl}/$i",
+                    placeholder: (context, url) => Shimmer.fromColors(
+                      baseColor: shimmerbaseColor,
+                      highlightColor: shimmerhighlightColor,
+                      child: Container(
+                          margin: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage("${ApiUrls.baseUrl}/$i"),
+                                  fit: BoxFit.cover))),
+                    ),
+                  ),
+                ),
+              ),
             );
           },
         );

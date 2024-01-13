@@ -8,7 +8,6 @@ import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/resources/components/title_text_wid.dart';
 import 'package:carnova_user/utils/appbar.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
@@ -37,14 +36,17 @@ class BookedVehiclesScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                  height: heigth / 3.8,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                          image: NetworkImage(
-                              "${ApiUrls.baseUrl}/${vehicle.vehicleId.images[0]}"),
-                          fit: BoxFit.cover))),
+              Hero(
+                tag: vehicle.vehicleId.name,
+                child: Container(
+                    height: heigth / 3.8,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                "${ApiUrls.baseUrl}/${vehicle.vehicleId.images[0]}"),
+                            fit: BoxFit.cover))),
+              ),
               const SizedBox(height: 5),
               HomeTitles(titles: "Car Details"),
               const SizedBox(height: 10),
@@ -60,8 +62,7 @@ class BookedVehiclesScreen extends StatelessWidget {
                     "Starting Date",
                     style: normalSizePoppins,
                   ),
-                  trailing:
-                      Text(formattedStartDate, style: normalSizePoppins),
+                  trailing: Text(formattedStartDate, style: normalSizePoppins),
                 ),
               ),
               const SizedBox(height: 10),

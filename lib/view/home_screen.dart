@@ -5,6 +5,7 @@ import 'package:carnova_user/resources/components/textfields_and_buttons/loading
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:carnova_user/view/vehicle/booking/all_vehicles_list.dart';
+import 'package:carnova_user/view/vehicle/booking/booked_vehicle_scrn.dart';
 import 'package:carnova_user/view/vehicle/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/resources/components/car_show_screen/active_vehicle.dart';
@@ -86,8 +87,15 @@ class HomeScreen extends StatelessWidget {
                       physics: const BouncingScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return MostRatedDemo(
-                            vehicledata: upcomingVehicles[index]);
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => BookedVehiclesScreen(
+                                    vehicle: upcomingVehicles[index])));
+                          },
+                          child: MostRatedDemo(
+                              vehicledata: upcomingVehicles[index]),
+                        );
                       },
                       separatorBuilder: (context, index) =>
                           const SizedBox(width: 5),
