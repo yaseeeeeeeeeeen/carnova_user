@@ -27,13 +27,19 @@ class VehicleSearchEvent extends VehicleCheckEvent {
 
 class FilteringEventFromAllVehicles extends VehicleCheckEvent {
   List<Vehicle2> datas;
-  String? brand;
-  int? priceRange;
-  String? fuelType;
-  FilteringEventFromAllVehicles({
-    required this.datas,
-    this.brand,
-    this.priceRange,
-    this.fuelType
-  });
+  String brand;
+  int priceRange;
+  int seatCount;
+  String fuelType;
+  FilteringEventFromAllVehicles(
+      {required this.datas,
+      required this.seatCount,
+      required this.brand,
+      required this.priceRange,
+      required this.fuelType});
+}
+
+class FilterResetButtonClicked extends VehicleCheckEvent {
+  List<Vehicle2> datas;
+  FilterResetButtonClicked({required this.datas});
 }

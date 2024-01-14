@@ -53,7 +53,7 @@ class SearchTileWid extends StatelessWidget {
             width: width / 2,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,12 +65,9 @@ class SearchTileWid extends StatelessWidget {
                       Text("₹${data.price}", style: tabcardtext1)
                     ],
                   ),
-                  Text(data.brand.toUpperCase(),
-                      style:
-                          const TextStyle(color: Colors.black87, fontSize: 13)),
-                  Text(data.transmission,
-                      style:
-                          const TextStyle(color: Colors.black87, fontSize: 13)),
+                  Text("${data.brand.toUpperCase()} (${data.model})",
+                      style: style6),
+                  Text("Owner : ${data.createdBy.name}", style: style6)
                 ]))
       ]),
     );

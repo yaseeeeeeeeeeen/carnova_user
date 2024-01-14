@@ -27,7 +27,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.black));
+        const SystemUiOverlayStyle(statusBarColor: Colors.black
+        ));
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => ProfileEditBloc()),

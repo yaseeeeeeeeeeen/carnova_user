@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:bloc/bloc.dart';
 import 'package:carnova_user/blocs/vehicle_check/vehicle_check_state.dart';
@@ -25,6 +26,7 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
     on<GetAllVehicles>(getAllVehicles);
     on<VehicleSearchEvent>(vehicleSearchEvent);
     on<FilteringEventFromAllVehicles>(filteringEventFromAllVehicles);
+    on<FilterResetButtonClicked>(filterResetButtonClicked);
   }
 
   FutureOr<void> checkAvaliblityButtonClicked(
@@ -108,22 +110,35 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
   ) async {
     List<Vehicle2> filteredVehicles = event.datas;
 
-    if (event.brand != null ||
-        event.priceRange != null ||
-        event.fuelType != null) {
+    if (event.brand.isEmpty ||
+        event.priceRange != 0 ||
+        event.fuelType.isEmpty ||
+        event.seatCount != 0) {
       print("Filtering List");
-
+      print(event.seatCount);
       filteredVehicles = filteredVehicles.where((element) {
-        bool brandCondition =
-            event.brand == null || element.brand == event.brand;
+        bool brandCondition = event.brand.isEmpty ||
+            element.brand.toLowerCase() == event.brand.toLowerCase();
         bool priceCondition =
-            event.priceRange == null || element.price <= event.priceRange!;
-        bool fuelCondition =
-            event.fuelType == null || element.fuel == event.fuelType;
-        return fuelCondition && brandCondition && priceCondition;
+            event.priceRange == 0 || element.price < event.priceRange;
+        bool seatCondition = event.seatCount == 0 ||
+            (event.seatCount > 0 && event.seatCount == element.seat);
+
+        bool fuelCondition = event.fuelType.isEmpty ||
+            element.fuel.toLowerCase() == event.fuelType.toLowerCase();
+        print("$brandCondition,$priceCondition,$fuelCondition,$seatCondition");
+        return fuelCondition &&
+            brandCondition &&
+            priceCondition &&
+            seatCondition;
       }).toList();
     }
-
+    print(filteredVehicles.length);
     emit(FilteredList(allVehicles: filteredVehicles));
+  }
+
+  FutureOr<void> filterResetButtonClicked(
+      FilterResetButtonClicked event, Emitter<VehicleCheckState> emit) async {
+    emit(SearchedList(allVehicles: event.datas));
   }
 }
