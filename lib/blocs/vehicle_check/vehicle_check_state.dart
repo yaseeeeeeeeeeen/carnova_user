@@ -44,3 +44,7 @@ class SearchedList extends VehicleCheckState {
   List<Vehicle2> allVehicles;
   SearchedList({required this.allVehicles});
 }
+class FilteredList extends VehicleCheckState {
+  List<Vehicle2> allVehicles;
+  FilteredList({required this.allVehicles});
+}

@@ -24,6 +24,7 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
     on<FetchVehicles>(fetchVehicles);
     on<GetAllVehicles>(getAllVehicles);
     on<VehicleSearchEvent>(vehicleSearchEvent);
+    on<FilteringEventFromAllVehicles>(filteringEventFromAllVehicles);
   }
 
   FutureOr<void> checkAvaliblityButtonClicked(
@@ -98,7 +99,21 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
         .where((element) =>
             element.name.toLowerCase().contains(event.text.toLowerCase()))
         .toList();
-    print(searchResult.length);
     emit(SearchedList(allVehicles: searchResult));
+  }
+
+  FutureOr<void> filteringEventFromAllVehicles(
+      FilteringEventFromAllVehicles event,
+      Emitter<VehicleCheckState> emit) async {
+    List<Vehicle2> filteredVehicles = event.datas;
+    if (event.brand != null) {
+      filteredVehicles =
+          filteredVehicles.where((element) => element.brand == event.brand).toList();
+    } else if (event.priceRange != null) {
+      filteredVehicles = filteredVehicles
+          .where((element) => element.price <= event.priceRange!)
+          .toList();
+    }
+    emit(FilteredList(allVehicles: filteredVehicles));
   }
 }

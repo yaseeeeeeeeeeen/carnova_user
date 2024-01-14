@@ -22,5 +22,18 @@ class GetAllVehicles extends VehicleCheckEvent {}
 class VehicleSearchEvent extends VehicleCheckEvent {
   List<Vehicle2> datas;
   String text;
-  VehicleSearchEvent({required this.text,required this.datas});
+  VehicleSearchEvent({required this.text, required this.datas});
+}
+
+class FilteringEventFromAllVehicles extends VehicleCheckEvent {
+  List<Vehicle2> datas;
+  String? brand;
+  int? priceRange;
+  String? fuelType;
+  FilteringEventFromAllVehicles({
+    required this.datas,
+    this.brand,
+    this.priceRange,
+    this.fuelType
+  });
 }

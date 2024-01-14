@@ -45,21 +45,24 @@ class CarUpcomingListTile extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.grey.shade300)),
+                        border: Border.all(color: borderSide)),
                     height: heigth / 7.3,
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        "${ApiUrls.baseUrl}/${data.vehicleId.images[0]}"),
-                                    fit: BoxFit.cover),
-                                borderRadius: const BorderRadius.only(
-                                    bottomLeft: Radius.circular(10),
-                                    topLeft: Radius.circular(10))),
-                            width: width / 2.4,
+                          Hero(
+                            tag: data.vehicleId.name,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                          "${ApiUrls.baseUrl}/${data.vehicleId.images[0]}"),
+                                      fit: BoxFit.cover),
+                                  borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.circular(10),
+                                      topLeft: Radius.circular(10))),
+                              width: width / 2.4,
+                            ),
                           ),
                           Container(
                               padding: const EdgeInsets.only(right: 10),

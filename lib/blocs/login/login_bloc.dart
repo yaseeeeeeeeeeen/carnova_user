@@ -72,7 +72,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             endDate.isAfter(currentDate) &&
             element.status == "Booked";
       }).toList();
-/////////////////////////////////////////////////////////////////
       emit(LoginSuccsess());
     });
   }

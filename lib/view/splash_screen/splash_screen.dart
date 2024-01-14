@@ -47,12 +47,15 @@ class _SplashScreenState extends State<SplashScreen> {
     final token = SharedPref.instance.getToke();
 
     if (token != null) {
+      print("token not null");
       final response = await UserRepo().fetchUserData();
       response.fold((left) {
+        print(left.message);
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => const LoginScreen()),
             (route) => false);
       }, (right) {
+        print("User data Fetched");
         final data1 = UserModal.fromJson(right);
         locator<LoginBloc>().logedUser = data1;
         fetchUserBookings(context);
