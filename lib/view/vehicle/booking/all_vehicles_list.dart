@@ -41,7 +41,7 @@ class AllVehiclesList extends StatelessWidget {
                         },
                         child: MyTextField(
                             onChanged: (p0) {
-                              if (filteringOn) {
+                              if (filterdList.isNotEmpty) {
                                 context.read<VehicleCheckBloc>().add(
                                     VehicleSearchEvent(
                                         text: p0, datas: filterdList));
@@ -73,7 +73,9 @@ class AllVehiclesList extends StatelessWidget {
                                           filteringOn = true;
                                           context.read<VehicleCheckBloc>().add(
                                               FilteringEventFromAllVehicles(
-                                                  datas: datas, brand: "BMW"));
+                                                  datas: datas,
+                                                  brand: "Nissan",
+                                                  priceRange: 2000));
                                         },
                                         child: const Text("Filter The list")),
                                   ),
@@ -98,8 +100,6 @@ class AllVehiclesList extends StatelessWidget {
                     searchedList = state.allVehicles;
                   } else if (state is FilteredList) {
                     filterdList = state.allVehicles;
-                  }
-                  if (filteringOn) {
                     searchedList = filterdList;
                   }
                   return searchedList.isEmpty

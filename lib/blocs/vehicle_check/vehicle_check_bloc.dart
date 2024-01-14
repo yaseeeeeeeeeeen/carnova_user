@@ -103,17 +103,27 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
   }
 
   FutureOr<void> filteringEventFromAllVehicles(
-      FilteringEventFromAllVehicles event,
-      Emitter<VehicleCheckState> emit) async {
+    FilteringEventFromAllVehicles event,
+    Emitter<VehicleCheckState> emit,
+  ) async {
     List<Vehicle2> filteredVehicles = event.datas;
-    if (event.brand != null) {
-      filteredVehicles =
-          filteredVehicles.where((element) => element.brand == event.brand).toList();
-    } else if (event.priceRange != null) {
-      filteredVehicles = filteredVehicles
-          .where((element) => element.price <= event.priceRange!)
-          .toList();
+
+    if (event.brand != null ||
+        event.priceRange != null ||
+        event.fuelType != null) {
+      print("Filtering List");
+
+      filteredVehicles = filteredVehicles.where((element) {
+        bool brandCondition =
+            event.brand == null || element.brand == event.brand;
+        bool priceCondition =
+            event.priceRange == null || element.price <= event.priceRange!;
+        bool fuelCondition =
+            event.fuelType == null || element.fuel == event.fuelType;
+        return fuelCondition && brandCondition && priceCondition;
+      }).toList();
     }
+
     emit(FilteredList(allVehicles: filteredVehicles));
   }
 }
