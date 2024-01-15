@@ -6,8 +6,9 @@ abstract class VehicleCheckEvent {}
 class CheckAvaliblityButtonClicked extends VehicleCheckEvent {
   String startDate;
   String endDate;
+  String? location;
   CheckAvaliblityButtonClicked(
-      {required this.startDate, required this.endDate});
+      {required this.startDate, required this.endDate,this.location});
 }
 
 class FetchAvalibleVehicles extends VehicleCheckEvent {
@@ -42,4 +43,9 @@ class FilteringEventFromAllVehicles extends VehicleCheckEvent {
 class FilterResetButtonClicked extends VehicleCheckEvent {
   List<Vehicle2> datas;
   FilterResetButtonClicked({required this.datas});
+}
+
+class LocationSearchButtonClicked extends VehicleCheckEvent {
+  String location;
+  LocationSearchButtonClicked({required this.location});
 }

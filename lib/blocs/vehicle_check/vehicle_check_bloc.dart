@@ -9,6 +9,7 @@ import 'package:carnova_user/modals/fetch_modal.dart';
 import 'package:carnova_user/repositories/booking_repo.dart';
 import 'package:carnova_user/repositories/user_repo.dart';
 import 'package:carnova_user/utils/functions/location_picker.dart';
+import 'package:carnova_user/utils/functions/location_selecter.dart';
 import 'package:geolocator/geolocator.dart';
 
 part 'vehicle_check_event.dart';
@@ -27,29 +28,42 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
     on<VehicleSearchEvent>(vehicleSearchEvent);
     on<FilteringEventFromAllVehicles>(filteringEventFromAllVehicles);
     on<FilterResetButtonClicked>(filterResetButtonClicked);
+    on<LocationSearchButtonClicked>(locationSearchButtonClicked);
   }
 
   FutureOr<void> checkAvaliblityButtonClicked(
       CheckAvaliblityButtonClicked event,
       Emitter<VehicleCheckState> emit) async {
     emit(VehicleCheckLoading());
-    Position? currentLoaction =
-        await LocationPickerFunction().getCurrentLocation();
-    if (currentLoaction != null) {
-      location = currentLoaction;
-      String? address =
-          await LocationPickerFunction().getAddress(currentLoaction);
-      if (address != null) {
-        Map<String, String> data = {
-          "startDate": event.startDate,
-          "endDate": event.endDate,
-          "pickup": address,
-          "dropoff": address,
-        };
-        emit(UserStoreChoiceState(data: data));
-      }
+    if (event.location != null) {
+      Map<String, String> data = {
+        "startDate": event.startDate,
+        "endDate": event.endDate,
+        "pickup": event.location!,
+        "dropoff": event.location!,
+      };
+      print(data);
+      emit(UserStoreChoiceState(data: data));
     } else {
-      emit(LocationPickingFailed());
+      Position? currentLoaction =
+          await LocationPickerFunction().getCurrentLocation();
+      if (currentLoaction != null) {
+        location = currentLoaction;
+        String? address =
+            await LocationPickerFunction().getAddress(currentLoaction);
+        if (address != null) {
+          Map<String, String> data = {
+            "startDate": event.startDate,
+            "endDate": event.endDate,
+            "pickup": address,
+            "dropoff": address,
+          };
+          print(data);
+          emit(UserStoreChoiceState(data: data));
+        }
+      } else {
+        emit(LocationPickingFailed());
+      }
     }
   }
 
@@ -114,8 +128,6 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
         event.priceRange != 0 ||
         event.fuelType.isEmpty ||
         event.seatCount != 0) {
-      print("Filtering List");
-      print(event.seatCount);
       filteredVehicles = filteredVehicles.where((element) {
         bool brandCondition = event.brand.isEmpty ||
             element.brand.toLowerCase() == event.brand.toLowerCase();
@@ -123,22 +135,26 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
             event.priceRange == 0 || element.price < event.priceRange;
         bool seatCondition = event.seatCount == 0 ||
             (event.seatCount > 0 && event.seatCount == element.seat);
-
         bool fuelCondition = event.fuelType.isEmpty ||
             element.fuel.toLowerCase() == event.fuelType.toLowerCase();
-        print("$brandCondition,$priceCondition,$fuelCondition,$seatCondition");
         return fuelCondition &&
             brandCondition &&
             priceCondition &&
             seatCondition;
       }).toList();
     }
-    print(filteredVehicles.length);
     emit(FilteredList(allVehicles: filteredVehicles));
   }
 
   FutureOr<void> filterResetButtonClicked(
       FilterResetButtonClicked event, Emitter<VehicleCheckState> emit) async {
     emit(SearchedList(allVehicles: event.datas));
+  }
+
+  FutureOr<void> locationSearchButtonClicked(LocationSearchButtonClicked event,
+      Emitter<VehicleCheckState> emit) async {
+    emit(VehicleCheckLoading());
+    final locationList = await MapBoxHelper.getSearchResults(event.location);
+    emit(LocationSearchedSuccsess(locationList: locationList));
   }
 }

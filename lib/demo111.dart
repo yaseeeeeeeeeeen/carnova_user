@@ -1,11 +1,19 @@
 import 'package:carnova_user/resources/components/textfields_and_buttons/my_textfield.dart';
+import 'package:carnova_user/utils/functions/location_selecter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-class CustomWid01 extends StatelessWidget {
+class CustomWid01 extends StatefulWidget {
   CustomWid01({super.key});
 
-  TextEditingController _controller = TextEditingController();
+  @override
+  State<CustomWid01> createState() => _CustomWid01State();
+}
+
+class _CustomWid01State extends State<CustomWid01> {
+  TextEditingController locationcontroller = TextEditingController();
+
+  List<Map<String, dynamic>> locationList = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,33 +23,27 @@ class CustomWid01 extends StatelessWidget {
           padding: const EdgeInsets.all(15),
           child: Column(
             children: [
-              SizedBox(height: 50),
-              Row(
-                children: [
-                  Expanded(
-                    child: MyTextField(
-                        isPassword: false,
-                        validation: (value) => null,
-                        controller: _controller,
-                        hintText: "hintText",
-                        obscureText: false),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      print("SSSSSSSS");
-                      
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.all(5),
-                      child: SvgPicture.asset(
-                        "assets/svg/filter-svgrepo-com.svg",
-                        height: 30,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  )
-                ],
-              )
+            const  SizedBox(height: 50),
+              MyTextField(
+                  onFieldSubmitted: (p0) async {
+                    locationList = await MapBoxHelper.getSearchResults(
+                        locationcontroller.text);
+                    setState(() {});
+                  },
+                  isPassword: false,
+                  validation: (value) => null,
+                  controller: locationcontroller,
+                  hintText: "hintText",
+                  obscureText: false),
+              ListView.separated(
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                        tileColor: Colors.amber,
+                        title: Text(locationList[index]["placeName"]));
+                  },
+                  separatorBuilder: (context, index) => const Divider(),
+                  itemCount: locationList.length)
             ],
           ),
         ),

@@ -39,8 +39,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => PasswordSettingsBloc()),
         BlocProvider(create: (context) => BookingBloc())
       ],
-      child: const MaterialApp(
-          debugShowCheckedModeBanner: false, home: SplashScreen()),
+      child:const  MaterialApp(
+          debugShowCheckedModeBanner: false, home:  SplashScreen()),
     );
   }
 }

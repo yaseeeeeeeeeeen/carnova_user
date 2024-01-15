@@ -44,7 +44,13 @@ class SearchedList extends VehicleCheckState {
   List<Vehicle2> allVehicles;
   SearchedList({required this.allVehicles});
 }
+
 class FilteredList extends VehicleCheckState {
   List<Vehicle2> allVehicles;
   FilteredList({required this.allVehicles});
+}
+
+class LocationSearchedSuccsess extends VehicleCheckState {
+  List<Map<String, dynamic>> locationList;
+  LocationSearchedSuccsess({required this.locationList});
 }

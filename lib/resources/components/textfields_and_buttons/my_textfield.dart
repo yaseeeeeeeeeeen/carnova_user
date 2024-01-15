@@ -1,7 +1,9 @@
-import 'package:carnova_user/blocs/password_settings/password_settings_bloc.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'package:carnova_user/blocs/password_settings/password_settings_bloc.dart';
 
 // ignore: must_be_immutable
 class MyTextField extends StatelessWidget {
@@ -12,17 +14,19 @@ class MyTextField extends StatelessWidget {
   TextInputType? number;
   FormFieldValidator validation;
   Function(String)? onChanged;
+  Function(String)? onFieldSubmitted;
 
   MyTextField({
-    Key? key, // Fixing the super.key parameter
-    required this.isPassword,
-    this.number,
+    Key? key,
+    this.onFieldSubmitted,
     this.onChanged,
-    required this.validation,
+    this.number,
     required this.controller,
     required this.hintText,
     required this.obscureText,
-  }) : super(key: key); // Ensure passing key to super
+    required this.isPassword,
+    required this.validation,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +40,9 @@ class MyTextField extends StatelessWidget {
       },
       builder: (context, state) {
         return TextFormField(
+          onFieldSubmitted: onFieldSubmitted ?? (value) {},
           onChanged: onChanged ?? (value) {},
-          keyboardType: number ?? TextInputType.text,
+          keyboardType: number ?? TextInputType.streetAddress,
           validator: validation,
           controller: controller,
           obscureText: isPassword ? obscureText : false,
@@ -64,7 +69,7 @@ class MyTextField extends StatelessWidget {
                     icon: obscureText
                         ? const Icon(Icons.visibility)
                         : const Icon(
-                            Icons.visibility_off), // Use your desired icon
+                            Icons.visibility_off),
                     onPressed: () {
                       context
                           .read<PasswordSettingsBloc>()
@@ -76,21 +81,5 @@ class MyTextField extends StatelessWidget {
         );
       },
     );
-  }
-}
-
-// ignore: must_be_immutable
-class TitleTexts extends StatelessWidget {
-  TitleTexts({super.key, required this.text, this.size, this.color});
-  final double? size;
-  final String text;
-  Color? color;
-  @override
-  Widget build(BuildContext context) {
-    return Text(text,
-        style: GoogleFonts.poppins(
-            fontSize: size ?? 21,
-            fontWeight: FontWeight.w600,
-            color: color ?? Colors.black));
   }
 }
