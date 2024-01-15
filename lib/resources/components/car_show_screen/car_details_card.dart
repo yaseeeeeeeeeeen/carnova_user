@@ -14,6 +14,7 @@ class CarDetailsCard extends StatelessWidget {
       "assets/svg/car-steering-wheel-svgrepo-com.svg",
       "assets/svg/fuel-svgrepo-com.svg",
       "assets/svg/gearshift-gear-svgrepo-com.svg",
+      "assets/svg/seat-belt-svgrepo-com.svg",
       "assets/svg/star-svgrepo-com.svg"
     ];
     return SizedBox(
@@ -23,7 +24,7 @@ class CarDetailsCard extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         separatorBuilder: (context, index) => const Divider(),
         itemBuilder: (context, index) {
-          if (index == cardetails.length - 1) {
+          if (index == svgPath.length - 1) {
             return GestureDetector(
               onTap: () {
                 showModalBottomSheet(
@@ -89,7 +90,9 @@ class CarDetailsCard extends StatelessWidget {
                   SvgPicture.asset(svgPath[index],
                       height: 25, width: 25, fit: BoxFit.cover),
                   const SizedBox(height: 5),
-                  Text(cardetails[index], style: style5)
+                  index == svgPath.length - 2
+                      ? Text("${cardetails[index]} SEAT", style: style5)
+                      : Text(cardetails[index], style: style5)
                 ],
               ),
             );
@@ -97,7 +100,7 @@ class CarDetailsCard extends StatelessWidget {
         },
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: cardetails.length,
+        itemCount: svgPath.length,
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:carnova_user/blocs/vehicle_check/vehicle_check_bloc.dart';
 import 'package:carnova_user/blocs/vehicle_check/vehicle_check_state.dart';
 import 'package:carnova_user/data/get_it/get_it.dart';
+import 'package:carnova_user/modals/vehicle_data._modal.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/snack_bar.dart';
@@ -89,6 +90,7 @@ class HomeScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
+                            print(upcomingVehicles[index].vehicleId.seat);
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => BookedVehiclesScreen(
                                     vehicle: upcomingVehicles[index])));

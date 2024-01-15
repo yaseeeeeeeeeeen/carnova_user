@@ -122,6 +122,7 @@ class Vehicle {
   String transmission;
   String brand;
   String fuel;
+  int seat;
   String location;
   double lat;
   double long;
@@ -137,6 +138,7 @@ class Vehicle {
   Vehicle({
     required this.id,
     required this.name,
+    required this.seat,
     required this.price,
     required this.model,
     required this.transmission,
@@ -158,6 +160,7 @@ class Vehicle {
   factory Vehicle.fromJson(Map<String, dynamic> json) {
     return Vehicle(
       id: json['_id'],
+      seat: json['seat'],
       name: json['name'],
       price: json['price'].toDouble(),
       model: json['model'],
@@ -187,8 +190,9 @@ class Vehicle {
       'transmission': transmission,
       'brand': brand,
       'fuel': fuel,
-      'lat':lat,
-      'long':long,
+      'lat': lat,
+      'seat':seat,
+      'long': long,
       'location': location,
       'createdBy': createdBy,
       'images': images,
@@ -198,7 +202,7 @@ class Vehicle {
       'document': document,
       // 'bookings': bookings,
       'hostDetails': hostDetails.toJson(),
-       // Add this line
+      // Add this line
     };
   }
 }

@@ -96,6 +96,7 @@ class AllVehiclesList extends StatelessWidget {
                                           titletext: "Seat Count",
                                           hinttext: "Tap to Select Seat Count"),
                                       const SizedBox(height: 10),
+                                      
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
