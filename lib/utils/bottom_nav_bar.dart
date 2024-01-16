@@ -1,4 +1,3 @@
-import 'package:carnova_user/modals/vehicle_data._modal.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/view/upcoming_history.dart';
@@ -21,12 +20,6 @@ class HomePageState extends State<CustomNavBar> {
 
   @override
   void initState() {
-    final mapppp1 = VehicleDataModal.fromJson(imageU.vehicleDataMap1);
-    vehiclesData.add(mapppp1);
-    final mapppp2 = VehicleDataModal.fromJson(imageU.vehicleDataMap2);
-    vehiclesData.add(mapppp2);
-    final mapppp3 = VehicleDataModal.fromJson(imageU.vehicleDataMap3);
-    vehiclesData.add(mapppp3);
 
     if (widget.index != null) {
       currentIndex = widget.index!;

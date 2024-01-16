@@ -1,5 +1,4 @@
 import 'package:carnova_user/data/get_it/get_it.dart';
-import 'package:carnova_user/modals/vehicle_data._modal.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/resources/components/car_show_screen/list_empty_svg.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
@@ -14,7 +13,6 @@ class CarUpcomingListTile extends StatelessWidget {
   CarUpcomingListTile({super.key});
   //// addd upcoming booked vehiles list
   final vehicles = getBookedVehicleList();
-  final vehiclesinfo = vehiclesData;
 
   @override
   Widget build(BuildContext context) {
