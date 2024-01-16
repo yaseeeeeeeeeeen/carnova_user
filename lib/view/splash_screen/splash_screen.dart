@@ -81,8 +81,13 @@ class _SplashScreenState extends State<SplashScreen> {
       final datas = vehicleList.map((e) => BookedVehicle.fromJson(e)).toList();
       locator<VehicleCheckBloc>().allBookedVehicles = datas;
       //////////////////// DIVIED BOOKED AND NOT BOOKED////////////////////////////////
-      final bookedonly =
-          datas.where((element) => element.status == "Booked").toList();
+      final bookedonly = datas.where((element) {
+        final startDate = DateTime.parse(element.startDate);
+        //   final endDate = DateTime.parse(element.endDate);
+        return startDate.isAfter(currentDate) &&
+            //    endDate.isAfter(currentDate) &&
+            element.status == "Booked";
+      }).toList();
       locator<VehicleCheckBloc>().bookedVehicles = bookedonly;
       ////////////////// ACTIVE VEHICLE SORTING/////////////////////////////////
       locator<VehicleCheckBloc>().activeVehicles = datas.where((element) {

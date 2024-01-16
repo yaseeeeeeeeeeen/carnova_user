@@ -1,7 +1,5 @@
 import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:flutter/material.dart';
-
-import 'package:carnova_user/resources/components/car_show_screen/review_tile.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';

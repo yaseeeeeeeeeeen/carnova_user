@@ -2,6 +2,7 @@ import 'package:carnova_user/blocs/vehicle_check/vehicle_check_bloc.dart';
 import 'package:carnova_user/blocs/vehicle_check/vehicle_check_state.dart';
 import 'package:carnova_user/modals/fetch_modal.dart';
 import 'package:carnova_user/resources/components/car_show_screen/car_tile_wid.dart';
+import 'package:carnova_user/resources/components/car_show_screen/list_empty_svg.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/my_textfield.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/appbar.dart';
@@ -38,97 +39,87 @@ class FetchedVehicles extends StatelessWidget {
         }),
         body: Padding(
             padding: const EdgeInsets.all(10),
-            child: vehicles.isEmpty
-                ? SizedBox(
-                    height: double.infinity,
-                    width: double.infinity,
-                    child: Center(
-                        child: Text(
-                            "VEHICLES DOES NOT AVALIBLE IN \n $location",
-                            textAlign: TextAlign.center)),
-                  )
-                : SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Column(children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(right: 10),
-                              child: BlocListener<VehicleCheckBloc,
-                                  VehicleCheckState>(
-                                listener: (context, state) {},
-                                child: MyTextField(
-                                    onFieldSubmitted: (p0) async {
-                                      context.read<VehicleCheckBloc>().add(
-                                          LocationSearchButtonClicked(
-                                              location:
-                                                  locationController.text));
-                                    },
-                                    controller: locationController,
-                                    hintText: "Search Your Location",
-                                    obscureText: false,
-                                    isPassword: false,
-                                    validation: (value) => null),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: scaffoldBg,
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: borderSide)),
-                            height: 57,
-                            width: 55,
-                            child: IconButton(
-                                onPressed: () {
+            child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          height: 55,
+                          margin: const EdgeInsets.only(right: 10),
+                          child:
+                              BlocListener<VehicleCheckBloc, VehicleCheckState>(
+                            listener: (context, state) {},
+                            child: MyTextField(
+                                onFieldSubmitted: (p0) async {
                                   context.read<VehicleCheckBloc>().add(
-                                      CheckAvaliblityButtonClicked(
-                                          startDate: startDate,
-                                          endDate: enddate,
+                                      LocationSearchButtonClicked(
                                           location: locationController.text));
                                 },
-                                icon: Icon(Icons.search, color: black)),
-                          )
-                        ],
+                                controller: locationController,
+                                hintText: "Search Your Location",
+                                obscureText: false,
+                                isPassword: false,
+                                validation: (value) => null),
+                          ),
+                        ),
                       ),
-                      const SizedBox(height: 10),
-                      BlocBuilder<VehicleCheckBloc, VehicleCheckState>(
-                        builder: (context, state) {
-                          if (state is LocationSearchedSuccsess) {
-                            locationList = state.locationList;
-
-                            return ListView.separated(
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) {
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                        color: mainColorU,
-                                        border: Border.all(color: borderSide),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    height: 60,
-                                    child: ListTile(
-                                      onTap: () {
-                                        location = state.locationList[index]
-                                            ["placeName"];
-                                        locationController.text = state
-                                            .locationList[index]["placeName"];
-                                      },
-                                      title: Text(state.locationList[index]
-                                          ["placeName"]),
-                                    ),
-                                  );
-                                },
-                                separatorBuilder: (context, index) =>
-                                    const Divider(),
-                                itemCount: state.locationList.length);
-                          } else if (state is VehicleCheckLoading) {
-                            return Center(
-                                child: CircularProgressIndicator(color: black));
-                          } else {
-                            return ListView.separated(
+                      Container(
+                        decoration: BoxDecoration(
+                            color: scaffoldBg,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: borderSide)),
+                        height: 57,
+                        width: 55,
+                        child: IconButton(
+                            onPressed: () {
+                              context.read<VehicleCheckBloc>().add(
+                                  CheckAvaliblityButtonClicked(
+                                      startDate: startDate,
+                                      endDate: enddate,
+                                      location: locationController.text));
+                            },
+                            icon: Icon(Icons.search, color: black)),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  BlocBuilder<VehicleCheckBloc, VehicleCheckState>(
+                    builder: (context, state) {
+                      if (state is LocationSearchedSuccsess) {
+                        locationList = state.locationList;
+                        return ListView.separated(
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                    color: mainColorU,
+                                    border: Border.all(color: borderSide),
+                                    borderRadius: BorderRadius.circular(10)),
+                                height: 60,
+                                child: ListTile(
+                                  onTap: () {
+                                    location =
+                                        state.locationList[index]["placeName"];
+                                    locationController.text =
+                                        state.locationList[index]["placeName"];
+                                  },
+                                  title: Text(
+                                      state.locationList[index]["placeName"]),
+                                ),
+                              );
+                            },
+                            separatorBuilder: (context, index) =>
+                                const Divider(),
+                            itemCount: state.locationList.length);
+                      } else if (state is VehicleCheckLoading) {
+                        return Center(
+                            child: CircularProgressIndicator(color: black));
+                      } else {
+                        return vehicles.isNotEmpty
+                            ? ListView.separated(
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
@@ -148,10 +139,17 @@ class FetchedVehicles extends StatelessWidget {
                                 },
                                 separatorBuilder: (context, index) =>
                                     const Divider(),
-                                itemCount: vehicles.length);
-                          }
-                        },
-                      )
-                    ]))));
+                                itemCount: vehicles.length)
+                            : SizedBox(
+                                width: double.infinity,
+                                child: Center(
+                                    child: VehicleLocationEmpty(
+                                        location: location)),
+                              );
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 50)
+                ]))));
   }
 }

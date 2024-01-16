@@ -58,7 +58,7 @@ class MostRatedDemo extends StatelessWidget {
             ),
           ),
           Container(
-              color: Colors.white,
+              color: mainColorU,
               width: width / 1.5 - 10,
               height: heigth / 16,
               padding: const EdgeInsets.all(5),
@@ -74,11 +74,10 @@ class MostRatedDemo extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                        width: 100,
                         child: Text(
-                          formattedDate,
-                          style: mailstyle,
-                        ))
+                      formattedDate,
+                      style: mailstyle,
+                    ))
                   ]))
         ],
       )),

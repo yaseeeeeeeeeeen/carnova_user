@@ -35,7 +35,7 @@ class AllVehileDetaisScreen extends StatelessWidget {
       vehicleData.fuel,
       vehicleData.seat.toString(),
       vehicleData.transmission,
-      "4.3"
+      ""
     ];
     double heigth = MediaQuery.sizeOf(context).height;
     double width = MediaQuery.sizeOf(context).width;

@@ -75,22 +75,21 @@ class _PaymentScreenState extends State<PaymentScreen> {
               CarAgentTile(vehicledata: widget.vehicle),
               const SizedBox(height: 5),
               Container(
-                height: h / 2.3,
+                // height: h / 2.3,
                 decoration: BoxDecoration(
                     color: mainColorU,
                     border: Border.all(color: borderSide),
                     borderRadius: BorderRadius.circular(10)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: ListView(
+                  shrinkWrap: true,
+                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SubTitleWidget(title: '  Booking Details'),
                     FairDetailsRowWidget(
                         name: "Base Rate :",
                         money: '₹ ${widget.vehicle.price}'),
-                    FairDetailsRowWidget(
-                        name: "SGST : 14 %", money: '₹ $sgst'),
-                    FairDetailsRowWidget(
-                        name: "CGST : 14 %", money: '₹ $cgst'),
+                    FairDetailsRowWidget(name: "SGST : 14 %", money: '₹ $sgst'),
+                    FairDetailsRowWidget(name: "CGST : 14 %", money: '₹ $cgst'),
                     FairDetailsRowWidget(
                         name: "", money: "${count.toString()} DAYS"),
                     FairDetailsRowWidget(
@@ -100,12 +99,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         child: Divider(thickness: 0.5)),
                     FairDetailsRowWidget(
                         name: "Total Rental Amount", money: '₹ $totalAmount'),
-                    Row(
-                      children: [
-                        Checkbox(value: false, onChanged: (value) {}),
-                        const Text("WALLET")
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     Checkbox(value: false, onChanged: (value) {}),
+                    //     const Text("WALLET")
+                    //   ],
+                    // ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: BlocConsumer<BookingBloc, BookingState>(
@@ -120,10 +119,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     builder: (context) =>
                                         const BookingFailedScreen()),
                                 (route) => false);
-                           } else if (state is PaymentErrorState) {
+                          } else if (state is PaymentErrorState) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                                customSnackbar(
-                                    context, false, state.message));
+                                customSnackbar(context, false, state.message));
                           } else if (state is FetchedVehicleData) {
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(

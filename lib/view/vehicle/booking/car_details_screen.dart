@@ -28,7 +28,7 @@ class CarDataShow extends StatelessWidget {
       vehicleData.fuel,
       vehicleData.seat.toString(),
       vehicleData.transmission,
-      "4.3"
+      ""
     ];
     double heigth = MediaQuery.sizeOf(context).height;
     return Scaffold(

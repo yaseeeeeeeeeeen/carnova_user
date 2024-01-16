@@ -21,9 +21,9 @@ class BookedVehiclesScreen extends StatelessWidget {
     List<String> cardetails = [
       vehicle.vehicleId.brand,
       vehicle.vehicleId.fuel,
-      vehicle.vehicleId.transmission,
       vehicle.vehicleId.seat.toString(),
-      "4.5"
+      vehicle.vehicleId.transmission,
+      ""
     ];
     double heigth = MediaQuery.sizeOf(context).height;
     return Scaffold(
