@@ -1,3 +1,4 @@
+import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carnova_user/resources/components/car_show_screen/review_tile.dart';
@@ -13,8 +14,8 @@ class CarDetailsCard extends StatelessWidget {
     List<String> svgPath = [
       "assets/svg/car-steering-wheel-svgrepo-com.svg",
       "assets/svg/fuel-svgrepo-com.svg",
-      "assets/svg/gearshift-gear-svgrepo-com.svg",
       "assets/svg/seat-belt-svgrepo-com.svg",
+      "assets/svg/gearshift-gear-svgrepo-com.svg",
       "assets/svg/star-svgrepo-com.svg"
     ];
     return SizedBox(
@@ -27,54 +28,73 @@ class CarDetailsCard extends StatelessWidget {
           if (index == svgPath.length - 1) {
             return GestureDetector(
               onTap: () {
-                showModalBottomSheet(
-                  isScrollControlled: true,
-                  context: context,
-                  builder: (context) {
-                    return Container(
-                      padding: const EdgeInsets.all(10),
-                      color: appbarColorU,
-                      height: MediaQuery.sizeOf(context).height / 1.7,
-                      child: SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(),
-                        child: Column(
-                          children: [
-                            Text("Reviews", style: reviweTitle),
-                            const ReviewCommentTile(
-                                review: "its very friendly to use",
-                                rating: "4.5"),
-                            const ReviewCommentTile(
-                                review: "Good coundition", rating: "4.2")
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                );
+                ScaffoldMessenger.of(context).showSnackBar(customSnackbar(
+                    context, true, "This Feature Avalible Soon"));
+                // showModalBottomSheet(
+                //   isScrollControlled: true,
+                //   context: context,
+                //   builder: (context) {
+                //     return Container(
+                //       padding: const EdgeInsets.all(10),
+                //       color: appbarColorU,
+                //       height: MediaQuery.sizeOf(context).height / 1.7,
+                //       child: SingleChildScrollView(
+                //         physics: const BouncingScrollPhysics(),
+                //         child: Column(
+                //           children: [
+                //             Text("Reviews", style: reviweTitle),
+                //             const ReviewCommentTile(
+                //                 review: "its very friendly to use",
+                //                 rating: "4.5"),
+                //             const ReviewCommentTile(
+                //                 review: "Good coundition", rating: "4.2")
+                //           ],
+                //         ),
+                //       ),
+                //     );
+                //   },
+                // );
               },
-              child: Container(
-                  margin: const EdgeInsets.all(2),
-                  width: 100,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: appbarColorU),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(),
-                        Row(
+              child: Stack(
+                children: [
+                  Container(
+                      margin: const EdgeInsets.all(2),
+                      width: 90,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: appbarColorU),
+                      child: Center(
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SvgPicture.asset(svgPath[index],
-                                fit: BoxFit.cover, height: 30, width: 30),
-                            Text(cardetails[index], style: style7)
+                            const SizedBox(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(svgPath[index],
+                                    fit: BoxFit.cover, height: 25, width: 25),
+                                Text(cardetails[index], style: style7)
+                              ],
+                            ),
+                            Text("Rating", style: ratingtitle)
                           ],
                         ),
-                        Text("Rating", style: ratingtitle)
-                      ],
-                    ),
-                  )),
+                      )),
+                  //////////////////////// Coming soon feature/////////////////
+                  Container(
+                      margin: const EdgeInsets.all(2),
+                      width: 90,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: appbarColorU.withOpacity(0.6)),
+                      child: Center(
+                          child: Icon(
+                        Icons.lock,
+                        size: 30,
+                        color: mainColorU,
+                      ))),
+                ],
+              ),
             );
           } else {
             return Container(
@@ -90,7 +110,7 @@ class CarDetailsCard extends StatelessWidget {
                   SvgPicture.asset(svgPath[index],
                       height: 25, width: 25, fit: BoxFit.cover),
                   const SizedBox(height: 5),
-                  index == svgPath.length - 2
+                  index == svgPath.length - 3
                       ? Text("${cardetails[index]} SEAT", style: style5)
                       : Text(cardetails[index], style: style5)
                 ],

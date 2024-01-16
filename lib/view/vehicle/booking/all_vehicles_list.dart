@@ -5,6 +5,7 @@ import 'package:carnova_user/resources/components/searched_title.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/my_textfield.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/appbar.dart';
+import 'package:carnova_user/view/vehicle/booking/all_vehicle_dtls.dart';
 import 'package:carnova_user/view/vehicle/drop_down.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -96,7 +97,6 @@ class AllVehiclesList extends StatelessWidget {
                                           titletext: "Seat Count",
                                           hinttext: "Tap to Select Seat Count"),
                                       const SizedBox(height: 10),
-                                      
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
@@ -189,7 +189,18 @@ class AllVehiclesList extends StatelessWidget {
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             final vehicle = searchedList[index];
-                            return SearchTileWid(data: vehicle);
+                            return GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          AllVehileDetaisScreen(
+                                              vehicleData: vehicle,
+                                              isBooked: false,
+                                              startDate: "11-22-33",
+                                              location: "Calicut",
+                                              endDate: "11-22-44")));
+                                },
+                                child: SearchTileWid(data: vehicle));
                           },
                           separatorBuilder: (context, index) => const Divider(),
                           itemCount: searchedList.length);

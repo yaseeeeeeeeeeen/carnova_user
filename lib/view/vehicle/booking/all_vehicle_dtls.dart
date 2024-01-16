@@ -1,14 +1,18 @@
 import 'package:carnova_user/modals/all_vehicle_list_modal.dart';
-import 'package:carnova_user/modals/fetch_modal.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
-import 'package:carnova_user/resources/components/car_show_screen/agent_tile.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/book_in_allvehicles.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
+import 'package:carnova_user/view/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/resources/components/car_show_screen/car_details_card.dart';
 import 'package:carnova_user/resources/components/car_show_screen/vehicle_images_wid.dart';
 import 'package:carnova_user/resources/components/title_text_wid.dart';
 import 'package:carnova_user/utils/appbar.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:maps_launcher/maps_launcher.dart';
+
+import '../../../resources/constant/text_styles.dart';
 
 // ignore: must_be_immutable
 class AllVehileDetaisScreen extends StatelessWidget {
@@ -26,19 +30,19 @@ class AllVehileDetaisScreen extends StatelessWidget {
   String location;
   @override
   Widget build(BuildContext context) {
-    final vehicleReal0 = vehicleData.toJson();
-    final vehicleReal = Vehicle.fromJson(vehicleReal0);
     List<String> cardetails = [
       vehicleData.brand,
       vehicleData.fuel,
+      vehicleData.seat.toString(),
       vehicleData.transmission,
       "4.3"
     ];
     double heigth = MediaQuery.sizeOf(context).height;
+    double width = MediaQuery.sizeOf(context).width;
     return Scaffold(
       backgroundColor: scaffoldBg,
       bottomNavigationBar: AllVehicleScreenBottom(
-          location: "MEPPADI",
+          location: location,
           price: vehicleData.price.toInt().toString(),
           vehicle: vehicleData,
           startDate: startDate,
@@ -66,7 +70,68 @@ class AllVehileDetaisScreen extends StatelessWidget {
               const SizedBox(height: 10),
               CarDetailsCard(cardetails: cardetails),
               const SizedBox(height: 10),
-              // HomeTitles(titles: "Contact"),
+              HomeTitles(titles: "Contact"),
+              Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade300),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10)),
+                margin: const EdgeInsets.only(top: 5, bottom: 5),
+                height: heigth / 10,
+                child: Center(
+                  child: ListTile(
+                    title: Text(
+                      softWrap: false,
+                      overflow: TextOverflow.visible,
+                      vehicleData.createdBy.name,
+                      style: caragentName,
+                    ),
+                    subtitle: const Text("Car Agent"),
+                    trailing: SizedBox(
+                      height: heigth / 12,
+                      width: width / 3,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              callAgent(vehicleData.createdBy.phone.toString());
+                            },
+                            child: CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: heigth / 30,
+                              child: SvgPicture.asset(imageU.phoneSvg,
+                                  height: heigth / 32, fit: BoxFit.contain),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              openMap("${vehicleData.name} Avalible Here");
+                            },
+                            child: CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: heigth / 40,
+                              child: SvgPicture.asset(imageU.gmapSvg,
+                                  height: heigth / 26, fit: BoxFit.contain),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    leading: SizedBox(
+                      width: width / 8,
+                      child: vehicleData.createdBy.profile.isNotEmpty
+                          ? CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                  "${ApiUrls.baseUrl}/${vehicleData.createdBy.profile}"),
+                            )
+                          : CircleAvatar(
+                              backgroundImage: AssetImage(imageU.profileDemo),
+                            ),
+                    ),
+                  ),
+                ),
+              ),
               // CarAgentTile(vehicledata: vehicleReal),
               const SizedBox(height: 10),
               HomeTitles(titles: "More Images"),
@@ -78,4 +143,12 @@ class AllVehileDetaisScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+openMap(String messege) async {
+  MapsLauncher.launchCoordinates(11.1557, 75.8912, messege);
+}
+
+callAgent(String number) async {
+  await FlutterPhoneDirectCaller.callNumber(number);
 }

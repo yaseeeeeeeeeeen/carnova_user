@@ -26,8 +26,8 @@ class CarDataShow extends StatelessWidget {
     List<String> cardetails = [
       vehicleData.brand,
       vehicleData.fuel,
-      vehicleData.transmission,
       vehicleData.seat.toString(),
+      vehicleData.transmission,
       "4.3"
     ];
     double heigth = MediaQuery.sizeOf(context).height;
