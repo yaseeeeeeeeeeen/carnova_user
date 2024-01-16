@@ -1,6 +1,7 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/list_datas.dart';
+import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -39,13 +40,13 @@ class _DropDownWidState extends State<DropDownWid> {
         const SizedBox(height: 8),
         Text(
           widget.titletext,
-          style: GoogleFonts.poppins(fontSize: 17, fontWeight: FontWeight.w500),
+          style: tabcardtext1,
         ),
         const SizedBox(height: 8),
         CustomDropdown(
           selectedStyle: GoogleFonts.poppins(color: Colors.black),
           hintText: widget.hinttext,
-          hintStyle: GoogleFonts.poppins(),
+          hintStyle: normalSizePoppins,
           items: mainList[widget.listIndex],
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(

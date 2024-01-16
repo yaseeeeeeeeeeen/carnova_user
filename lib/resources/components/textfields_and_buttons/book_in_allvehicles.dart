@@ -1,28 +1,31 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:carnova_user/modals/all_vehicle_list_modal.dart';
-import 'package:carnova_user/modals/fetch_modal.dart';
-import 'package:carnova_user/view/vehicle/booking/booking_confirm.dart';
+import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
+import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-// ignore: must_be_immutable
 class AllVehicleScreenBottom extends StatelessWidget {
   AllVehicleScreenBottom(
-      {super.key,
-      required this.price,
-      required this.startDate,
-      required this.endDate,
-      required this.location,
-      required this.vehicle});
+      {super.key, required this.price, required this.vehicle});
   String price;
   Vehicle2 vehicle;
-  String startDate;
-  String endDate;
-  String location;
+  DateTime? _startDate;
+  DateTime? _endDate;
+  DateTime today = DateTime.now();
+  String endDate = "";
+  String startDate = "";
+  TextEditingController startdateController = TextEditingController();
+  TextEditingController enddateController = TextEditingController();
+  String location = "";
   @override
   Widget build(BuildContext context) {
+    final media = MediaQuery.sizeOf(context);
     return BottomAppBar(
         child: Container(
       height: 80,
@@ -38,36 +41,127 @@ class AllVehicleScreenBottom extends StatelessWidget {
                   Text("₹$price", style: style2),
                   Text("  Per Day",
                       style: GoogleFonts.poppins(
-                          fontSize: 15, color: Colors.black54))
+                          fontSize: 15, color: black.withOpacity(0.6)))
                 ]),
           ),
           const SizedBox(width: 30),
           ElevatedButton(
               onPressed: () {
-                DateTime start = DateFormat('EEEE, MMMM d, y').parse(startDate);
-                DateTime end = DateFormat('EEEE, MMMM d, y').parse(endDate);
-                String formattedStartDate =
-                    DateFormat('yyyy-MM-dd').format(start);
-                String formattedEndDate = DateFormat('yyyy-MM-dd').format(end);
-                final vehicleReal0 = vehicle.toJson();
-                final vehicleReal = Vehicle.fromJson(vehicleReal0);
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => PaymentScreen(
-                        vehicle: vehicleReal,
-                        startingDate: formattedStartDate,
-                        endingDate: formattedEndDate)));
+                showBottomSheet(
+                    backgroundColor: scaffoldBg,
+                    enableDrag: true,
+                    context: context,
+                    builder: (context) => Container(
+                          padding: const EdgeInsets.all(15),
+                          // color: appbarColorU.withOpacity(0.7),
+                          child: ListView(
+                            shrinkWrap: true,
+                            children: [
+                              Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: mainColorU,
+                                    border: Border.all(color: borderSide),
+                                  ),
+                                  height: media.height / 2.5,
+                                  child: SfDateRangePicker(
+                                      todayHighlightColor: black,
+                                      rangeTextStyle: normalSizePoppins,
+                                      endRangeSelectionColor: appbarColorU,
+                                      rangeSelectionColor:
+                                          appbarColorU.withOpacity(0.3),
+                                      view: DateRangePickerView.month,
+                                      minDate: DateTime.now(),
+                                      selectionShape:
+                                          DateRangePickerSelectionShape
+                                              .rectangle,
+                                      selectionMode:
+                                          DateRangePickerSelectionMode.range,
+                                      initialDisplayDate: DateTime.now(),
+                                      showActionButtons: true,
+                                      onSubmit: (p0) {
+                                        if (startDate.isNotEmpty &&
+                                            endDate.isNotEmpty) {
+                                          return ScaffoldMessenger.maybeOf(
+                                                  context)!
+                                              .showSnackBar(customSnackbar(
+                                                  context,
+                                                  true,
+                                                  "Successfully Selected"));
+                                        }
+                                        return ScaffoldMessenger.maybeOf(
+                                                context)!
+                                            .showSnackBar(customSnackbar(
+                                                context,
+                                                false,
+                                                "Please Select A Date"));
+                                      },
+                                      onCancel: () {
+                                        _startDate = DateTime.now();
+                                        _endDate = DateTime.now();
+                                        endDate = "";
+                                        startDate = "";
+                                        startdateController.clear();
+                                        enddateController.clear();
+                                      },
+                                      headerStyle: DateRangePickerHeaderStyle(
+                                          textStyle: GoogleFonts.poppins()),
+                                      initialSelectedRange: PickerDateRange(
+                                        _startDate ?? DateTime.now(),
+                                        _endDate ?? DateTime.now(),
+                                      ),
+                                      startRangeSelectionColor: appbarColorU,
+                                      onSelectionChanged:
+                                          (DateRangePickerSelectionChangedArgs
+                                              args) {
+                                        if (args.value is PickerDateRange) {
+                                          if (args.value!.startDate != null &&
+                                              args.value!.endDate != null) {
+                                            _startDate = args.value!.startDate!;
+                                            _endDate = args.value!.endDate!;
+                                            endDate =
+                                                DateFormat('EEEE, MMMM d, yyyy')
+                                                    .format(_endDate!);
+                                            startDate =
+                                                DateFormat('EEEE, MMMM d, yyyy')
+                                                    .format(_startDate!);
+                                            startdateController.text =
+                                                startDate;
+                                            enddateController.text = endDate;
+                                          }
+                                        }
+                                      })),
+                              const SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  HalfSizeButton(
+                                    title: "Close",
+                                    isLoading: false,
+                                    onTap: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  HalfSizeButton(
+                                    title: "Chek Now",
+                                    isLoading: false,
+                                    onTap: () {},
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        ));
               },
               style: ElevatedButton.styleFrom(
-                  fixedSize: const Size(130, 50),
-                  backgroundColor: Colors.black,
+                  fixedSize: Size(media.width / 2, media.height / 17),
+                  backgroundColor: black,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10))),
-              child: Text("Book Now", style: style4))
+              child: Text("Check Avaliblity", style: style4))
         ],
       ),
     ));
   }
 }
-
-// ignore: must_be_immutable
-

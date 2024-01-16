@@ -4,12 +4,14 @@ import 'package:carnova_user/modals/all_vehicle_list_modal.dart';
 import 'package:carnova_user/resources/components/searched_title.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/my_textfield.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
+import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/utils/appbar.dart';
 import 'package:carnova_user/view/vehicle/booking/all_vehicle_dtls.dart';
 import 'package:carnova_user/view/vehicle/drop_down.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_xlider/flutter_xlider.dart';
 
 class AllVehiclesList extends StatelessWidget {
   AllVehiclesList({super.key, required this.datas});
@@ -22,6 +24,8 @@ class AllVehiclesList extends StatelessWidget {
   TextEditingController transmissionController = TextEditingController();
   TextEditingController brandController = TextEditingController();
   TextEditingController seatController = TextEditingController();
+  int? priceRange;
+  final ValueNotifier<double?> priceNotifier = ValueNotifier<double?>(200);
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.sizeOf(context);
@@ -97,12 +101,23 @@ class AllVehiclesList extends StatelessWidget {
                                           titletext: "Seat Count",
                                           hinttext: "Tap to Select Seat Count"),
                                       const SizedBox(height: 10),
+                                      Text(
+                                        "Price Range",
+                                        style: tabcardtext1,
+                                      ),
+                                      Row(children: [
+                                        Text('₹200', style: cardtitle),
+                                        Expanded(child: priceSlider()),
+                                        Text('> ₹5000', style: cardtitle)
+                                      ]),
+                                      const SizedBox(height: 10),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
                                           ElevatedButton(
                                               onPressed: () {
+                                                priceNotifier.value = 200;
                                                 fuelController.clear();
                                                 brandController.clear();
                                                 seatController.clear();
@@ -124,21 +139,34 @@ class AllVehiclesList extends StatelessWidget {
                                               child: const Text("RESET")),
                                           ElevatedButton(
                                               onPressed: () {
+                                                if (priceNotifier.value !=
+                                                    null) {
+                                                  priceRange = priceNotifier
+                                                      .value!
+                                                      .round();
+                                                } else {
+                                                  priceRange = 100000;
+                                                }
                                                 int seatCount = seatController
                                                         .text.isEmpty
                                                     ? 0
                                                     : int.parse(
                                                         seatController.text);
-                                                context.read<VehicleCheckBloc>().add(
-                                                    FilteringEventFromAllVehicles(
-                                                        ////price controller in here
-                                                        priceRange: 4000,
-                                                        datas: datas,
-                                                        brand: brandController
-                                                            .text,
-                                                        seatCount: seatCount,
-                                                        fuelType: fuelController
-                                                            .text));
+                                                context
+                                                    .read<VehicleCheckBloc>()
+                                                    .add(
+                                                        FilteringEventFromAllVehicles(
+                                                            priceRange:
+                                                                priceRange!,
+                                                            datas: datas,
+                                                            brand:
+                                                                brandController
+                                                                    .text,
+                                                            seatCount:
+                                                                seatCount,
+                                                            fuelType:
+                                                                fuelController
+                                                                    .text));
                                                 Navigator.of(context).pop();
                                               },
                                               style: ElevatedButton.styleFrom(
@@ -194,11 +222,7 @@ class AllVehiclesList extends StatelessWidget {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) =>
                                           AllVehileDetaisScreen(
-                                              vehicleData: vehicle,
-                                              isBooked: false,
-                                              startDate: "11-22-33",
-                                              location: "Calicut",
-                                              endDate: "11-22-44")));
+                                              vehicleData: vehicle)));
                                 },
                                 child: SearchTileWid(data: vehicle));
                           },
@@ -209,5 +233,36 @@ class AllVehiclesList extends StatelessWidget {
             ]),
           )),
     );
+  }
+
+  Widget priceSlider() {
+    return ValueListenableBuilder(
+        valueListenable: priceNotifier,
+        builder: (context, value, _) {
+          return FlutterSlider(
+              max: 5000,
+              min: 200,
+              values: [value ?? 200],
+              onDragCompleted: (handlerIndex, end, start) {
+                priceNotifier.value = end;
+              },
+              trackBar: FlutterSliderTrackBar(
+                activeTrackBar: BoxDecoration(color: appbarColorU),
+              ),
+              handler: FlutterSliderHandler(
+                decoration: const BoxDecoration(color: Colors.transparent),
+                child: CircleAvatar(
+                  radius: 8,
+                  backgroundColor: appbarColorU,
+                ),
+              ),
+              handlerHeight: 30,
+              handlerAnimation: const FlutterSliderHandlerAnimation(
+                curve: Curves.elasticOut,
+                reverseCurve: Curves.bounceIn,
+                duration: Duration(milliseconds: 500),
+                scale: 1.1,
+              ));
+        });
   }
 }

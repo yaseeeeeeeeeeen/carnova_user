@@ -18,16 +18,8 @@ import '../../../resources/constant/text_styles.dart';
 class AllVehileDetaisScreen extends StatelessWidget {
   AllVehileDetaisScreen(
       {super.key,
-      required this.vehicleData,
-      required this.isBooked,
-      required this.startDate,
-      required this.location,
-      required this.endDate});
+      required this.vehicleData,});
   Vehicle2 vehicleData;
-  bool isBooked;
-  String startDate;
-  String endDate;
-  String location;
   @override
   Widget build(BuildContext context) {
     List<String> cardetails = [
@@ -42,11 +34,7 @@ class AllVehileDetaisScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: scaffoldBg,
       bottomNavigationBar: AllVehicleScreenBottom(
-          location: location,
-          price: vehicleData.price.toInt().toString(),
-          vehicle: vehicleData,
-          startDate: startDate,
-          endDate: endDate),
+          price: vehicleData.price.toInt().toString(), vehicle: vehicleData),
       appBar: customAppBarText(vehicleData.name, context, null),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
