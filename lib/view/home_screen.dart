@@ -89,7 +89,6 @@ class HomeScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            print(upcomingVehicles[index].vehicleId.seat);
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => BookedVehiclesScreen(
                                     vehicle: upcomingVehicles[index])));

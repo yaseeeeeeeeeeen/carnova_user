@@ -4,6 +4,8 @@ import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/appbar.dart';
 import 'package:carnova_user/utils/functions/logout_cnfm.dart';
 import 'package:carnova_user/view/login_signup/change_password.dart';
+import 'package:carnova_user/view/policies/privacy_policy.dart';
+import 'package:carnova_user/view/policies/terms_and_condition.dart';
 
 import 'package:flutter/material.dart';
 
@@ -31,10 +33,22 @@ class UserProfile extends StatelessWidget {
                   },
                 ),
                 ProfileScreenListtile(text: "App info", isLogout: false),
-                ProfileScreenListtile(
-                    text: "Terms & Conditions", isLogout: false),
-                ProfileScreenListtile(
-                    text: "Privacy & Policy", isLogout: false),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const TermsAndConditionScreen()));
+                  },
+                  child: ProfileScreenListtile(
+                      text: "Terms & Conditions", isLogout: false),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const PrivacyAndPolicyScreen()));
+                  },
+                  child: ProfileScreenListtile(
+                      text: "Privacy & Policy", isLogout: false),
+                ),
                 ProfileScreenListtile(text: "Help", isLogout: false),
                 const Divider(thickness: 1.5),
                 ProfileScreenListtile(text: "Clear App Data", isLogout: false),

@@ -61,14 +61,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final datas = vehicleList.map((e) => BookedVehicle.fromJson(e)).toList();
       locator<VehicleCheckBloc>().allBookedVehicles = datas;
       //////////////////// DIVIED BOOKED AND NOT BOOKED////////////////////////////////
-      final bookedonly =
-          datas.where((element) {
-                 final startDate = DateTime.parse(element.startDate);
-     //   final endDate = DateTime.parse(element.endDate);
-        return startDate.isBefore(currentDate) &&
-        //    endDate.isAfter(currentDate) &&
-            element.status == "Booked";
-          }).toList();
+      final bookedonly = datas.where((element) {
+        return element.status == "Booked";
+      }).toList();
       locator<VehicleCheckBloc>().bookedVehicles = bookedonly;
       ////////////////// ACTIVE VEHICLE SORTING/////////////////////////////////
       locator<VehicleCheckBloc>().activeVehicles = datas.where((element) {
@@ -81,13 +76,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(LoginSuccsess());
     });
   }
+
 //////////////////// WORK PENDING////////////////////////////////////////////////////////////////////////
   FutureOr<void> forgetPasswordClicked(
       ForgetPasswordClicked event, Emitter<LoginState> emit) async {
     emit(LoadingState());
     final response = await UserLoginRepo().forgetPassword(event.email);
-    response.fold((left) {}, (right) {
-
-    });
+    response.fold((left) {}, (right) {});
   }
 }
