@@ -42,7 +42,7 @@ class ProfileCardWid extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             "   ${logedUser.name.toUpperCase()}",
-            style: profileName,
+            style: activeVehicle1,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
