@@ -3,6 +3,7 @@ import 'package:carnova_user/resources/components/textfields_and_buttons/loading
 import 'package:carnova_user/resources/components/textfields_and_buttons/my_textfield.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/bottom_nav_bar.dart';
+import 'package:carnova_user/utils/functions/permissions.dart';
 import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:carnova_user/utils/validations.dart';
 import 'package:carnova_user/view/home_screen.dart';
@@ -159,11 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         customSnackbar(
                                             context, false, state.messege));
                                   } else if (state is LoginSuccsess) {
-                                    Navigator.of(context).pushAndRemoveUntil(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                CustomNavBar()),
-                                        (route) => false);
+                                    navigateToHome(context);
                                   }
                                 },
                                 builder: (context, state) {
@@ -195,7 +192,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 children: [
                                   Text(
                                     'Not a member?',
-                                    style: TextStyle(color: black.withOpacity(0.7)),
+                                    style: TextStyle(
+                                        color: black.withOpacity(0.7)),
                                   ),
                                   const SizedBox(width: 4),
                                   GestureDetector(
@@ -216,9 +214,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ))))));
   }
 
-  navigateToHome(context) {
-    // Navigator.of(context).pushAndRemoveUntil(
-    //     MaterialPageRoute(builder: (context) =>  ScreenPa()),
-    //     (route) => false);
+  navigateToHome(context) async {
+    await Permissions().locationPermissionCheking(context);
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => CustomNavBar()),
+        (route) => false);
   }
 }
