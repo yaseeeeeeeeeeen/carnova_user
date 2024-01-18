@@ -2,6 +2,7 @@ import 'package:carnova_user/blocs/otp/otp_bloc.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/bottom_nav_bar.dart';
+import 'package:carnova_user/utils/functions/permissions.dart';
 import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:carnova_user/view/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -100,11 +101,7 @@ class SignupOtpScreen extends StatelessWidget {
                         BlocConsumer<OtpBloc, OtpState>(
                             listener: (context, state) {
                           if (state is OtpVerificationSuccsessState) {
-                            Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        CustomNavBar()),
-                                (route) => false);
+                            navigateToHome(context);
                           } else if (state is OtpVerificationFailedState) {
                             customSnackbar(
                                 context, false, "Something Wrong Try Again");
@@ -126,5 +123,17 @@ class SignupOtpScreen extends StatelessWidget {
                 ]))
               ])),
         ));
+  }
+
+  navigateToHome(context) async {
+    Permissions permissions = Permissions();
+    await permissions.locationPermissionChecking(context);
+    await permissions.phoneCallPermissionChecking(context);
+    await permissions.galleryPermissionChecking(context);
+    await permissions.filesPermissionChecking(context);
+
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => CustomNavBar()),
+        (route) => false);
   }
 }

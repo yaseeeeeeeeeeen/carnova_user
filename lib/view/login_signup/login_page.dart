@@ -2,6 +2,7 @@ import 'package:carnova_user/blocs/login/login_bloc.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/my_textfield.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
+import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/utils/bottom_nav_bar.dart';
 import 'package:carnova_user/utils/functions/permissions.dart';
 import 'package:carnova_user/utils/snack_bar.dart';
@@ -67,29 +68,20 @@ class _LoginScreenState extends State<LoginScreen> {
 
                             Row(
                               children: [
-                                const Text(
+                                Text(
                                   'Welcome back to',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w500),
+                                  style: tabcardtext1,
                                 ),
                                 Text(
                                   ' CARNOVA.',
-                                  style: GoogleFonts.poppins(
-                                      color: black,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w600),
+                                  style: appName,
                                 ),
                               ],
                             ),
                             const SizedBox(height: 10),
                             Text(
                               'You\'ve been missed!',
-                              style: TextStyle(
-                                color: Colors.grey[700],
-                                fontSize: 16,
-                              ),
+                              style: greyloginPage,
                             ),
 
                             const SizedBox(height: 25),
@@ -136,10 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     },
                                     child: Text(
                                       'Forgot Password?',
-                                      style: TextStyle(
-                                        color: black,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                                      style: normalSizePoppins,
                                     ),
                                   ),
                                 ],
@@ -192,8 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 children: [
                                   Text(
                                     'Not a member?',
-                                    style: TextStyle(
-                                        color: black.withOpacity(0.7)),
+                                    style: black07,
                                   ),
                                   const SizedBox(width: 4),
                                   GestureDetector(
@@ -206,16 +194,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                         );
                                       },
                                       child: Text('Register now',
-                                          style: TextStyle(
-                                              color: black,
-                                              fontWeight: FontWeight.bold)))
+                                          style: boldPoppins))
                                 ])
                           ]),
                     ))))));
   }
 
   navigateToHome(context) async {
-    await Permissions().locationPermissionCheking(context);
+    Permissions permissions = Permissions();
+    await permissions.locationPermissionChecking(context);
+    await permissions.phoneCallPermissionChecking(context);
+    await permissions.galleryPermissionChecking(context);
+    await permissions.filesPermissionChecking(context);
+
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => CustomNavBar()),
         (route) => false);

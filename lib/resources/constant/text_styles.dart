@@ -50,6 +50,11 @@ TextStyle tabcardtext1 = TextStyle(
     fontWeight: FontWeight.w500,
     fontFamily: "Poppins");
 
+TextStyle appName = TextStyle(
+    color: black,
+    fontSize: 22,
+    fontWeight: FontWeight.w500,
+    fontFamily: "Poppins");
 /////profie texts-----------
 ///
 TextStyle mailstyle = TextStyle(
@@ -104,15 +109,15 @@ TextStyle style1 = const TextStyle(
   fontWeight: FontWeight.w400,
 );
 
-TextStyle style5 = const TextStyle(
+TextStyle style5 =  TextStyle(
   fontFamily: "Poppins",
-  color: Colors.black,
+  color: black,
   fontSize: 16,
-  fontWeight: FontWeight.w600,
+  fontWeight: FontWeight.w500,
 );
-TextStyle style6 = const TextStyle(
+TextStyle style6 =  TextStyle(
   fontFamily: "Poppins",
-  color: Colors.black,
+  color: black,
   fontSize: 14,
   fontWeight: FontWeight.w500,
 );
@@ -138,8 +143,8 @@ TextStyle navbartitle = const TextStyle(
   fontSize: 15,
 );
 
-TextStyle changePasswordFont = const TextStyle(
-  color: Colors.black,
+TextStyle changePasswordFont =  TextStyle(
+  color: black,
   fontSize: 15,
   fontFamily: "Poppins",
 );
@@ -151,9 +156,15 @@ TextStyle paymentFailedTilteStyle = TextStyle(
   fontFamily: "Poppins",
 );
 
+TextStyle greyloginPage = TextStyle(
+  color: Colors.grey.shade600,
+  fontSize: 16,
+  fontFamily: "Poppins",
+);
+
 TextStyle greycolourNormal = const TextStyle(
   color: Colors.grey,
-  fontSize: 13,
+  fontSize: 11,
 );
 
 /////////// Cancle///////////////
@@ -166,6 +177,16 @@ TextStyle cancleText = const TextStyle(
 TextStyle poppins600 = const TextStyle(
   fontWeight: FontWeight.w600,
   fontFamily: "Poppins",
+);
+
+TextStyle boldPoppins =  TextStyle(
+  fontWeight: FontWeight.bold,
+  color: black,
+  fontFamily: "Poppins",
+);
+TextStyle black07 = TextStyle(
+  fontFamily: "Poppins",
+  color: black.withOpacity(0.7),
 );
 
 TextStyle style3 = GoogleFonts.montserrat(

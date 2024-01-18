@@ -1,6 +1,8 @@
 import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
+import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/view/login_signup/change_password.dart';
+import 'package:carnova_user/view/profile/profile_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/view/home_screen.dart';
@@ -27,7 +29,7 @@ Widget bottomsheetWid(double height, context) {
             children: [
               CircleAvatar(
                 radius: 47,
-                backgroundColor: Colors.black,
+                backgroundColor: black,
                 child: logedUser.profile!.isNotEmpty
                     ? CircleAvatar(
                         backgroundImage: NetworkImage(
@@ -56,16 +58,20 @@ Widget bottomsheetWid(double height, context) {
             ],
           )),
       // ListTileToggle(text: "Dark Mode"),
-
-      GestureDetector(
+      ListTilePwid(
+          title: "Edit Profile",
+          onTap: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => ProfileEditScreen()));
+          }),
+      ListTilePwid(
+          title: "Change Password",
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => ChangePasswordScreen()));
-          },
-          child: ListTilePwid(title: "Change Password")),
-      ListTilePwid(title: "Clear data"),
-      ListTilePwid(title: "Help"),
-      ListTilePwid(title: "About"),
+          }),
+      ListTilePwid(title: "Terms & condition", onTap: () {}),
+      ListTilePwid(title: "About", onTap: () {}),
       const SizedBox(height: 5)
     ]),
   );

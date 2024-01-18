@@ -1,6 +1,7 @@
 // ignore: duplicate_ignore
 // ignore_for_file: must_be_immutable
 
+import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
@@ -36,18 +37,19 @@ import 'package:carnova_user/resources/constant/text_styles.dart';
 // }
 
 class ListTilePwid extends StatelessWidget {
-  ListTilePwid({super.key, required this.title});
+  ListTilePwid({super.key, required this.title,required this.onTap});
   String title;
-
+void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 3, bottom: 3),
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey.shade300),
+          border: Border.all(color: borderSide),
           borderRadius: BorderRadius.circular(10)),
       child: ListTile(
-        trailing: const Icon(Icons.chevron_right_outlined, color: Colors.black),
+        onTap: onTap,
+        trailing: Icon(Icons.chevron_right_outlined, color: black),
         title: Text(title, style: style5),
       ),
     );

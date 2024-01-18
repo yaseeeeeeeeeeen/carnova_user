@@ -1,5 +1,6 @@
 class ApiUrls {
-  static const String baseUrl = "https://carnova.onrender.com";
+//  https://carnova.onrender.com
+  static const String baseUrl = "http://192.168.28.133:3000";
   static const String userUrl = "$baseUrl/user";
   static const String loginUrl = "$userUrl/login";
   static const String userdata = "$userUrl/getuser";

@@ -25,40 +25,38 @@ class UserProfile extends StatelessWidget {
                 const ProfileCardWid(),
                 const SizedBox(height: 10),
                 ProfileScreenListtile(
-                  text: "Change Password",
-                  isLogout: false,
-                  ontap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ChangePasswordScreen()));
-                  },
-                ),
-                ProfileScreenListtile(text: "App info", isLogout: false),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const TermsAndConditionScreen()));
-                  },
-                  child: ProfileScreenListtile(
-                      text: "Terms & Conditions", isLogout: false),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const PrivacyAndPolicyScreen()));
-                  },
-                  child: ProfileScreenListtile(
-                      text: "Privacy & Policy", isLogout: false),
-                ),
-                ProfileScreenListtile(text: "Help", isLogout: false),
-                const Divider(thickness: 1.5),
-                ProfileScreenListtile(text: "Clear App Data", isLogout: false),
+                    text: "Change Password",
+                    isLogout: false,
+                    ontap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ChangePasswordScreen()));
+                    }),
                 ProfileScreenListtile(
-                  text: "Sign Out",
-                  isLogout: true,
-                  ontap: () {
-                    signoutConfirmation(context);
-                  },
+                    ontap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              const TermsAndConditionScreen()));
+                    },
+                    text: "Terms & Conditions",
+                    isLogout: false),
+                GestureDetector(
+                  onTap: () {},
+                  child: ProfileScreenListtile(
+                      ontap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+                                const PrivacyAndPolicyScreen()));
+                      },
+                      text: "Privacy & Policy",
+                      isLogout: false),
                 ),
+                const Divider(thickness: 1.5),
+                ProfileScreenListtile(
+                    text: "Sign Out",
+                    isLogout: true,
+                    ontap: () {
+                      signoutConfirmation(context);
+                    }),
                 Container()
               ],
             ),

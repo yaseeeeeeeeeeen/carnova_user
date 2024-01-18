@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class ProfileScreenListtile extends StatelessWidget {
   ProfileScreenListtile(
-      {super.key, required this.text, required this.isLogout,this.ontap});
+      {super.key, required this.text, required this.isLogout, required this.ontap});
   final String text;
   bool isLogout = false;
   void Function()? ontap;
