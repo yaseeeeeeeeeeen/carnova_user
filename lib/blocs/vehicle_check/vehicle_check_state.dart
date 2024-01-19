@@ -1,8 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:geolocator/geolocator.dart';
+
 import 'package:carnova_user/modals/all_vehicle_list_modal.dart';
 import 'package:carnova_user/modals/fetch_modal.dart';
-import 'package:geolocator/geolocator.dart';
 
 abstract class VehicleCheckState {}
 
@@ -53,4 +54,14 @@ class FilteredList extends VehicleCheckState {
 class LocationSearchedSuccsess extends VehicleCheckState {
   List<Map<String, dynamic>> locationList;
   LocationSearchedSuccsess({required this.locationList});
+}
+
+class CheckVehicleAvalibleSuccess extends VehicleCheckState {}
+
+class AllreadyThisVehicleHaveBooking extends VehicleCheckState {}
+class DeffultCalanderState extends VehicleCheckState {}
+
+class CheckVehicleAvalibleFailed extends VehicleCheckState {
+  String messege;
+  CheckVehicleAvalibleFailed({required this.messege});
 }

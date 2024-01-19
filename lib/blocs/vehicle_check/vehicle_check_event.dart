@@ -8,7 +8,7 @@ class CheckAvaliblityButtonClicked extends VehicleCheckEvent {
   String endDate;
   String? location;
   CheckAvaliblityButtonClicked(
-      {required this.startDate, required this.endDate,this.location});
+      {required this.startDate, required this.endDate, this.location});
 }
 
 class FetchAvalibleVehicles extends VehicleCheckEvent {
@@ -49,3 +49,14 @@ class LocationSearchButtonClicked extends VehicleCheckEvent {
   String location;
   LocationSearchButtonClicked({required this.location});
 }
+
+class CheckAVhicleBookings extends VehicleCheckEvent {
+  final String location;
+  final String vehicleId;
+  final String endDate;
+  final String startDate;
+
+  CheckAVhicleBookings(this.location, this.vehicleId, this.endDate, this.startDate);
+}
+
+class DeffualtCalanderOpen extends VehicleCheckEvent{}

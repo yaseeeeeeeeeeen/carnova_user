@@ -23,4 +23,9 @@ class BookingRepo {
     String url = ApiUrls.getAllVehicles;
     return ApiService.getApi(url, token);
   }
+
+  EitherResponse checkVehicleAvaliblity(data) async {
+    const String url = ApiUrls.vehicleAvaliblity;
+    return ApiService.postApi(data, url, token);
+  }
 }

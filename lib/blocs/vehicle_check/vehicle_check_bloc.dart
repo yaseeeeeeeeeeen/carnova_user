@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:bloc/bloc.dart';
 import 'package:carnova_user/blocs/vehicle_check/vehicle_check_state.dart';
@@ -29,6 +28,8 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
     on<FilteringEventFromAllVehicles>(filteringEventFromAllVehicles);
     on<FilterResetButtonClicked>(filterResetButtonClicked);
     on<LocationSearchButtonClicked>(locationSearchButtonClicked);
+    on<CheckAVhicleBookings>(checkAVhicleBookings);
+    on<DeffualtCalanderOpen>(deffualtCalanderOpen);
   }
 
   FutureOr<void> checkAvaliblityButtonClicked(
@@ -42,7 +43,6 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
         "pickup": event.location!,
         "dropoff": event.location!,
       };
-      print(data);
       emit(UserStoreChoiceState(data: data));
     } else {
       Position? currentLoaction =
@@ -58,7 +58,6 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
             "pickup": address,
             "dropoff": address,
           };
-          print(data);
           emit(UserStoreChoiceState(data: data));
         }
       } else {
@@ -156,5 +155,32 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
     emit(VehicleCheckLoading());
     final locationList = await MapBoxHelper.getSearchResults(event.location);
     emit(LocationSearchedSuccsess(locationList: locationList));
+  }
+
+  FutureOr<void> checkAVhicleBookings(
+      CheckAVhicleBookings event, Emitter<VehicleCheckState> emit) async {
+    emit(VehicleCheckLoading());
+    final data = {
+      "startDate": event.startDate,
+      "endDate": event.endDate,
+      "vehicleId": event.vehicleId,
+      "location": event.location
+    };
+
+    final response = await BookingRepo().checkVehicleAvaliblity(data);
+    response.fold((left) {
+      emit(CheckVehicleAvalibleFailed(messege: left.message));
+    }, (right) {
+      if (right == false) {
+        emit(CheckVehicleAvalibleSuccess());
+      } else {
+        emit(AllreadyThisVehicleHaveBooking());
+      }
+    });
+  }
+
+  FutureOr<void> deffualtCalanderOpen(
+      DeffualtCalanderOpen event, Emitter<VehicleCheckState> emit) {
+    emit(DeffultCalanderState());
   }
 }

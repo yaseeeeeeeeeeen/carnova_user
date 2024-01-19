@@ -1,6 +1,6 @@
 class ApiUrls {
 //  https://carnova.onrender.com
-  static const String baseUrl = "http://192.168.28.133:3000";
+  static const String baseUrl = "https://carnova.onrender.com";
   static const String userUrl = "$baseUrl/user";
   static const String loginUrl = "$userUrl/login";
   static const String userdata = "$userUrl/getuser";
@@ -17,4 +17,7 @@ class ApiUrls {
   static const String getAllVehicles = '$userUrl/getVehicles';
   static const String forgetPassword = '$userUrl/forgot-password';
   static const String resetPassword = '$userUrl/reset-password/';
+  static const String vehicleAvaliblity = '$userUrl/vehicle-available';
+  static const String imagegettingUrl =
+      "https://carnova.onrender.com/admin/getFile/";
 }

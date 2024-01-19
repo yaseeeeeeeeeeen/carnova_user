@@ -25,7 +25,7 @@ class AllVehiclesList extends StatelessWidget {
   TextEditingController brandController = TextEditingController();
   TextEditingController seatController = TextEditingController();
   int? priceRange;
-  final ValueNotifier<double?> priceNotifier = ValueNotifier<double?>(200);
+  final ValueNotifier<double?> priceNotifier = ValueNotifier<double?>(null);
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.sizeOf(context);
@@ -117,7 +117,7 @@ class AllVehiclesList extends StatelessWidget {
                                         children: [
                                           ElevatedButton(
                                               onPressed: () {
-                                                priceNotifier.value = 200;
+                                                priceNotifier.value = null;
                                                 fuelController.clear();
                                                 brandController.clear();
                                                 seatController.clear();

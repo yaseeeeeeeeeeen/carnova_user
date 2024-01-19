@@ -16,9 +16,10 @@ import '../../../resources/constant/text_styles.dart';
 
 // ignore: must_be_immutable
 class AllVehileDetaisScreen extends StatelessWidget {
-  AllVehileDetaisScreen(
-      {super.key,
-      required this.vehicleData,});
+  AllVehileDetaisScreen({
+    super.key,
+    required this.vehicleData,
+  });
   Vehicle2 vehicleData;
   @override
   Widget build(BuildContext context) {
@@ -94,7 +95,8 @@ class AllVehileDetaisScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              openMap("${vehicleData.name} Avalible Here");
+                              openMap("${vehicleData.name} Avalible Here",
+                                  vehicleData.lat, vehicleData.long);
                             },
                             child: CircleAvatar(
                               backgroundColor: Colors.transparent,
@@ -133,8 +135,8 @@ class AllVehileDetaisScreen extends StatelessWidget {
   }
 }
 
-openMap(String messege) async {
-  MapsLauncher.launchCoordinates(11.1557, 75.8912, messege);
+openMap(String messege, double lat, double long) async {
+  MapsLauncher.launchCoordinates(lat, long, messege);
 }
 
 callAgent(String number) async {
