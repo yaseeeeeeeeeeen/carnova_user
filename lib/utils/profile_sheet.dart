@@ -33,7 +33,7 @@ Widget bottomsheetWid(double height, context) {
                 child: logedUser.profile!.isNotEmpty
                     ? CircleAvatar(
                         backgroundImage: NetworkImage(
-                            "${ApiUrls.baseUrl}/${logedUser.profile}"),
+                            "${ApiUrls.imagegettingUrl}${logedUser.profile}"),
                         radius: 45,
                         backgroundColor: Colors.black)
                     : CircleAvatar(

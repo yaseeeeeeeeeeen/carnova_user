@@ -41,7 +41,7 @@ class HistoryCharList extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
                                         image: NetworkImage(
-                                            "${ApiUrls.baseUrl}/${data.vehicleId.images[0]}"),
+                                            "${ApiUrls.imagegettingUrl}${data.vehicleId.images[0]}"),
                                         fit: BoxFit.cover),
                                     borderRadius: const BorderRadius.only(
                                         bottomLeft: Radius.circular(10),

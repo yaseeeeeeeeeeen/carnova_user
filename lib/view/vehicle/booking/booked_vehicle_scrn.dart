@@ -45,7 +45,7 @@ class BookedVehiclesScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
                             image: NetworkImage(
-                                "${ApiUrls.baseUrl}/${vehicle.vehicleId.images[0]}"),
+                                "${ApiUrls.imagegettingUrl}${vehicle.vehicleId.images[0]}"),
                             fit: BoxFit.cover))),
               ),
               const SizedBox(height: 5),

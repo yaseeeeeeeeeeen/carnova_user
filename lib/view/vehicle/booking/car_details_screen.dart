@@ -54,7 +54,7 @@ class CarDataShow extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
                               image: NetworkImage(
-                                  "${ApiUrls.baseUrl}/${vehicleData.images[0]}"),
+                                  "${ApiUrls.imagegettingUrl}${vehicleData.images[0]}"),
                               fit: BoxFit.cover)))),
               const SizedBox(height: 5),
               HomeTitles(titles: "Car Details"),

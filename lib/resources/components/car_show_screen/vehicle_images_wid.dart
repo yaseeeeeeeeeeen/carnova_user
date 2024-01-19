@@ -29,7 +29,7 @@ class CarMoreImages extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   child: CachedNetworkImage(
                     fit: BoxFit.cover,
-                    imageUrl: "${ApiUrls.baseUrl}/$i",
+                    imageUrl: "${ApiUrls.imagegettingUrl}$i",
                     placeholder: (context, url) => Shimmer.fromColors(
                       baseColor: shimmerbaseColor,
                       highlightColor: shimmerhighlightColor,

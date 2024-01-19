@@ -37,7 +37,7 @@ class SearchTileWid extends StatelessWidget {
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: NetworkImage(
-                              "${ApiUrls.baseUrl}/${data.images[0]}"),
+                              "${ApiUrls.imagegettingUrl}${data.images[0]}"),
                           fit: BoxFit.cover),
                       borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(10),

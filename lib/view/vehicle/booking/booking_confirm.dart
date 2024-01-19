@@ -69,7 +69,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
                               image: NetworkImage(
-                                  "${ApiUrls.baseUrl}/${widget.vehicle.images[0]}"),
+                                  "${ApiUrls.imagegettingUrl}${widget.vehicle.images[0]}"),
                               fit: BoxFit.cover)))),
               const SizedBox(height: 5),
               CarAgentTile(vehicledata: widget.vehicle),

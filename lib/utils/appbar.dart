@@ -29,7 +29,7 @@ PreferredSizeWidget customAppBarU(context) {
           child: logedUser.profile!.isNotEmpty
               ? CircleAvatar(
                   backgroundImage:
-                      NetworkImage("${ApiUrls.baseUrl}/${logedUser.profile}"),
+                      NetworkImage("${ApiUrls.imagegettingUrl}${logedUser.profile}"),
                   backgroundColor: Colors.black,
                 )
               : CircleAvatar(

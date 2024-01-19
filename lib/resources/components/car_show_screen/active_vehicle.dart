@@ -26,7 +26,7 @@ class ActivatedVehicle extends StatelessWidget {
                   color: Colors.black,
                   image: DecorationImage(
                       image: NetworkImage(
-                          "${ApiUrls.baseUrl}/${data.vehicleId.images[0]}"),
+                          "${ApiUrls.imagegettingUrl}${data.vehicleId.images[0]}"),
                       fit: BoxFit.cover)),
               height: heigth / 4.5),
           Row(

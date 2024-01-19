@@ -37,7 +37,7 @@ class MostRatedDemo extends StatelessWidget {
                 height: heigth / 6,
                 fit: BoxFit.cover,
                 imageUrl:
-                    "${ApiUrls.baseUrl}/${vehicledata.vehicleId.images[0]}",
+                    "${ApiUrls.imagegettingUrl}${vehicledata.vehicleId.images[0]}",
                 placeholder: (context, url) => Shimmer.fromColors(
                   baseColor: shimmerbaseColor,
                   highlightColor: shimmerhighlightColor,
@@ -50,7 +50,7 @@ class MostRatedDemo extends StatelessWidget {
                             topRight: Radius.circular(10)),
                         image: DecorationImage(
                             image: NetworkImage(
-                                "${ApiUrls.baseUrl}/${vehicledata.vehicleId.images[0]}"),
+                                "${ApiUrls.imagegettingUrl}${vehicledata.vehicleId.images[0]}"),
                             fit: BoxFit.cover)),
                   ),
                 ),
