@@ -44,7 +44,6 @@ class ApiServices {
   }
 
   Future<http.StreamedResponse> profileUpdate(File image) async {
-    final logedUser = getLoggedInUser();
     final token = SharedPref.instance.getToke();
     final url = Uri.parse(ApiUrls.addProfile);
     var request = http.MultipartRequest('PATCH', url);
@@ -56,7 +55,7 @@ class ApiServices {
       'profile',
       profilePhotoStream,
       profilePhotoLength,
-      filename: 'profilephoto${logedUser.name}.jpg',
+      filename: 'profilephoto.jpg',
     );
     request.files.add(profilePhotoMultipartFile);
     final response = await request.send();

@@ -49,9 +49,7 @@ class MostRatedDemo extends StatelessWidget {
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10)),
                         image: DecorationImage(
-                            image: NetworkImage(
-                                "${ApiUrls.imagegettingUrl}${vehicledata.vehicleId.images[0]}"),
-                            fit: BoxFit.cover)),
+                            image: NetworkImage(url), fit: BoxFit.cover)),
                   ),
                 ),
               ),

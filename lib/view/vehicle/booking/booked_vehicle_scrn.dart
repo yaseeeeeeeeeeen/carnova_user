@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carnova_user/modals/booked_vehicle.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/cancle_bar.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:carnova_user/resources/components/title_text_wid.dart';
 import 'package:carnova_user/utils/appbar.dart';
 import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
 
 // ignore: must_be_immutable
 class BookedVehiclesScreen extends StatelessWidget {
@@ -39,14 +41,25 @@ class BookedVehiclesScreen extends StatelessWidget {
             children: [
               Hero(
                 tag: vehicle.vehicleId.name,
-                child: Container(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        "${ApiUrls.imagegettingUrl}${vehicle.vehicleId.images[0]}",
                     height: heigth / 3.8,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                "${ApiUrls.imagegettingUrl}${vehicle.vehicleId.images[0]}"),
-                            fit: BoxFit.cover))),
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => Shimmer.fromColors(
+                      baseColor: shimmerbaseColor,
+                      highlightColor: shimmerhighlightColor,
+                      child: Container(
+                          height: heigth / 3.8,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                  image: NetworkImage(url), fit: BoxFit.cover))),
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(height: 5),
               HomeTitles(titles: "Car Details"),

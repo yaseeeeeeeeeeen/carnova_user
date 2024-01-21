@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
+import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ActivatedVehicle extends StatelessWidget {
   ActivatedVehicle({super.key});
@@ -20,15 +23,26 @@ class ActivatedVehicle extends StatelessWidget {
             border: Border.all(color: Colors.grey.shade300, width: 1)),
         height: heigth / 3,
         child: Column(children: [
-          Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.black,
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          "${ApiUrls.imagegettingUrl}${data.vehicleId.images[0]}"),
-                      fit: BoxFit.cover)),
-              height: heigth / 4.5),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(5),
+            child: CachedNetworkImage(
+               fit: BoxFit.cover,height: heigth / 4.5,
+              imageUrl:  "${ApiUrls.imagegettingUrl}${data.vehicleId.images[0]}",
+              placeholder:(context, url) =>  Shimmer.fromColors(
+                baseColor: shimmerbaseColor,
+                highlightColor: shimmerhighlightColor,
+                child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.black,
+                        image: DecorationImage(
+                            image: NetworkImage(
+                              url ),
+                            fit: BoxFit.cover)),
+                    height: heigth / 4.5),
+              ),
+            ),
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

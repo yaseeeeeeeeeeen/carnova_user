@@ -26,18 +26,18 @@ class SearchTileWid extends StatelessWidget {
             borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(10), topLeft: Radius.circular(10)),
             child: CachedNetworkImage(
-              imageUrl: "${ApiUrls.baseUrl}/${data.images[0]}",
+              imageUrl: "${ApiUrls.imagegettingUrl}${data.images[0]}",
               width: width / 2.6,
               height: heigth / 7.2,
               fit: BoxFit.cover,
               placeholder: (context, url) => Shimmer.fromColors(
-                baseColor: Colors.grey.shade500,
-                highlightColor: Colors.grey.shade100,
+                baseColor: shimmerbaseColor,
+                highlightColor: shimmerhighlightColor,
                 child: Container(
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: NetworkImage(
-                              "${ApiUrls.imagegettingUrl}${data.images[0]}"),
+                              url),
                           fit: BoxFit.cover),
                       borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(10),

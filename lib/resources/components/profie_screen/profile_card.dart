@@ -1,10 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
+import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/view/home_screen.dart';
 import 'package:carnova_user/view/profile/profile_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ProfileCardWid extends StatelessWidget {
   const ProfileCardWid({super.key});
@@ -30,10 +33,23 @@ class ProfileCardWid extends StatelessWidget {
             tag: "profilePhoto",
             child: logedUser.profile!.isNotEmpty
                 ? CircleAvatar(
-                    backgroundColor: Colors.white,
                     radius: heigth / 13,
-                    backgroundImage:
-                        NetworkImage("${ApiUrls.imagegettingUrl}${logedUser.profile}"))
+                    child: CachedNetworkImage(
+                      
+                      fit: BoxFit.cover,
+                      imageUrl:
+                          "${ApiUrls.imagegettingUrl}${logedUser.profile}",
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: shimmerbaseColor,
+                        highlightColor: shimmerhighlightColor,
+                        child: CircleAvatar(
+                          backgroundColor: mainColorU,
+                          radius: heigth / 13,
+                          child: Image.network(url),
+                        ),
+                      ),
+                    ),
+                  )
                 : CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: heigth / 13,

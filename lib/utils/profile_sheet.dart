@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
@@ -6,6 +7,7 @@ import 'package:carnova_user/view/profile/profile_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/view/home_screen.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../resources/components/profie_screen/profile_tile_button.dart';
 
@@ -31,11 +33,18 @@ Widget bottomsheetWid(double height, context) {
                 radius: 47,
                 backgroundColor: black,
                 child: logedUser.profile!.isNotEmpty
-                    ? CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            "${ApiUrls.imagegettingUrl}${logedUser.profile}"),
-                        radius: 45,
-                        backgroundColor: Colors.black)
+                    ? CachedNetworkImage(
+                      imageUrl:   "${ApiUrls.imagegettingUrl}${logedUser.profile}",
+                      placeholder:(context, url) =>  Shimmer.fromColors(
+                        baseColor: shimmerbaseColor,
+                        highlightColor: shimmerhighlightColor,
+                        child: CircleAvatar(
+                            backgroundImage: NetworkImage(
+                            url  ),
+                            radius: 45,
+                            backgroundColor: Colors.black),
+                      ),
+                    )
                     : CircleAvatar(
                         backgroundImage: AssetImage(imageU.profileDemo),
                         radius: 45,

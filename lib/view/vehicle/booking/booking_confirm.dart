@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carnova_user/blocs/booking/booking_bloc.dart';
 import 'package:carnova_user/blocs/booking/booking_event.dart';
 import 'package:carnova_user/blocs/booking/booking_state.dart';
@@ -12,6 +13,7 @@ import 'package:carnova_user/utils/bottom_nav_bar.dart';
 import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../resources/components/car_show_screen/agent_tile.dart';
 
@@ -62,15 +64,28 @@ class _PaymentScreenState extends State<PaymentScreen> {
             children: [
               Hero(
                   tag: widget.vehicle.name,
-                  child: Container(
-                      height: h / 3.8,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  "${ApiUrls.imagegettingUrl}${widget.vehicle.images[0]}"),
-                              fit: BoxFit.cover)))),
+                  child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                    child: CachedNetworkImage(
+                          height: h / 3.8,
+                          width: double.infinity,
+                      imageUrl: "${ApiUrls.imagegettingUrl}${widget.vehicle.images[0]}",
+                      fit: BoxFit.cover,
+                      placeholder:(context, url) =>  Shimmer.fromColors(
+                        baseColor: shimmerbaseColor,
+                        highlightColor: shimmerhighlightColor,
+                        child: Container(
+                            height: h / 3.8,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                        url),
+                                    fit: BoxFit.cover))),
+                      ),
+                    ),
+                  )),
               const SizedBox(height: 5),
               CarAgentTile(vehicledata: widget.vehicle),
               const SizedBox(height: 5),

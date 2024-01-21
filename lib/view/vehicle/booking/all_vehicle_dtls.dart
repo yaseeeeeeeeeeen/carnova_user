@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carnova_user/modals/all_vehicle_list_modal.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/book_in_allvehicles.dart';
@@ -11,6 +12,7 @@ import 'package:carnova_user/utils/appbar.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:maps_launcher/maps_launcher.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../resources/constant/text_styles.dart';
 
@@ -46,14 +48,26 @@ class AllVehileDetaisScreen extends StatelessWidget {
             children: [
               Hero(
                   tag: vehicleData.name,
-                  child: Container(
-                      height: heigth / 3.8,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  "${ApiUrls.imagegettingUrl}${vehicleData.images[0]}"),
-                              fit: BoxFit.cover)))),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CachedNetworkImage(
+                      fit: BoxFit.cover,
+                       height: heigth / 3.8,
+                      imageUrl: "${ApiUrls.imagegettingUrl}${vehicleData.images[0]}",
+                      placeholder:(context, url) =>  Shimmer.fromColors(
+                        baseColor: shimmerbaseColor,
+                        highlightColor: shimmerhighlightColor,
+                        child: Container(
+                            height: heigth / 3.8,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                       url ),
+                                    fit: BoxFit.cover))),
+                      ),
+                    ),
+                  )),
               const SizedBox(height: 5),
               HomeTitles(titles: "Car Details"),
               const SizedBox(height: 10),
@@ -63,7 +77,7 @@ class AllVehileDetaisScreen extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey.shade300),
-                    color: Colors.white,
+                    color: mainColorU,
                     borderRadius: BorderRadius.circular(10)),
                 margin: const EdgeInsets.only(top: 5, bottom: 5),
                 height: heigth / 10,

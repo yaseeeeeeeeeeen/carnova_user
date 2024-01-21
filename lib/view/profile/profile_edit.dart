@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carnova_user/blocs/profile_edit/profile_edit_bloc.dart';
 import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
@@ -12,6 +13,7 @@ import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:carnova_user/view/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 // ignore: must_be_immutable
 class ProfileEditScreen extends StatelessWidget {
@@ -60,10 +62,23 @@ class ProfileEditScreen extends StatelessWidget {
                               )
                             : logedUser.profile!.isNotEmpty
                                 ? CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                        "${ApiUrls.imagegettingUrl}${logedUser.profile}"),
                                     backgroundColor: black.withOpacity(0.2),
                                     radius: 80,
+                                    child: CachedNetworkImage(
+                                      imageUrl:
+                                          "${ApiUrls.imagegettingUrl}${logedUser.profile}",
+                                      placeholder: (context, url) =>
+                                          Shimmer.fromColors(
+                                        baseColor: shimmerbaseColor,
+                                        highlightColor: shimmerhighlightColor,
+                                        child: CircleAvatar(
+                                          backgroundImage: NetworkImage(url),
+                                          backgroundColor:
+                                              black.withOpacity(0.2),
+                                          radius: 80,
+                                        ),
+                                      ),
+                                    ),
                                   )
                                 : CircleAvatar(
                                     backgroundImage:

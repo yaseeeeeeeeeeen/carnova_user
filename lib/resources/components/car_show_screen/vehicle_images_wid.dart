@@ -37,7 +37,7 @@ class CarMoreImages extends StatelessWidget {
                           margin: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: NetworkImage("${ApiUrls.baseUrl}/$i"),
+                                  image: NetworkImage(url),
                                   fit: BoxFit.cover))),
                     ),
                   ),

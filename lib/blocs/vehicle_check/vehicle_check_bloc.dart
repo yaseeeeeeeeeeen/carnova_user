@@ -96,8 +96,7 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
 
   FutureOr<void> getAllVehicles(
       GetAllVehicles event, Emitter<VehicleCheckState> emit) async {
-    emit(VehicleCheckLoading());
-    Future.delayed(const Duration(seconds: 2));
+    emit(VehicleCheckAllVehicleLoading());
     final response = await BookingRepo().getAllVehicles();
     response.fold((left) {
       emit(VehilceFetchingFailed(messege: left.message));
@@ -166,15 +165,19 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
       "vehicleId": event.vehicleId,
       "location": event.location
     };
-
+    print(data);
     final response = await BookingRepo().checkVehicleAvaliblity(data);
     response.fold((left) {
       emit(CheckVehicleAvalibleFailed(messege: left.message));
     }, (right) {
+      print(right);
       if (right == false) {
         emit(CheckVehicleAvalibleSuccess());
-      } else {
+      } else if (right == true) {
         emit(AllreadyThisVehicleHaveBooking());
+      } else {
+        emit(CheckVehicleAvalibleFailed(
+            messege: "Something Wrong in This Booking"));
       }
     });
   }

@@ -10,6 +10,7 @@ abstract class VehicleCheckState {}
 final class VehicleCheckInitial extends VehicleCheckState {}
 
 class VehicleCheckLoading extends VehicleCheckState {}
+class VehicleCheckAllVehicleLoading extends VehicleCheckState {}
 
 class UserStoreChoiceState extends VehicleCheckState {
   Map<String, String> data;

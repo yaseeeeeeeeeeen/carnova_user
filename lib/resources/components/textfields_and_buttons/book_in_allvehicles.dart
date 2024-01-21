@@ -53,7 +53,7 @@ class AllVehicleScreenBottom extends StatelessWidget {
             child: ElevatedButton(
                 onPressed: () {
                   context.read<VehicleCheckBloc>().add(DeffualtCalanderOpen());
-                  
+
                   showBottomSheet(
                       backgroundColor: scaffoldBg,
                       enableDrag: true,
@@ -192,10 +192,10 @@ class AllVehicleScreenBottom extends StatelessWidget {
                                                     _endDate =
                                                         args.value!.endDate!;
                                                     endDate =
-                                                        DateFormat('YYYY-MM-DD')
+                                                        DateFormat('yyyy-MM-dd')
                                                             .format(_endDate!);
                                                     startDate = DateFormat(
-                                                            'YYYY-MM-DD')
+                                                            'yyyy-MM-dd')
                                                         .format(_startDate!);
                                                     // startdateController.text =
                                                     //     startDate;
@@ -246,9 +246,8 @@ class AllVehicleScreenBottom extends StatelessWidget {
                                                       .add(CheckAVhicleBookings(
                                                           vehicle.location,
                                                           vehicle.id,
-                                                          endDate.toString(),
-                                                          startDate
-                                                              .toString()));
+                                                          endDate,
+                                                          startDate));
                                                 },
                                               );
                                             },

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carnova_user/modals/fetch_modal.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/resources/components/car_show_screen/agent_tile.dart';
@@ -8,6 +9,7 @@ import 'package:carnova_user/resources/components/car_show_screen/car_details_ca
 import 'package:carnova_user/resources/components/car_show_screen/vehicle_images_wid.dart';
 import 'package:carnova_user/resources/components/title_text_wid.dart';
 import 'package:carnova_user/utils/appbar.dart';
+import 'package:shimmer/shimmer.dart';
 
 // ignore: must_be_immutable
 class CarDataShow extends StatelessWidget {
@@ -48,14 +50,26 @@ class CarDataShow extends StatelessWidget {
             children: [
               Hero(
                   tag: vehicleData.name,
-                  child: Container(
-                      height: heigth / 3.8,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  "${ApiUrls.imagegettingUrl}${vehicleData.images[0]}"),
-                              fit: BoxFit.cover)))),
+                  child: ClipRRect(
+                     borderRadius: BorderRadius.circular(10),
+                    child: CachedNetworkImage(
+                       height: heigth / 3.8,
+                      fit: BoxFit.cover,
+                      imageUrl: "${ApiUrls.imagegettingUrl}${vehicleData.images[0]}",
+                      placeholder:(context, url) =>  Shimmer.fromColors(
+                      baseColor: shimmerbaseColor,
+                      highlightColor: shimmerhighlightColor,  
+                        child: Container(
+                            height: heigth / 3.8,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                        url),
+                                    fit: BoxFit.cover))),
+                      ),
+                    ),
+                  )),
               const SizedBox(height: 5),
               HomeTitles(titles: "Car Details"),
               const SizedBox(height: 10),

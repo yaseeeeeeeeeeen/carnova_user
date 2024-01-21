@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/resources/components/car_show_screen/list_empty_svg.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HistoryCharList extends StatelessWidget {
   HistoryCharList({super.key});
@@ -37,16 +39,30 @@ class HistoryCharList extends StatelessWidget {
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: NetworkImage(
-                                            "${ApiUrls.imagegettingUrl}${data.vehicleId.images[0]}"),
-                                        fit: BoxFit.cover),
-                                    borderRadius: const BorderRadius.only(
-                                        bottomLeft: Radius.circular(10),
-                                        topLeft: Radius.circular(10))),
-                                width: width / 2.4,
+                              ClipRRect(
+                                       borderRadius: const BorderRadius.only(
+                                          bottomLeft: Radius.circular(10),
+                                          topLeft: Radius.circular(10)),
+                                child: CachedNetworkImage(
+                                      width: width / 2.4,
+                                  fit: BoxFit.cover,
+                                  imageUrl:  "${ApiUrls.imagegettingUrl}${data.vehicleId.images[0]}",
+                                  placeholder:(context, url) =>  Shimmer.fromColors(
+                                    baseColor: shimmerbaseColor,
+                                    highlightColor: shimmerhighlightColor,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: NetworkImage(
+                                                url ),
+                                              fit: BoxFit.cover),
+                                          borderRadius: const BorderRadius.only(
+                                              bottomLeft: Radius.circular(10),
+                                              topLeft: Radius.circular(10))),
+                                      width: width / 2.4,
+                                    ),
+                                  ),
+                                ),
                               ),
                               Container(
                                   padding: const EdgeInsets.only(right: 10),

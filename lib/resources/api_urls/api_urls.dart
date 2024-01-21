@@ -13,7 +13,7 @@ class ApiUrls {
   static const String changepassword = '$userUrl/change-password';
   static const String bookVehicle = "$userUrl/book-vehicle";
   static const String getBooking = "$userUrl/user-booking";
-  static const String cancelBooking = '$userUrl/cancel-booking';
+  static const String cancelBooking = '$userUrl/cancel-booking';    
   static const String getAllVehicles = '$userUrl/getVehicles';
   static const String forgetPassword = '$userUrl/forgot-password';
   static const String resetPassword = '$userUrl/reset-password/';
