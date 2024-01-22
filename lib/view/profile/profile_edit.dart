@@ -64,18 +64,21 @@ class ProfileEditScreen extends StatelessWidget {
                                 ? CircleAvatar(
                                     backgroundColor: black.withOpacity(0.2),
                                     radius: 80,
-                                    child: CachedNetworkImage(
-                                      imageUrl:
-                                          "${ApiUrls.imagegettingUrl}${logedUser.profile}",
-                                      placeholder: (context, url) =>
-                                          Shimmer.fromColors(
-                                        baseColor: shimmerbaseColor,
-                                        highlightColor: shimmerhighlightColor,
-                                        child: CircleAvatar(
-                                          backgroundImage: NetworkImage(url),
-                                          backgroundColor:
-                                              black.withOpacity(0.2),
-                                          radius: 80,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(80),
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                            "${ApiUrls.imagegettingUrl}${logedUser.profile}",
+                                        placeholder: (context, url) =>
+                                            Shimmer.fromColors(
+                                          baseColor: shimmerbaseColor,
+                                          highlightColor: shimmerhighlightColor,
+                                          child: CircleAvatar(
+                                            backgroundImage: NetworkImage(url),
+                                            backgroundColor:
+                                                black.withOpacity(0.2),
+                                            radius: 80,
+                                          ),
                                         ),
                                       ),
                                     ),

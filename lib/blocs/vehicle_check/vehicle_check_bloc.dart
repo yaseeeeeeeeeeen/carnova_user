@@ -165,12 +165,10 @@ class VehicleCheckBloc extends Bloc<VehicleCheckEvent, VehicleCheckState> {
       "vehicleId": event.vehicleId,
       "location": event.location
     };
-    print(data);
     final response = await BookingRepo().checkVehicleAvaliblity(data);
     response.fold((left) {
       emit(CheckVehicleAvalibleFailed(messege: left.message));
     }, (right) {
-      print(right);
       if (right == false) {
         emit(CheckVehicleAvalibleSuccess());
       } else if (right == true) {

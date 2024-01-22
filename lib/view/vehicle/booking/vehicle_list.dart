@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 
+// ignore: must_be_immutable
 class FetchedVehicles extends StatelessWidget {
   List<Vehicle> vehicles;
   String location;

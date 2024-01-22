@@ -51,20 +51,9 @@ class HomeScreen extends StatelessWidget {
                         options: CarouselOptions(
                           height: heigth / 3,
                           viewportFraction: 1,
-                          autoPlayInterval: const Duration(seconds: 10),
+                          autoPlayInterval: const Duration(seconds: 8),
                           autoPlay: true,
                         )),
-                // : SizedBox(
-                //     height: heigth / 3,
-                //     width: double.maxFinite - 30,
-                //     child: ListView.builder(
-                //       itemCount: activeVehicles.length,
-                //       itemBuilder: (context, index) =>
-                //           ActivatedVehicle(data: activeVehicles[index]),
-                //       scrollDirection: Axis.horizontal,
-                //       shrinkWrap: true,
-                //     ),
-                //   ),
                 const SizedBox(height: 10),
                 HomeTitles(titles: "See Vehicles"),
                 const SizedBox(height: 10),

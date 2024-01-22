@@ -54,7 +54,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       locator<VehicleCheckBloc>().activeVehicles = [];
       emit(LoginSuccsess());
     }, (right) {
-      print("DATA FROM LOGIN $right");
       DateTime currentDate = DateTime.now();
       DateFormat('yyyy-MM-dd').format(currentDate);
       final List vehicleList = right as List;

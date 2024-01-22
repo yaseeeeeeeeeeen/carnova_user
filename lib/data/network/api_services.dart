@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/data/shared_preferance/sharedprefrance.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/utils/app_exceptions.dart';
@@ -114,7 +113,6 @@ class ApiService {
     final body = jsonEncode(data);
     try {
       final response = await http.post(uri, body: body, headers: header);
-      print(response.statusCode);
       final responseBody = getResponse(response);
       return Right(responseBody);
     } on SocketException {

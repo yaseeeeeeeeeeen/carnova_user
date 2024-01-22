@@ -30,13 +30,13 @@ class ProfileCardWid extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Hero(
-            tag: "profilePhoto",
+            tag: "profilePhoto",  
             child: logedUser.profile!.isNotEmpty
-                ? CircleAvatar(
-                    radius: heigth / 13,
+                ? ClipRRect(
+                    borderRadius: BorderRadius.circular(150),
                     child: CachedNetworkImage(
-                      
                       fit: BoxFit.cover,
+                      height: heigth / 7,
                       imageUrl:
                           "${ApiUrls.imagegettingUrl}${logedUser.profile}",
                       placeholder: (context, url) => Shimmer.fromColors(

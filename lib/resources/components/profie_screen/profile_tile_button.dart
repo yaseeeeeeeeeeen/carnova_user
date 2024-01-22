@@ -2,7 +2,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:carnova_user/resources/constant/colors_userside.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 

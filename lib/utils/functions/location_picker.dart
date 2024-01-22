@@ -4,9 +4,10 @@ import 'package:geolocator/geolocator.dart';
 class LocationPickerFunction {
   Position? _currentLocation;
   //late String _currentAddress = '';
-  List<String> Locationnames = [];
+  List<String> locationnames = [];
   bool _serviceEnabled = false;
   late LocationPermission _permission;
+  // ignore: body_might_complete_normally_nullable
   Future<Position?> getCurrentLocation() async {
     _serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!_serviceEnabled) {

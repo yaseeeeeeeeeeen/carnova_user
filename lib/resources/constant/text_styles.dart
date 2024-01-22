@@ -7,12 +7,16 @@ TextStyle normalSizePoppins = TextStyle(
   fontFamily: "Poppins",
 );
 
+TextStyle normalSizePoppinsWhite =
+    TextStyle(color: mainColorU, fontFamily: "Poppins");
 //Home screen
 TextStyle activeVehicle1 = TextStyle(
     color: black,
     fontSize: 20,
     fontWeight: FontWeight.w500,
     fontFamily: "Poppins");
+
+
 
 TextStyle activeVehicle2 = TextStyle(
     color: black,
@@ -109,13 +113,13 @@ TextStyle style1 = const TextStyle(
   fontWeight: FontWeight.w400,
 );
 
-TextStyle style5 =  TextStyle(
+TextStyle style5 = TextStyle(
   fontFamily: "Poppins",
   color: black,
   fontSize: 16,
   fontWeight: FontWeight.w500,
 );
-TextStyle style6 =  TextStyle(
+TextStyle style6 = TextStyle(
   fontFamily: "Poppins",
   color: black,
   fontSize: 14,
@@ -143,7 +147,7 @@ TextStyle navbartitle = const TextStyle(
   fontSize: 15,
 );
 
-TextStyle changePasswordFont =  TextStyle(
+TextStyle changePasswordFont = TextStyle(
   color: black,
   fontSize: 15,
   fontFamily: "Poppins",
@@ -179,7 +183,7 @@ TextStyle poppins600 = const TextStyle(
   fontFamily: "Poppins",
 );
 
-TextStyle boldPoppins =  TextStyle(
+TextStyle boldPoppins = TextStyle(
   fontWeight: FontWeight.bold,
   color: black,
   fontFamily: "Poppins",

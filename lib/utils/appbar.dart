@@ -1,13 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
+import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/utils/profile_sheet.dart';
 import 'package:carnova_user/view/home_screen.dart';
-import 'package:path/path.dart';
 import 'package:shimmer/shimmer.dart';
 
 PreferredSizeWidget customAppBarU(context) {
@@ -31,22 +30,26 @@ PreferredSizeWidget customAppBarU(context) {
           },
           child: logedUser.profile!.isNotEmpty
               ? CircleAvatar(
-                child: CachedNetworkImage(
-                  imageUrl: "${ApiUrls.imagegettingUrl}${logedUser.profile}",
-                  placeholder:(context, url) =>  Shimmer.fromColors(
-                  baseColor: shimmerbaseColor,
-                  highlightColor: shimmerhighlightColor,
-                    child: CircleAvatar(
-                        backgroundImage:
-                            NetworkImage(url),
-                        // backgroundColor: Colors.black,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(150),
+                    child: CachedNetworkImage(
+                      fit: BoxFit.cover,
+                      imageUrl:
+                          "${ApiUrls.imagegettingUrl}${logedUser.profile}",
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: shimmerbaseColor,
+                        highlightColor: shimmerhighlightColor,
+                        child: CircleAvatar(
+                          backgroundImage: NetworkImage(url),
+                          // backgroundColor: Colors.black,
+                        ),
                       ),
+                    ),
                   ),
-                ),
-              )
+                )
               : CircleAvatar(
                   backgroundImage: AssetImage(imageU.profileDemo),
-                  backgroundColor: Colors.black,
+                  backgroundColor: black,
                 ),
         ),
         const SizedBox(width: 10),
@@ -66,9 +69,9 @@ PreferredSizeWidget customAppBarText(
               () {
                 Navigator.of(context).pop();
               },
-          icon: const Icon(Icons.arrow_back_outlined, color: Colors.white)),
+          icon: Icon(Icons.arrow_back_outlined, color: mainColorU)),
       backgroundColor: appbarColorU,
       centerTitle: true,
       elevation: 0,
-      title: Text(title, style: GoogleFonts.poppins()));
+      title: Text(title, style: normalSizePoppinsWhite));
 }

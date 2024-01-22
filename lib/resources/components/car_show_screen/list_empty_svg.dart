@@ -42,6 +42,7 @@ class ListIsEmpty extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class VehicleLocationEmpty extends StatelessWidget {
   VehicleLocationEmpty({super.key, required this.location});
   String location;

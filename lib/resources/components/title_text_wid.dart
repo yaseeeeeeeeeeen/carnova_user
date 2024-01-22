@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,9 +13,7 @@ class HomeTitles extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(left: 5),
-      child: Text(titles,
-          style: GoogleFonts.poppins(
-              color: textColorU, fontSize: 18, fontWeight: FontWeight.bold)),
+      child: Text(titles, style: activeVehicle2),
     );
   }
 }

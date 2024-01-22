@@ -13,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
 
+// ignore: must_be_immutable
 class AllVehiclesList extends StatelessWidget {
   AllVehiclesList({super.key, required this.datas});
   List<Vehicle2> datas;

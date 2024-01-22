@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -11,6 +13,7 @@ class Permissions {
   Future<void> locationPermissionChecking(BuildContext context) async {
     _serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!_serviceEnabled) {
+   
       ScaffoldMessenger.of(context).showSnackBar(customSnackbar(
         context,
         false,

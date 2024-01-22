@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DropDownWid extends StatefulWidget {
-  DropDownWid(
+  const DropDownWid(
       {super.key,
       required this.listIndex,
       required this.controller,

@@ -3,6 +3,7 @@ import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CarListTile extends StatelessWidget {
   CarListTile({super.key, required this.data});
   Vehicle data;

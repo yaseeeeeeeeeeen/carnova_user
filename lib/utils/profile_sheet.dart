@@ -3,6 +3,7 @@ import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/view/login_signup/change_password.dart';
+import 'package:carnova_user/view/policies/terms_and_condition.dart';
 import 'package:carnova_user/view/profile/profile_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
@@ -22,33 +23,33 @@ Widget bottomsheetWid(double height, context) {
             image: DecorationImage(
                 image: AssetImage(imageU.profileBg), fit: BoxFit.cover),
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Colors.black, width: 1),
-            color: Colors.white,
+            border: Border.all(color: black, width: 1),
+            color: mainColorU,
           ),
           height: height / 6,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              CircleAvatar(
-                radius: 47,
-                backgroundColor: black,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(150),
                 child: logedUser.profile!.isNotEmpty
                     ? CachedNetworkImage(
-                      imageUrl:   "${ApiUrls.imagegettingUrl}${logedUser.profile}",
-                      placeholder:(context, url) =>  Shimmer.fromColors(
-                        baseColor: shimmerbaseColor,
-                        highlightColor: shimmerhighlightColor,
-                        child: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                            url  ),
-                            radius: 45,
-                            backgroundColor: Colors.black),
-                      ),
-                    )
+                        height: height / 8,
+                        imageUrl:
+                            "${ApiUrls.imagegettingUrl}${logedUser.profile}",
+                        placeholder: (context, url) => Shimmer.fromColors(
+                          baseColor: shimmerbaseColor,
+                          highlightColor: shimmerhighlightColor,
+                          child: CircleAvatar(
+                              backgroundImage: NetworkImage(url),
+                              radius: 45,
+                              backgroundColor: black),
+                        ),
+                      )
                     : CircleAvatar(
                         backgroundImage: AssetImage(imageU.profileDemo),
                         radius: 45,
-                        backgroundColor: Colors.black),
+                        backgroundColor: black),
               ),
               Container(
                 width: MediaQuery.sizeOf(context).width / 1.6,
@@ -79,7 +80,12 @@ Widget bottomsheetWid(double height, context) {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => ChangePasswordScreen()));
           }),
-      ListTilePwid(title: "Terms & condition", onTap: () {}),
+      ListTilePwid(
+          title: "Terms & condition",
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const TermsAndConditionScreen()));
+          }),
       ListTilePwid(title: "About", onTap: () {}),
       const SizedBox(height: 5)
     ]),
