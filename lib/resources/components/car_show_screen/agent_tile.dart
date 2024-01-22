@@ -1,5 +1,6 @@
 import 'package:carnova_user/modals/fetch_modal.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
+import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/view/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +17,8 @@ class CarAgentTile extends StatelessWidget {
     double width = MediaQuery.sizeOf(context).width;
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey.shade300),
-          color: Colors.white,
+          border: Border.all(color: borderSide),
+          color: mainColorU,
           borderRadius: BorderRadius.circular(10)),
       margin: const EdgeInsets.only(top: 5, bottom: 5),
       height: heigth / 10,
@@ -66,7 +67,7 @@ class CarAgentTile extends StatelessWidget {
             child: vehicledata.hostDetails.profile.isNotEmpty
                 ? CircleAvatar(
                     backgroundImage: NetworkImage(
-                        "${ApiUrls.baseUrl}/${vehicledata.hostDetails.profile}"),
+                        "${ApiUrls.imagegettingUrl}${vehicledata.hostDetails.profile}"),
                   )
                 : CircleAvatar(
                     backgroundImage: AssetImage(imageU.profileDemo),

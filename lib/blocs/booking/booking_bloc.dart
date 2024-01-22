@@ -37,7 +37,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       'amount': event.grandTotal * 100,
       'name': 'Carnova .pvt',
       'description': 'Rental Car Solution',
-      'prefill': {'contact': '8848917803', 'email': 'test@razorpay.com'}
+      'prefill': {'contact': '8848917803', 'email': 'carnovacarrentalls@gmail.com'}
     };
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);

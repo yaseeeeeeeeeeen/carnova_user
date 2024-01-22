@@ -76,7 +76,7 @@ class AllVehileDetaisScreen extends StatelessWidget {
               HomeTitles(titles: "Contact"),
               Container(
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade300),
+                    border: Border.all(color: borderSide),
                     color: mainColorU,
                     borderRadius: BorderRadius.circular(10)),
                 margin: const EdgeInsets.only(top: 5, bottom: 5),

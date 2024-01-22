@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carnova_user/data/get_it/get_it.dart';
+import 'package:carnova_user/modals/booked_vehicle.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:flutter/material.dart';
@@ -7,38 +7,36 @@ import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ActivatedVehicle extends StatelessWidget {
-  ActivatedVehicle({super.key});
-  final vehicles = getActiveVehicles();
+  ActivatedVehicle({super.key,required this.data});
+  BookedVehicle data;
   @override
   Widget build(BuildContext context) {
-    /// just added in vehicle data list
-    final data = vehicles[0];
-    ////////////////////////////////////////////////////////////////
+
+
     double heigth = MediaQuery.sizeOf(context).height;
     return Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Colors.white,
-            border: Border.all(color: Colors.grey.shade300, width: 1)),
+            color: mainColorU,
+            border: Border.all(color: borderSide, width: 1)),
         height: heigth / 3,
         child: Column(children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(5),
             child: CachedNetworkImage(
-               fit: BoxFit.cover,height: heigth / 4.5,
-              imageUrl:  "${ApiUrls.imagegettingUrl}${data.vehicleId.images[0]}",
-              placeholder:(context, url) =>  Shimmer.fromColors(
+              fit: BoxFit.cover,
+              height: heigth / 4.5,
+              imageUrl: "${ApiUrls.imagegettingUrl}${data.vehicleId.images[0]}",
+              placeholder: (context, url) => Shimmer.fromColors(
                 baseColor: shimmerbaseColor,
                 highlightColor: shimmerhighlightColor,
                 child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        color: Colors.black,
+                        color: black,
                         image: DecorationImage(
-                            image: NetworkImage(
-                              url ),
-                            fit: BoxFit.cover)),
+                            image: NetworkImage(url), fit: BoxFit.cover)),
                     height: heigth / 4.5),
               ),
             ),

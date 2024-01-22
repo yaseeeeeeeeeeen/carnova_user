@@ -18,9 +18,8 @@ class HistoryCharList extends StatelessWidget {
       color: scaffoldBg,
       padding: const EdgeInsets.all(10),
       height: heigth,
-      child: historyOfbooking.isEmpty
-          ? const ListIsEmpty()
-          : ListView.separated(
+      child:
+          ListView.separated(
               physics: const BouncingScrollPhysics(),
               separatorBuilder: (context, index) => const SizedBox(height: 10),
               shrinkWrap: true,
@@ -40,21 +39,23 @@ class HistoryCharList extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               ClipRRect(
-                                       borderRadius: const BorderRadius.only(
-                                          bottomLeft: Radius.circular(10),
-                                          topLeft: Radius.circular(10)),
+                                borderRadius: const BorderRadius.only(
+                                    bottomLeft: Radius.circular(10),
+                                    topLeft: Radius.circular(10)),
                                 child: CachedNetworkImage(
-                                      width: width / 2.4,
+                                  height: heigth / 7.3,
+                                  width: width / 2.4,
                                   fit: BoxFit.cover,
-                                  imageUrl:  "${ApiUrls.imagegettingUrl}${data.vehicleId.images[0]}",
-                                  placeholder:(context, url) =>  Shimmer.fromColors(
+                                  imageUrl:
+                                      "${ApiUrls.imagegettingUrl}${data.vehicleId.images[0]}",
+                                  placeholder: (context, url) =>
+                                      Shimmer.fromColors(
                                     baseColor: shimmerbaseColor,
                                     highlightColor: shimmerhighlightColor,
                                     child: Container(
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
-                                              image: NetworkImage(
-                                                url ),
+                                              image: NetworkImage(url),
                                               fit: BoxFit.cover),
                                           borderRadius: const BorderRadius.only(
                                               bottomLeft: Radius.circular(10),

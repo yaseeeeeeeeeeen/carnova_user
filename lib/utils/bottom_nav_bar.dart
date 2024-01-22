@@ -148,7 +148,7 @@ class HomePageState extends State<CustomNavBar> {
   List<Widget> screens = [
     const HomeScreen(),
     FindVehicleU(),
-    const HistoryScreen(),
+     HistoryScreen(),
     const UserProfile(),
   ];
 }

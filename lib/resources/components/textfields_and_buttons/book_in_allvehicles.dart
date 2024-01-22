@@ -3,10 +3,13 @@
 import 'package:carnova_user/blocs/vehicle_check/vehicle_check_bloc.dart';
 import 'package:carnova_user/blocs/vehicle_check/vehicle_check_state.dart';
 import 'package:carnova_user/modals/all_vehicle_list_modal.dart';
+import 'package:carnova_user/modals/fetch_modal.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
 import 'package:carnova_user/utils/snack_bar.dart';
+import 'package:carnova_user/view/vehicle/booking/booking_confirm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
@@ -71,22 +74,32 @@ class AllVehicleScreenBottom extends StatelessWidget {
                                       color: mainColorU,
                                       border: Border.all(color: borderSide),
                                     ),
-                                    height: media.height / 3,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Text(
-                                          "This Vehicle Avalible Have Already A Booking",
-                                          style: cardtitle,
-                                        ),
-                                        MyLoadingButton(
-                                            title: "Go Back",
-                                            isLoading: false,
-                                            onTap: () {
-                                              Navigator.of(context).pop();
-                                            })
-                                      ],
+                                    height: media.height / 2.4,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          SizedBox(
+                                            height: media.height / 3.8,
+                                            child: SvgPicture.asset(
+                                                "assets/svg/Calendar-rafiki.svg",
+                                                fit: BoxFit.contain),
+                                          ),
+                                          Text(
+                                            "This Vehicle Avalible Have Already A Booking",
+                                            style: cardtitle,
+                                          ),
+                                          //  const SizedBox(height: 20),
+                                          MyLoadingButton(
+                                              title: "Go Back",
+                                              isLoading: false,
+                                              onTap: () {
+                                                Navigator.of(context).pop();
+                                              })
+                                        ],
+                                      ),
                                     ),
                                   );
                                 } else if (state
@@ -97,18 +110,35 @@ class AllVehicleScreenBottom extends StatelessWidget {
                                       color: mainColorU,
                                       border: Border.all(color: borderSide),
                                     ),
-                                    height: media.height / 3,
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          "This Vehicle Avalible You can book",
-                                          style: cardtitle,
-                                        ),
-                                        MyLoadingButton(
-                                            title: "Book Now",
-                                            isLoading: false,
-                                            onTap: () {})
-                                      ],
+                                    height: media.height / 2.4,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          SizedBox(
+                                            height: media.height / 3.8,
+                                            child: SvgPicture.asset(
+                                                "assets/svg/By my car-bro.svg",
+                                                fit: BoxFit.contain),
+                                          ),
+                                          Text(
+                                            "This Vehicle Avalible Now...!",
+                                            style: cardtitle,
+                                          ),
+                                          MyLoadingButton(
+                                              title: "Book Now",
+                                              isLoading: false,
+                                              onTap: () {
+                                                navigatepaymentScreen(
+                                                    vehicle,
+                                                    startDate,
+                                                    endDate,
+                                                    context);
+                                              })
+                                        ],
+                                      ),
                                     ),
                                   );
                                 } else if (state is DeffultCalanderState) {
@@ -273,5 +303,40 @@ class AllVehicleScreenBottom extends StatelessWidget {
         ],
       ),
     ));
+  }
+
+  navigatepaymentScreen(Vehicle2 vehicle, String start, String end, context) {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => PaymentScreen(
+            vehicle: Vehicle(
+                id: vehicle.id,
+                name: vehicle.name,
+                seat: vehicle.seat,
+                price: vehicle.price.toDouble(),
+                model: vehicle.model,
+                transmission: vehicle.transmission,
+                brand: vehicle.brand,
+                fuel: vehicle.fuel,
+                location: vehicle.location,
+                lat: vehicle.lat,
+                long: vehicle.long,
+                createdBy: vehicle.createdBy.id,
+                images: vehicle.images,
+                isVerified: vehicle.isVerified,
+                review: [],
+                v: vehicle.v,
+                document: vehicle.document,
+                hostDetails: HostDetails(
+                    id: vehicle.createdBy.id,
+                    name: vehicle.createdBy.name,
+                    email: vehicle.createdBy.email,
+                    phone: vehicle.createdBy.phone,
+                    password: vehicle.createdBy.password,
+                    isBlocked: vehicle.createdBy.isBlocked,
+                    isVerified: vehicle.createdBy.isVerified,
+                    v: vehicle.createdBy.v,
+                    profile: vehicle.createdBy.profile)),
+            startingDate: startDate,
+            endingDate: endDate)));
   }
 }

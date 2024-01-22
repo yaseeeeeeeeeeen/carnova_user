@@ -19,8 +19,8 @@ class ProfileCardWid extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey.shade300),
-        color: Colors.white,
+        border: Border.all(color: borderSide),
+        color: mainColorU,
       ),
       padding: const EdgeInsets.all(10),
       height: heigth / 3.4,
@@ -51,7 +51,7 @@ class ProfileCardWid extends StatelessWidget {
                     ),
                   )
                 : CircleAvatar(
-                    backgroundColor: Colors.white,
+                    backgroundColor: mainColorU,
                     radius: heigth / 13,
                     backgroundImage: AssetImage(imageU.profileDemo)),
           ),

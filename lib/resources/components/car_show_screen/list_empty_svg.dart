@@ -12,23 +12,32 @@ class ListIsEmpty extends StatelessWidget {
     double heigth = MediaQuery.sizeOf(context).height;
     double width = MediaQuery.sizeOf(context).width;
     return Center(
-        child: Column(
-      children: [
-        SizedBox(
-          height: heigth / 2,
-          width: width / 1.5,
-          child: SvgPicture.asset("assets/svg/Car rental-amico (1).svg"),
-        ),
-        MyLoadingButton(
-          title: "Unlock Your Ride",
-          isLoading: false,
-          onTap: () {
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => CustomNavBar(index: 1)),
-                (route) => false);
-          },
-        )
-      ],
+        child: Padding(
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        children: [
+          SizedBox(
+            height: heigth / 2,
+            width: width / 1.5,
+            child: SvgPicture.asset("assets/svg/Car rental-amico (1).svg"),
+          ),
+          Text(
+              "Zero bookings, infinite possibilities! Your car rental adventure is just a click away",
+              textAlign: TextAlign.center,
+              style: cardtitle),
+          const SizedBox(height: 15),
+          MyLoadingButton(
+            title: "Unlock Your Ride",
+            isLoading: false,
+            onTap: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                      builder: (context) => CustomNavBar(index: 1)),
+                  (route) => false);
+            },
+          )
+        ],
+      ),
     ));
   }
 }
