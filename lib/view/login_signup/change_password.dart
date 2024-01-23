@@ -1,6 +1,7 @@
 import 'package:carnova_user/blocs/password_settings/password_settings_bloc.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/my_textfield.dart';
+import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/utils/appbar.dart';
 import 'package:carnova_user/utils/snack_bar.dart';
@@ -21,7 +22,7 @@ class ChangePasswordScreen extends StatelessWidget {
       appBar: customAppBarText("Change Password", context, () {
         Navigator.of(context).pop();
       }),
-      backgroundColor: Colors.white,
+      backgroundColor: mainColorU,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

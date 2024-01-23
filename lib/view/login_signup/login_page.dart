@@ -55,12 +55,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                   color: black,
                                   borderRadius: BorderRadius.circular(30),
                                 ),
-                                child: Center(
-                                    child: Text(
-                                  "C",
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 40, color: Colors.white),
-                                )),
+                                child:const Center(
+                                      child:  Image(
+                                      image: AssetImage(
+                                          "assets/images/Frame 1.png"),
+                                      fit: BoxFit.cover)),
                               ),
                             ),
 

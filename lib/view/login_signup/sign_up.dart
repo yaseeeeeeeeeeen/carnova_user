@@ -56,12 +56,11 @@ class SignupScreen extends StatelessWidget {
                                     color: black,
                                     borderRadius: BorderRadius.circular(30),
                                   ),
-                                  child: Center(
-                                      child: Text(
-                                    "C",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 40, color: mainColorU),
-                                  )),
+                                  child: const Center(
+                                      child:  Image(
+                                      image: AssetImage(
+                                          "assets/images/Frame 1.png"),
+                                      fit: BoxFit.cover)),
                                 ),
                               ),
                               const SizedBox(height: 10),

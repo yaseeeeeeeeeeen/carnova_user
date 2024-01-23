@@ -25,9 +25,9 @@ class ForgotPasswordScreen extends StatelessWidget {
         // centerTitle: true,
         leading: GestureDetector(
           onTap: () => Navigator.pop(context),
-          child: const Icon(
+          child: Icon(
             Icons.arrow_back_ios_new_rounded,
-            color: Colors.black,
+            color: black,
           ),
         ),
         title: Text(
@@ -63,12 +63,10 @@ class ForgotPasswordScreen extends StatelessWidget {
                         color: black,
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      child: Center(
-                          child: Text(
-                        "C",
-                        style: GoogleFonts.poppins(
-                            fontSize: 40, color: Colors.white),
-                      )),
+                      child: const Center(
+                          child: Image(
+                              image: AssetImage("assets/images/Frame 1.png"),
+                              fit: BoxFit.cover)),
                     )),
                 const SizedBox(height: 25),
                 Text(
@@ -85,9 +83,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 25),
                 BlocConsumer<LoginBloc, LoginState>(
-                  listener: (context, state) {
-                   
-                  },
+                  listener: (context, state) {},
                   builder: (context, state) {
                     return MyLoadingButton(
                         onTap: () {
