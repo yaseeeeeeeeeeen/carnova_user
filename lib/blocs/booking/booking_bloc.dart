@@ -37,7 +37,10 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       'amount': event.grandTotal * 100,
       'name': 'Carnova .pvt',
       'description': 'Rental Car Solution',
-      'prefill': {'contact': '8848917803', 'email': 'carnovacarrentalls@gmail.com'}
+      'prefill': {
+        'contact': '8848917803',
+        'email': 'carnovacarrentalls@gmail.com'
+      }
     };
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
@@ -90,14 +93,13 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
         final startDate = DateTime.parse(element.startDate);
         final endDate = DateTime.parse(element.endDate);
         return startDate.isBefore(currentDate) &&
-            endDate.isAfter(currentDate) &&
-            element.status == "Booked";
+                endDate.isAfter(currentDate) ||
+            endDate.isAtSameMomentAs(currentDate) && element.status == "Booked";
       }).toList();
       replaceActive(data2);
       emit(FetchedVehicleData());
     });
   }
-
   FutureOr<void> cancelBooking(
       CancelBooking event, Emitter<BookingState> emit) async {
     emit(BookingLoadingState());

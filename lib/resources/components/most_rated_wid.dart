@@ -27,30 +27,27 @@ class MostRatedDemo extends StatelessWidget {
       child: GestureDetector(
           child: Column(
         children: [
-          Hero(
-            tag: vehicledata.vehicleId.name,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-              child: CachedNetworkImage(
-                width: width / 1.5 - 10,
-                height: heigth / 6,
-                fit: BoxFit.cover,
-                imageUrl:
-                    "${ApiUrls.imagegettingUrl}${vehicledata.vehicleId.images[0]}",
-                placeholder: (context, url) => Shimmer.fromColors(
-                  baseColor: shimmerbaseColor,
-                  highlightColor: shimmerhighlightColor,
-                  child: Container(
-                    width: width / 1.5 - 10,
-                    height: heigth / 6,
-                    decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10)),
-                        image: DecorationImage(
-                            image: NetworkImage(url), fit: BoxFit.cover)),
-                  ),
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+            child: CachedNetworkImage(
+              width: width / 1.5 - 10,
+              height: heigth / 6,
+              fit: BoxFit.cover,
+              imageUrl:
+                  "${ApiUrls.imagegettingUrl}${vehicledata.vehicleId.images[0]}",
+              placeholder: (context, url) => Shimmer.fromColors(
+                baseColor: shimmerbaseColor,
+                highlightColor: shimmerhighlightColor,
+                child: Container(
+                  width: width / 1.5 - 10,
+                  height: heigth / 6,
+                  decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10)),
+                      image: DecorationImage(
+                          image: NetworkImage(url), fit: BoxFit.cover)),
                 ),
               ),
             ),

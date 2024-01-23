@@ -22,8 +22,7 @@ class HomeScreen extends StatelessWidget {
     final upcomingVehicles = getBookedVehicleList();
     double heigth = MediaQuery.sizeOf(context).height;
     if (upcomingVehicles.isEmpty && activeVehicles.isEmpty) {
-      /////////////////welcome screen//////////////////////////////////////
-      return const WelcomeScreen();
+          return const WelcomeScreen();
     }
     return Scaffold(
         backgroundColor: scaffoldBg,
@@ -63,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 upcomingVehicles.isEmpty
                     ? const SizedBox()
-                    : HomeTitles(titles: "Upcoming days Bookings"),
+                    : HomeTitles(titles: "Upcoming Bookings"),
                 const SizedBox(height: 10),
                 Container(
                   height: heigth / 4.3,

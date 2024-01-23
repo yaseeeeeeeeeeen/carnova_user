@@ -14,7 +14,7 @@ class CarDetailsCard extends StatelessWidget {
       "assets/svg/fuel-svgrepo-com.svg",
       "assets/svg/seat-belt-svgrepo-com.svg",
       "assets/svg/gearshift-gear-svgrepo-com.svg",
-      "assets/svg/star-svgrepo-com.svg"
+      // "assets/svg/star-svgrepo-com.svg"
     ];
     return SizedBox(
       height: 70,
@@ -23,7 +23,8 @@ class CarDetailsCard extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         separatorBuilder: (context, index) => const Divider(),
         itemBuilder: (context, index) {
-          if (index == svgPath.length - 1) {
+          ////// This Feature is Pending Adding time 4 Change to Svg length-1   /////////
+          if (index == 4) {
             return GestureDetector(
               onTap: () {
                 ScaffoldMessenger.of(context).showSnackBar(customSnackbar(
@@ -108,7 +109,7 @@ class CarDetailsCard extends StatelessWidget {
                   SvgPicture.asset(svgPath[index],
                       height: 25, width: 25, fit: BoxFit.cover),
                   const SizedBox(height: 5),
-                  index == svgPath.length - 3
+                  index == svgPath.length - 2
                       ? Text("${cardetails[index]} SEAT", style: style5)
                       : Text(cardetails[index], style: style5)
                 ],

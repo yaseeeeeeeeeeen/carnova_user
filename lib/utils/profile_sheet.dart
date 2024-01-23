@@ -86,7 +86,7 @@ Widget bottomsheetWid(double height, context) {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => const TermsAndConditionScreen()));
           }),
-      ListTilePwid(title: "About", onTap: () {}),
+      // ListTilePwid(title: "About", onTap: () {}),
       const SizedBox(height: 5)
     ]),
   );

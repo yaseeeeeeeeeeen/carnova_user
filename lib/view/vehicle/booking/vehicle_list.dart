@@ -106,6 +106,11 @@ class FetchedVehicles extends StatelessWidget {
                                         state.locationList[index]["placeName"];
                                     locationController.text =
                                         state.locationList[index]["placeName"];
+                                    context.read<VehicleCheckBloc>().add(
+                                        CheckAvaliblityButtonClicked(
+                                            startDate: startDate,
+                                            endDate: enddate,
+                                            location: locationController.text));
                                   },
                                   title: Text(
                                       state.locationList[index]["placeName"]),
