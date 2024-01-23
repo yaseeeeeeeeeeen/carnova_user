@@ -6,9 +6,9 @@
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 <uses-permission android:name="android.permission.CAMERA"/>
     <application
-        android:label="carnova_user"
+        android:label="Carnova"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/carnova_user">
         <activity
             android:name=".MainActivity"
             android:exported="true"
