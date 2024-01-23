@@ -81,11 +81,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       ForgetPasswordClicked event, Emitter<LoginState> emit) async {
     emit(LoadingState());
     final response = await UserLoginRepo().forgetPassword(event.email);
-    print(response);
-    response.fold((left) {
-      print(left.message);
-    }, (right) {
-      print(right);
-    });
+    response.fold((left) {}, (right) {});
   }
 }

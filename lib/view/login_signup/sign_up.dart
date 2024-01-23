@@ -10,7 +10,6 @@ import 'package:carnova_user/view/home_screen.dart';
 import 'package:carnova_user/view/login_signup/otp_verification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
 class SignupScreen extends StatelessWidget {
