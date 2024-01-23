@@ -58,12 +58,14 @@ class ImagePreviewWid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: mainColorU,
+      backgroundColor: scaffoldBg,
       appBar: customAppBarText("IMAGE PREVIEW", context, () {
         Navigator.of(context).pop();
       }),
-      body: Center(
-        child: Image(image: NetworkImage(imagePath)),
+      body: SizedBox(
+        height: MediaQuery.sizeOf(context).height,
+        width: MediaQuery.sizeOf(context).width,
+        child: InteractiveViewer(child: Image(image: NetworkImage(imagePath))),
       ),
     );
   }

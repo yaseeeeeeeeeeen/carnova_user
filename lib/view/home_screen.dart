@@ -44,16 +44,18 @@ class HomeScreen extends StatelessWidget {
                     : const SizedBox(height: 10),
                 activeVehicles.isEmpty
                     ? const SizedBox()
-                    : CarouselSlider.builder(
-                        itemCount: activeVehicles.length,
-                        itemBuilder: (context, index, realIndex) =>
-                            ActivatedVehicle(data: activeVehicles[index]),
-                        options: CarouselOptions(
-                          height: heigth / 3,
-                          viewportFraction: 1,
-                          autoPlayInterval: const Duration(seconds: 8),
-                          autoPlay: true,
-                        )),
+                    : activeVehicles.length == 1
+                        ? ActivatedVehicle(data: activeVehicles[0])
+                        : CarouselSlider.builder(
+                            itemCount: activeVehicles.length,
+                            itemBuilder: (context, index, realIndex) =>
+                                ActivatedVehicle(data: activeVehicles[index]),
+                            options: CarouselOptions(
+                              height: heigth / 3,
+                              viewportFraction: 1,
+                              autoPlayInterval: const Duration(seconds: 8),
+                              autoPlay: true,
+                            )),
                 const SizedBox(height: 10),
                 HomeTitles(titles: "See Vehicles"),
                 const SizedBox(height: 10),
@@ -61,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 upcomingVehicles.isEmpty
                     ? const SizedBox()
-                    : HomeTitles(titles: "Upcoming Bookings"),
+                    : HomeTitles(titles: "Upcoming days Bookings"),
                 const SizedBox(height: 10),
                 Container(
                   height: heigth / 4.3,

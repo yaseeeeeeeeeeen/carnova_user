@@ -7,7 +7,6 @@ import 'package:carnova_user/blocs/signup/signup_bloc.dart';
 import 'package:carnova_user/blocs/vehicle_check/vehicle_check_bloc.dart';
 import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/data/shared_preferance/sharedprefrance.dart';
-import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/view/splash_screen/splash_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: appbarColorU));
+        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => ProfileEditBloc()),

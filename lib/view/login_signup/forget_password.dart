@@ -1,3 +1,4 @@
+import 'package:carnova_user/blocs/login/login_bloc.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/my_textfield.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
@@ -5,6 +6,7 @@ import 'package:carnova_user/resources/constant/text_styles.dart';
 import 'package:carnova_user/utils/validations.dart';
 import 'package:carnova_user/view/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
@@ -82,7 +84,20 @@ class ForgotPasswordScreen extends StatelessWidget {
                   obscureText: false,
                 ),
                 const SizedBox(height: 25),
-                MyLoadingButton(onTap: () {}, title: "Send", isLoading: false)
+                BlocConsumer<LoginBloc, LoginState>(
+                  listener: (context, state) {
+                   
+                  },
+                  builder: (context, state) {
+                    return MyLoadingButton(
+                        onTap: () {
+                          context.read<LoginBloc>().add(ForgetPasswordClicked(
+                              email: emailController.text));
+                        },
+                        title: "Send",
+                        isLoading: state is LoadingState);
+                  },
+                )
               ],
             ),
           ),

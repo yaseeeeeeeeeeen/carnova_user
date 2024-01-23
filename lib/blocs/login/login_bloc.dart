@@ -69,8 +69,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         final startDate = DateTime.parse(element.startDate);
         final endDate = DateTime.parse(element.endDate);
         return startDate.isBefore(currentDate) &&
-            endDate.isAfter(currentDate) &&
-            element.status == "Booked";
+                endDate.isAfter(currentDate) ||
+            endDate.isAtSameMomentAs(currentDate) && element.status == "Booked";
       }).toList();
       emit(LoginSuccsess());
     });
@@ -81,6 +81,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       ForgetPasswordClicked event, Emitter<LoginState> emit) async {
     emit(LoadingState());
     final response = await UserLoginRepo().forgetPassword(event.email);
-    response.fold((left) {}, (right) {});
+    print(response);
+    response.fold((left) {
+      print(left.message);
+    }, (right) {
+      print(right);
+    });
   }
 }

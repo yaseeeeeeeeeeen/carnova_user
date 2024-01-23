@@ -17,6 +17,6 @@ class LoginFailedState extends LoginState {
 }
 
 class ForgetPasswordMailSended extends LoginState {
-  String id;
-  ForgetPasswordMailSended({required this.id});
+  String otp;
+  ForgetPasswordMailSended({required this.otp});
 }

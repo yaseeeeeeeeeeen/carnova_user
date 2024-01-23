@@ -5,6 +5,7 @@ import 'package:carnova_user/utils/bottom_nav_bar.dart';
 import 'package:carnova_user/utils/functions/permissions.dart';
 import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:carnova_user/view/home_screen.dart';
+import 'package:carnova_user/view/login_signup/change_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,7 +15,8 @@ import 'package:otp_text_field/otp_text_field.dart';
 
 // ignore: must_be_immutable
 class SignupOtpScreen extends StatelessWidget {
-  SignupOtpScreen({super.key, required this.email});
+  SignupOtpScreen({super.key, required this.email, this.otpOne});
+  String? otpOne;
   final String email;
   final otpController = TextEditingController();
   int? otp;
@@ -112,9 +114,22 @@ class SignupOtpScreen extends StatelessWidget {
                             isLoading: state is LoadingState,
                             onTap: () {
                               if (complete) {
-                                context
-                                    .read<OtpBloc>()
-                                    .add(OtpSubmitButtonClicked(intotp: otp!));
+                                if (otpOne != null) {
+                                  final otppp = int.parse(otpOne!);
+                                  if (otp == otppp) {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ChangePasswordScreen()));
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        customSnackbar(context, false,
+                                            "OTP WRONG TRY AGAIN"));
+                                  }
+                                } else {
+                                  context.read<OtpBloc>().add(
+                                      OtpSubmitButtonClicked(intotp: otp!));
+                                }
                               }
                             },
                           );

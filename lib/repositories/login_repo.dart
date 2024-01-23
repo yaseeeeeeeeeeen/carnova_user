@@ -9,7 +9,7 @@ class UserLoginRepo {
   }
 
   EitherResponse forgetPassword(String email) async {
-    Map<String, dynamic> data = {"email": email};
+    Map<String, String> data = {"email": email};
     String url = ApiUrls.forgetPassword;
     return ApiService.postApi(data, url);
   }

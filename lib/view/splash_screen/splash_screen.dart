@@ -78,6 +78,7 @@ class _SplashScreenState extends State<SplashScreen> {
       locator<VehicleCheckBloc>().allBookedVehicles = datas;
       //////////////////// DIVIED BOOKED AND NOT BOOKED////////////////////////////////
       final bookedonly = datas.where((element) {
+        
         return element.status == "Booked";
       }).toList();
       locator<VehicleCheckBloc>().bookedVehicles = bookedonly;
@@ -86,8 +87,8 @@ class _SplashScreenState extends State<SplashScreen> {
         final startDate = DateTime.parse(element.startDate);
         final endDate = DateTime.parse(element.endDate);
         return startDate.isBefore(currentDate) &&
-            endDate.isAfter(currentDate) &&
-            element.status == "Booked";
+                endDate.isAfter(currentDate) ||
+            endDate.isAtSameMomentAs(currentDate) && element.status == "Booked";
       }).toList();
     });
     Navigator.of(context).pushAndRemoveUntil(
