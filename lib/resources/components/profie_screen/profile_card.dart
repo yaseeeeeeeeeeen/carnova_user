@@ -48,6 +48,7 @@ class ProfileCardWid extends StatelessWidget {
                           child: Image.network(url),
                         ),
                       ),
+                      
                     ),
                   )
                 : CircleAvatar(
@@ -75,10 +76,7 @@ class ProfileCardWid extends StatelessWidget {
                   },
                   child: Text(
                     "Edit Profile",
-                    style: GoogleFonts.poppins(
-                        fontSize: 15,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
+                    style: boldPoppins15,
                   ))
             ],
           )

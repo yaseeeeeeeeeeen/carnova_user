@@ -188,6 +188,14 @@ TextStyle boldPoppins = TextStyle(
   color: black,
   fontFamily: "Poppins",
 );
+
+TextStyle boldPoppins15 = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 15,
+  color: black,
+  fontFamily: "Poppins",
+);
+
 TextStyle black07 = TextStyle(
   fontFamily: "Poppins",
   color: black.withOpacity(0.7),
