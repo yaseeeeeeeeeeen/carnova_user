@@ -16,8 +16,6 @@ TextStyle activeVehicle1 = TextStyle(
     fontWeight: FontWeight.w500,
     fontFamily: "Poppins");
 
-
-
 TextStyle activeVehicle2 = TextStyle(
     color: black,
     fontSize: 18,
@@ -36,8 +34,8 @@ TextStyle highlightLocation = const TextStyle(
     fontWeight: FontWeight.w500,
     fontFamily: "Poppins");
 
-TextStyle buttontextstyle = const TextStyle(
-    color: Colors.white,
+TextStyle buttontextstyle = TextStyle(
+    color: mainColorU,
     fontSize: 16,
     fontWeight: FontWeight.w400,
     fontFamily: "Poppins");

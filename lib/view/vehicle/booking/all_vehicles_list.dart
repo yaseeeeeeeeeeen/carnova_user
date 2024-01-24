@@ -2,6 +2,7 @@ import 'package:carnova_user/blocs/vehicle_check/vehicle_check_bloc.dart';
 import 'package:carnova_user/blocs/vehicle_check/vehicle_check_state.dart';
 import 'package:carnova_user/modals/all_vehicle_list_modal.dart';
 import 'package:carnova_user/resources/components/searched_title.dart';
+import 'package:carnova_user/resources/components/textfields_and_buttons/loading_button.dart';
 import 'package:carnova_user/resources/components/textfields_and_buttons/my_textfield.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
@@ -75,10 +76,7 @@ class AllVehiclesList extends StatelessWidget {
                       onTap: () {
                         showModalBottomSheet(
                             backgroundColor: scaffoldBg,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(20),
-                                    topLeft: Radius.circular(20))),
+                            shape: const LinearBorder(),
                             context: context,
                             builder: (context) => Padding(
                                   padding: const EdgeInsets.all(10),
@@ -116,8 +114,10 @@ class AllVehiclesList extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
-                                          ElevatedButton(
-                                              onPressed: () {
+                                          HalfSizeButton(
+                                              title: "RESET",
+                                              isLoading: false,
+                                              onTap: () {
                                                 priceNotifier.value = null;
                                                 fuelController.clear();
                                                 brandController.clear();
@@ -128,18 +128,11 @@ class AllVehiclesList extends StatelessWidget {
                                                         FilterResetButtonClicked(
                                                             datas: datas));
                                                 Navigator.of(context).pop();
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                  backgroundColor: appbarColorU,
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10)),
-                                                  fixedSize: Size(
-                                                      media.width / 2.2, 40)),
-                                              child: const Text("RESET")),
-                                          ElevatedButton(
-                                              onPressed: () {
+                                              }),
+                                          HalfSizeButton(
+                                              title: "DONE",
+                                              isLoading: false,
+                                              onTap: () {
                                                 if (priceNotifier.value !=
                                                     null) {
                                                   priceRange = priceNotifier
@@ -169,16 +162,7 @@ class AllVehiclesList extends StatelessWidget {
                                                                 fuelController
                                                                     .text));
                                                 Navigator.of(context).pop();
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10)),
-                                                  backgroundColor: appbarColorU,
-                                                  fixedSize: Size(
-                                                      media.width / 2.2, 40)),
-                                              child: const Text("DONE")),
+                                              }),
                                         ],
                                       )
                                     ],

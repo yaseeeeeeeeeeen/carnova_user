@@ -21,47 +21,50 @@ class CarDataBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
+        padding: const EdgeInsets.only(bottom: 0),
         child: Container(
-      height: 80,
-      color: appbarColorU.withOpacity(0.5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Center(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("₹$price", style: style2),
-                  Text("  Per Day",
-                      style: GoogleFonts.poppins(
-                          fontSize: 15, color: Colors.black54))
-                ]),
-          ),
-          const SizedBox(width: 30),
-          ElevatedButton(
-              onPressed: () {
-                DateTime start = DateFormat('EEEE, MMMM d, y').parse(startDate);
-                DateTime end = DateFormat('EEEE, MMMM d, y').parse(endDate);
-                String formattedStartDate =
-                    DateFormat('yyyy-MM-dd').format(start);
-                String formattedEndDate = DateFormat('yyyy-MM-dd').format(end);
+          height: 80,
+          color: appbarColorU.withOpacity(0.5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Center(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("₹$price", style: style2),
+                      Text("  Per Day",
+                          style: GoogleFonts.poppins(
+                              fontSize: 15, color: Colors.black54))
+                    ]),
+              ),
+              const SizedBox(width: 30),
+              ElevatedButton(
+                  onPressed: () {
+                    DateTime start =
+                        DateFormat('EEEE, MMMM d, y').parse(startDate);
+                    DateTime end = DateFormat('EEEE, MMMM d, y').parse(endDate);
+                    String formattedStartDate =
+                        DateFormat('yyyy-MM-dd').format(start);
+                    String formattedEndDate =
+                        DateFormat('yyyy-MM-dd').format(end);
 
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => PaymentScreen(
-                        vehicle: vehicle,
-                        startingDate: formattedStartDate,
-                        endingDate: formattedEndDate)));
-              },
-              style: ElevatedButton.styleFrom(
-                  fixedSize: const Size(130, 50),
-                  backgroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10))),
-              child: Text("Book Now", style: style4))
-        ],
-      ),
-    ));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => PaymentScreen(
+                            vehicle: vehicle,
+                            startingDate: formattedStartDate,
+                            endingDate: formattedEndDate)));
+                  },
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: const Size(130, 50),
+                      backgroundColor: black,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  child: Text("Book Now", style: style4))
+            ],
+          ),
+        ));
   }
 }
 

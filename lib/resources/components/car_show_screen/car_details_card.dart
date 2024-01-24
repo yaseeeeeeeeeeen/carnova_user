@@ -109,9 +109,19 @@ class CarDetailsCard extends StatelessWidget {
                   SvgPicture.asset(svgPath[index],
                       height: 25, width: 25, fit: BoxFit.cover),
                   const SizedBox(height: 5),
-                  index == svgPath.length - 2
-                      ? Text("${cardetails[index]} SEAT", style: style5)
-                      : Text(cardetails[index], style: style5)
+                  SizedBox(
+                    height: 20,
+                    width: 100,
+                    child: index == svgPath.length - 2
+                        ? Text("${cardetails[index]} SEAT",
+                            style: style5,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center)
+                        : Text(cardetails[index],
+                            style: style5,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center),
+                  )
                 ],
               ),
             );

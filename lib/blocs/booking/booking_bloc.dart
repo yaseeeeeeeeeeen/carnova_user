@@ -85,21 +85,24 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       final datas = vehicleList.map((e) => BookedVehicle.fromJson(e)).toList();
       replaceBookedHistory(datas);
       //////////////////// DIVIED BOOKED AND NOT BOOKED////////////////////////////////
-      final bookedonly =
-          datas.where((element) => element.status == "Booked").toList();
+      final bookedonly = datas.where((element) {
+        final endDate = DateTime.parse(element.endDate);
+        return endDate.isBefore(currentDate) && element.status == "Booked";
+      }).toList();
       replaceBookedList(bookedonly);
       ////////////////// ACTIVE VEHICLE SORTING/////////////////////////////////
       final data2 = datas.where((element) {
         final startDate = DateTime.parse(element.startDate);
         final endDate = DateTime.parse(element.endDate);
         return startDate.isBefore(currentDate) &&
-                endDate.isAfter(currentDate) ||
-            endDate.isAtSameMomentAs(currentDate) && element.status == "Booked";
+            endDate.isAfter(currentDate) &&
+            element.status == "Booked";
       }).toList();
       replaceActive(data2);
       emit(FetchedVehicleData());
     });
   }
+
   FutureOr<void> cancelBooking(
       CancelBooking event, Emitter<BookingState> emit) async {
     emit(BookingLoadingState());
