@@ -5,7 +5,6 @@ import 'package:carnova_user/utils/bottom_nav_bar.dart';
 import 'package:carnova_user/utils/functions/permissions.dart';
 import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:carnova_user/view/home_screen.dart';
-import 'package:carnova_user/view/login_signup/change_password.dart';
 import 'package:carnova_user/view/login_signup/reset_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

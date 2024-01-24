@@ -57,7 +57,8 @@ class CarDataBottomBar extends StatelessWidget {
                             endingDate: formattedEndDate)));
                   },
                   style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(130, 50),
+                      fixedSize:
+                          Size(MediaQuery.sizeOf(context).width / 2.2, 50),
                       backgroundColor: black,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),

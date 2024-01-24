@@ -51,21 +51,21 @@ class CarDataShow extends StatelessWidget {
               Hero(
                   tag: vehicleData.name,
                   child: ClipRRect(
-                     borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10),
                     child: CachedNetworkImage(
-                       height: heigth / 3.8,
+                      height: heigth / 3.8,
                       fit: BoxFit.cover,
-                      imageUrl: "${ApiUrls.imagegettingUrl}${vehicleData.images[0]}",
-                      placeholder:(context, url) =>  Shimmer.fromColors(
-                      baseColor: shimmerbaseColor,
-                      highlightColor: shimmerhighlightColor,  
+                      imageUrl:
+                          "${ApiUrls.imagegettingUrl}${vehicleData.images[0]}",
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: shimmerbaseColor,
+                        highlightColor: shimmerhighlightColor,
                         child: Container(
                             height: heigth / 3.8,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 image: DecorationImage(
-                                    image: NetworkImage(
-                                        url),
+                                    image: NetworkImage(url),
                                     fit: BoxFit.cover))),
                       ),
                     ),
