@@ -14,3 +14,15 @@ class ForgetPasswordClicked extends LoginEvent {
   String email;
   ForgetPasswordClicked({required this.email});
 }
+
+
+class ResetPasswordWithId extends LoginEvent {
+    String id;
+  String pass1;
+  String pass2;
+  ResetPasswordWithId({
+    required this.id,
+    required this.pass1,
+    required this.pass2,
+  });
+}

@@ -19,4 +19,9 @@ class UserLoginRepo {
     String url = "${ApiUrls.resetPassword}$id";
     return ApiService.patchApi(data, url);
   }
+    EitherResponse forgetPassChange(String pass1, String pass2, String id) async {
+    Map<String, dynamic> data = {"newpass": pass1, "confirmpass": pass2};
+    String url = "${ApiUrls.resetPassword}$id";
+    return ApiService.patchApi(data, url);
+  }
 }

@@ -21,6 +21,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginButtonClickedEvent>(loginButtonClickedEvent);
     on<BookingHistoryFetching>(bookingHistoryFetching);
     on<ForgetPasswordClicked>(forgetPasswordClicked);
+    on<ResetPasswordWithId>(resetPasswordWithId);
   }
 
   FutureOr<void> loginButtonClickedEvent(
@@ -61,8 +62,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       locator<VehicleCheckBloc>().allBookedVehicles = datas;
       //////////////////// DIVIED BOOKED AND NOT BOOKED////////////////////////////////
       final bookedonly = datas.where((element) {
-        final endDate = DateTime.parse(element.endDate);
-        return endDate.isBefore(currentDate) && element.status == "Booked";
+        return element.status == "Booked";
       }).toList();
       locator<VehicleCheckBloc>().bookedVehicles = bookedonly;
       ////////////////// ACTIVE VEHICLE SORTING/////////////////////////////////
@@ -85,7 +85,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     response.fold((left) {
       emit(LoginFailedState(messege: left.message));
     }, (right) {
-      print(right);
+      emit(ForgetPasswordMailSended(otp: right["otp"], id: right["u_id"]));
+    });
+  }
+
+  FutureOr<void> resetPasswordWithId(
+      ResetPasswordWithId event, Emitter<LoginState> emit) async {
+    emit(LoadingState());
+    final response = await UserLoginRepo()
+        .forgetPassChange(event.pass1, event.pass2, event.id);
+    response.fold((left) {
+      emit(LoginFailedState(messege: left.message));
+    }, (right) {
+      emit(PasswordResetedSuccsess());
     });
   }
 }

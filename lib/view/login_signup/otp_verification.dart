@@ -6,6 +6,7 @@ import 'package:carnova_user/utils/functions/permissions.dart';
 import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:carnova_user/view/home_screen.dart';
 import 'package:carnova_user/view/login_signup/change_password.dart';
+import 'package:carnova_user/view/login_signup/reset_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,8 +16,9 @@ import 'package:otp_text_field/otp_text_field.dart';
 
 // ignore: must_be_immutable
 class SignupOtpScreen extends StatelessWidget {
-  SignupOtpScreen({super.key, required this.email, this.otpOne});
+  SignupOtpScreen({super.key, required this.email, this.otpOne, this.otpOneId});
   String? otpOne;
+  String? otpOneId;
   final String email;
   final otpController = TextEditingController();
   int? otp;
@@ -29,9 +31,9 @@ class SignupOtpScreen extends StatelessWidget {
           shadowColor: Colors.transparent,
           elevation: 0,
           backgroundColor: Colors.transparent,
-          iconTheme: const IconThemeData(color: Colors.black),
+          iconTheme: IconThemeData(color: black),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: mainColorU,
         body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
@@ -55,13 +57,11 @@ class SignupOtpScreen extends StatelessWidget {
                               color: black,
                               borderRadius: BorderRadius.circular(30),
                             ),
-                            child: Center(
-                              child: Icon(
-                                color: mainColorU,
-                                Icons.person,
-                                size: 35,
-                              ),
-                            ),
+                            child: const Center(
+                                child: Image(
+                                    image:
+                                        AssetImage("assets/images/Frame 1.png"),
+                                    fit: BoxFit.cover)),
                           ),
                         ),
                         const SizedBox(height: 10),
@@ -120,7 +120,8 @@ class SignupOtpScreen extends StatelessWidget {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                ChangePasswordScreen()));
+                                                PasswordResetScreen(
+                                                    id: otpOneId!)));
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                         customSnackbar(context, false,

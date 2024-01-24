@@ -3,8 +3,10 @@ import 'package:carnova_user/resources/components/textfields_and_buttons/loading
 import 'package:carnova_user/resources/components/textfields_and_buttons/my_textfield.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
+import 'package:carnova_user/utils/snack_bar.dart';
 import 'package:carnova_user/utils/validations.dart';
 import 'package:carnova_user/view/home_screen.dart';
+import 'package:carnova_user/view/login_signup/otp_verification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -82,7 +84,19 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 25),
                 BlocConsumer<LoginBloc, LoginState>(
-                  listener: (context, state) {},
+                  listener: (context, state) {
+                    if (state is ForgetPasswordMailSended) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => SignupOtpScreen(
+                                email: emailController.text,
+                                otpOne: state.otp,
+                                otpOneId: state.id,
+                              )));
+                    } else if(state is LoginFailedState){
+                      ScaffoldMessenger.of(context).showSnackBar(customSnackbar(
+                          context, false, "Something Wrong Try Again...!"));
+                    }
+                  },
                   builder: (context, state) {
                     return MyLoadingButton(
                         onTap: () {
