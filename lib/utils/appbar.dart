@@ -41,7 +41,6 @@ PreferredSizeWidget customAppBarU(context) {
                         highlightColor: shimmerhighlightColor,
                         child: CircleAvatar(
                           backgroundImage: NetworkImage(url),
-                          // backgroundColor: Colors.black,
                         ),
                       ),
                     ),

@@ -1,7 +1,6 @@
 import 'package:carnova_user/data/get_it/get_it.dart';
 import 'package:carnova_user/resources/components/home_screen/all_vehicles_tile.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
-import 'package:carnova_user/view/vehicle/booking/booked_vehicle_scrn.dart';
 import 'package:carnova_user/view/vehicle/welcome_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +21,7 @@ class HomeScreen extends StatelessWidget {
     final upcomingVehicles = getBookedVehicleList();
     double heigth = MediaQuery.sizeOf(context).height;
     if (upcomingVehicles.isEmpty && activeVehicles.isEmpty) {
-          return const WelcomeScreen();
+      return const WelcomeScreen();
     }
     return Scaffold(
         backgroundColor: scaffoldBg,
@@ -71,9 +70,12 @@ class HomeScreen extends StatelessWidget {
                       physics: const BouncingScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return MostRatedDemo(
-                          index: index,
-                            vehicledata: upcomingVehicles[index]);
+                        return Hero(
+                          tag: index.toString(),
+                          child: MostRatedDemo(
+                              index: index,
+                              vehicledata: upcomingVehicles[index]),
+                        );
                       },
                       separatorBuilder: (context, index) =>
                           const SizedBox(width: 5),

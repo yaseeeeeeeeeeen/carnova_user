@@ -10,7 +10,7 @@ import 'package:shimmer/shimmer.dart';
 
 // ignore: must_be_immutable
 class MostRatedDemo extends StatelessWidget {
-  MostRatedDemo({super.key, required this.vehicledata,required this.index});
+  MostRatedDemo({super.key, required this.vehicledata, required this.index});
   // VehicleDataModal vehicledata;
   BookedVehicle vehicledata;
   int index;
@@ -27,66 +27,64 @@ class MostRatedDemo extends StatelessWidget {
             topLeft: Radius.circular(10), topRight: Radius.circular(10)),
       ),
       child: GestureDetector(
-        onTap: () {
-                                      Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => BookedVehiclesScreen(
-                                  index: index,
-                                    vehicle: vehicledata)));
-        },
-                 child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-            child: CachedNetworkImage(
-              width: width / 1.5 - 10,
-              height: heigth / 6,
-              fit: BoxFit.cover,
-              imageUrl:
-                  "${ApiUrls.imagegettingUrl}${vehicledata.vehicleId.images[0]}",
-              placeholder: (context, url) => Shimmer.fromColors(
-                baseColor: shimmerbaseColor,
-                highlightColor: shimmerhighlightColor,
-                child: Hero(
-                  tag: index.toString(),
-                  child: Container(
-                    width: width / 1.5 - 10,
-                    height: heigth / 6,
-                    decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10)),
-                        image: DecorationImage(
-                            image: NetworkImage(url), fit: BoxFit.cover)),
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) =>
+                    BookedVehiclesScreen(index: index, vehicle: vehicledata)));
+          },
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10)),
+                child: CachedNetworkImage(
+                  width: width / 1.5 - 10,
+                  height: heigth / 6,
+                  fit: BoxFit.cover,
+                  imageUrl:
+                      "${ApiUrls.imagegettingUrl}${vehicledata.vehicleId.images[0]}",
+                  placeholder: (context, url) => Shimmer.fromColors(
+                    baseColor: shimmerbaseColor,
+                    highlightColor: shimmerhighlightColor,
+                    child: Container(
+                      width: width / 1.5 - 10,
+                      height: heigth / 6,
+                      decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10)),
+                          image: DecorationImage(
+                              image: NetworkImage(url), fit: BoxFit.cover)),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-          Container(
-              color: mainColorU,
-              width: width / 1.5 - 10,
-              height: heigth / 16,
-              padding: const EdgeInsets.all(5),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Container(
+                  color: mainColorU,
+                  width: width / 1.5 - 10,
+                  height: heigth / 16,
+                  padding: const EdgeInsets.all(5),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(vehicledata.vehicleId.name, style: cardtitle),
-                        Text("₹${vehicledata.grandTotal}", style: cardtitle),
-                      ],
-                    ),
-                    SizedBox(
-                        child: Text(
-                      formattedDate,
-                      style: mailstyle,
-                    ))
-                  ]))
-        ],
-      )),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(vehicledata.vehicleId.name, style: cardtitle),
+                            Text("₹${vehicledata.grandTotal}",
+                                style: cardtitle),
+                          ],
+                        ),
+                        SizedBox(
+                            child: Text(
+                          formattedDate,
+                          style: mailstyle,
+                        ))
+                      ]))
+            ],
+          )),
     );
   }
 }

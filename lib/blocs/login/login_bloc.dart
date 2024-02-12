@@ -10,7 +10,6 @@ import 'package:carnova_user/modals/user_modal.dart';
 import 'package:carnova_user/repositories/booking_repo.dart';
 import 'package:carnova_user/repositories/login_repo.dart';
 import 'package:carnova_user/repositories/user_repo.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 part 'login_event.dart';
