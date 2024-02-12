@@ -15,7 +15,8 @@ import 'package:shimmer/shimmer.dart';
 // ignore: must_be_immutable
 class BookedVehiclesScreen extends StatelessWidget {
   BookedVehicle vehicle;
-  BookedVehiclesScreen({super.key, required this.vehicle});
+  int index;
+  BookedVehiclesScreen({super.key, required this.vehicle,required this.index});
   @override
   Widget build(BuildContext context) {
     DateTime start = DateFormat('yyyy-MM-dd').parse(vehicle.startDate);
@@ -40,7 +41,7 @@ class BookedVehiclesScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Hero(
-                tag: vehicle.vehicleId.name,
+                tag: index.toString(),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: CachedNetworkImage(
@@ -56,7 +57,8 @@ class BookedVehiclesScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               image: DecorationImage(
-                                  image: NetworkImage(url), fit: BoxFit.cover))),
+                                  image: NetworkImage(url),
+                                  fit: BoxFit.cover))),
                     ),
                   ),
                 ),

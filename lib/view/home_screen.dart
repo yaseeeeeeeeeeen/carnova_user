@@ -71,15 +71,9 @@ class HomeScreen extends StatelessWidget {
                       physics: const BouncingScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => BookedVehiclesScreen(
-                                    vehicle: upcomingVehicles[index])));
-                          },
-                          child: MostRatedDemo(
-                              vehicledata: upcomingVehicles[index]),
-                        );
+                        return MostRatedDemo(
+                          index: index,
+                            vehicledata: upcomingVehicles[index]);
                       },
                       separatorBuilder: (context, index) =>
                           const SizedBox(width: 5),

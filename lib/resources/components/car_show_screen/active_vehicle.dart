@@ -8,12 +8,10 @@ import 'package:shimmer/shimmer.dart';
 
 // ignore: must_be_immutable
 class ActivatedVehicle extends StatelessWidget {
-  ActivatedVehicle({super.key,required this.data});
+  ActivatedVehicle({super.key, required this.data});
   BookedVehicle data;
   @override
   Widget build(BuildContext context) {
-
-
     double heigth = MediaQuery.sizeOf(context).height;
     return Container(
         padding: const EdgeInsets.all(10),
@@ -53,9 +51,13 @@ class ActivatedVehicle extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(
-                      data.vehicleId.name,
-                      style: activeVehicle1,
+                    SizedBox(
+                      width: MediaQuery.sizeOf(context).width / 2.2,
+                      child: Text(
+                        data.vehicleId.name,
+                        overflow: TextOverflow.ellipsis,
+                        style: activeVehicle1,
+                      ),
                     ),
                     Text(
                       "₹${data.grandTotal}",

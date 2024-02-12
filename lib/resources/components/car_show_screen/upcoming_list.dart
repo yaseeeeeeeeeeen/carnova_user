@@ -39,7 +39,7 @@ class CarUpcomingListTile extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) =>
-                            BookedVehiclesScreen(vehicle: data)));
+                            BookedVehiclesScreen(vehicle: data,index: index)));
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -51,7 +51,7 @@ class CarUpcomingListTile extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Hero(
-                            tag: data.vehicleId.name,
+                            tag: index.toString(),
                             child: ClipRRect(
                               borderRadius: const BorderRadius.only(
                                   bottomLeft: Radius.circular(10),

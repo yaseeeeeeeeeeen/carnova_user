@@ -10,6 +10,7 @@ import 'package:carnova_user/modals/user_modal.dart';
 import 'package:carnova_user/repositories/booking_repo.dart';
 import 'package:carnova_user/repositories/login_repo.dart';
 import 'package:carnova_user/repositories/user_repo.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 part 'login_event.dart';
@@ -62,16 +63,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       locator<VehicleCheckBloc>().allBookedVehicles = datas;
       //////////////////// DIVIED BOOKED AND NOT BOOKED////////////////////////////////
       final bookedonly = datas.where((element) {
-        return element.status == "Booked";
+        final endDate = DateTime.parse(element.endDate);
+        return endDate.isAfter(currentDate);
       }).toList();
       locator<VehicleCheckBloc>().bookedVehicles = bookedonly;
       ////////////////// ACTIVE VEHICLE SORTING/////////////////////////////////
       locator<VehicleCheckBloc>().activeVehicles = datas.where((element) {
         final startDate = DateTime.parse(element.startDate);
         final endDate = DateTime.parse(element.endDate);
-        return startDate.isBefore(currentDate) &&
-            endDate.isAfter(currentDate) &&
-            element.status == "Booked";
+        return startDate.isBefore(currentDate) && endDate.isAfter(currentDate)&&element.status=="Booked";
       }).toList();
       emit(LoginSuccsess());
     });

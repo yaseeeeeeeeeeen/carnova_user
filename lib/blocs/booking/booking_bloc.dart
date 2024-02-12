@@ -86,7 +86,8 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       replaceBookedHistory(datas);
       //////////////////// DIVIED BOOKED AND NOT BOOKED////////////////////////////////
       final bookedonly = datas.where((element) {
-        return element.status == "Booked";
+        final endDate = DateTime.parse(element.endDate);
+        return endDate.isAfter(currentDate);
       }).toList();
       replaceBookedList(bookedonly);
       ////////////////// ACTIVE VEHICLE SORTING/////////////////////////////////

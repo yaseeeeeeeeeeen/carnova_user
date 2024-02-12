@@ -3,15 +3,17 @@ import 'package:carnova_user/modals/booked_vehicle.dart';
 import 'package:carnova_user/resources/api_urls/api_urls.dart';
 import 'package:carnova_user/resources/constant/colors_userside.dart';
 import 'package:carnova_user/resources/constant/text_styles.dart';
+import 'package:carnova_user/view/vehicle/booking/booked_vehicle_scrn.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 
 // ignore: must_be_immutable
 class MostRatedDemo extends StatelessWidget {
-  MostRatedDemo({super.key, required this.vehicledata});
+  MostRatedDemo({super.key, required this.vehicledata,required this.index});
   // VehicleDataModal vehicledata;
   BookedVehicle vehicledata;
+  int index;
   @override
   Widget build(BuildContext context) {
     DateTime parsedDate = DateTime.parse(vehicledata.startDate);
@@ -25,7 +27,13 @@ class MostRatedDemo extends StatelessWidget {
             topLeft: Radius.circular(10), topRight: Radius.circular(10)),
       ),
       child: GestureDetector(
-          child: Column(
+        onTap: () {
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => BookedVehiclesScreen(
+                                  index: index,
+                                    vehicle: vehicledata)));
+        },
+                 child: Column(
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.only(
@@ -39,15 +47,18 @@ class MostRatedDemo extends StatelessWidget {
               placeholder: (context, url) => Shimmer.fromColors(
                 baseColor: shimmerbaseColor,
                 highlightColor: shimmerhighlightColor,
-                child: Container(
-                  width: width / 1.5 - 10,
-                  height: heigth / 6,
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10)),
-                      image: DecorationImage(
-                          image: NetworkImage(url), fit: BoxFit.cover)),
+                child: Hero(
+                  tag: index.toString(),
+                  child: Container(
+                    width: width / 1.5 - 10,
+                    height: heigth / 6,
+                    decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10)),
+                        image: DecorationImage(
+                            image: NetworkImage(url), fit: BoxFit.cover)),
+                  ),
                 ),
               ),
             ),
